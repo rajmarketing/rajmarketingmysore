@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Velcro System - Raj Marketing Mysore</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fbfc;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2, h3 {
+      color: #0d47a1;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 0.6rem;
+      text-align: center;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background-color: #43a047;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+    }
+
+    .estimate {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background-color: #e0f7fa;
+      border: 2px dashed #00796b;
+      border-radius: 10px;
+      display: none;
+      color: #004d40;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      text-align: center;
+      color: #999;
+      margin-top: 2rem;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Raj Marketing Mysore</h1>
+</header>
+
+<div class="container">
+  <h2>Velcro System</h2>
+
+  <div class="section">
+    <h3>Product Description</h3>
+    <p>
+      The Velcro System is one of the simplest and most convenient mosquito net solutions. It's ideal for residential windows where easy installation and removal are key. The mesh is attached to the window frame using strong Velcro strips, allowing users to peel off and reattach the mesh effortlessly whenever required.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3>Specifications</h3>
+    <p>
+      • High-quality fiber mesh (available in black/grey)<br>
+      • Strong industrial-grade Velcro tape<br>
+      • Easy to cut and fit to any window size<br>
+      • Invisible look from a distance<br>
+      • Light-weight and flexible
+    </p>
+  </div>
+
+  <div class="section">
+    <h3>Durability</h3>
+    <p>
+      The Velcro System typically lasts 2–3 years depending on usage and cleaning. The Velcro’s adhesive and grip are long-lasting under normal indoor conditions.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3>Maintenance</h3>
+    <p>
+      • Easy to clean — just peel off and wash the mesh<br>
+      • Vacuum or rinse mesh with mild soap water<br>
+      • Re-stick Velcro after cleaning using hand pressure<br>
+      • Replace Velcro tape only if it loses stickiness over time
+    </p>
+  </div>
+
+  <div class="section">
+    <h3>Price per Sqft</h3>
+    <p>₹60 per Sqft</p>
+  </div>
+
+  <div class="section">
+    <h2>Check Your House Windows Price</h2>
+    <table id="measurementTable">
+      <thead>
+        <tr>
+          <th>Width (inches)</th>
+          <th>Height (inches)</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="number" class="width" /></td>
+          <td><input type="number" class="height" /></td>
+          <td><input type="number" class="qty" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <button onclick="addRow()">+ Add Row</button>
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="estimate" id="estimateBox"></div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Raj Marketing Mysore. All rights reserved.
+</footer>
+
+<script>
+  const pricePerSqft = 60;
+
+  function addRow() {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td><input type="number" class="width" /></td>
+      <td><input type="number" class="height" /></td>
+      <td><input type="number" class="qty" /></td>
+    `;
+    document.querySelector("#measurementTable tbody").appendChild(row);
+  }
+
+  function calculate() {
+    const widths = document.querySelectorAll(".width");
+    const heights = document.querySelectorAll(".height");
+    const qtys = document.querySelectorAll(".qty");
+
+    let total = 0;
+
+    for (let i = 0; i < widths.length; i++) {
+      let width = parseFloat(widths[i].value);
+      let height = parseFloat(heights[i].value);
+      let qty = parseInt(qtys[i].value);
+
+      if (isNaN(width) || isNaN(height) || isNaN(qty)) continue;
+
+      // Convert to minimum 24 inches
+      width = width < 24 ? 24 : width;
+      height = height < 24 ? 24 : height;
+
+      const sqft = (width / 12) * (height / 12);
+      total += sqft * pricePerSqft * qty;
+    }
+
+    const result = document.getElementById("estimateBox");
+    result.innerHTML = `<strong>Total Estimate:</strong> ₹${total.toFixed(2)}`;
+    result.style.display = "block";
+  }
+</script>
+
+</body>
+</html>

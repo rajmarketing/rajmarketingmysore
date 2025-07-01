@@ -5,40 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raj Marketing Mysore</title>
   <style>
+    :root {
+      --primary-color: #0d47a1;
+      --accent-color: #43a047;
+      --font: 'Segoe UI', sans-serif;
+    }
+
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
+      font-family: var(--font);
+      background: #f9f9f9;
       color: #333;
+      line-height: 1.6;
     }
 
     header {
-      background-color: #0d47a1;
+      background-color: var(--primary-color);
       color: white;
-      padding: 15px 20px;
-      text-align: center;
+      padding: 20px;
       font-size: 22px;
       font-weight: bold;
-      position: sticky;
-      top: 0;
-      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 24px;
     }
 
     nav {
       background-color: #1565c0;
       display: flex;
-      flex-direction: column;
-    }
-
-    .nav-links {
-      display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
+      padding: 10px;
+    }
+
+    nav .menu {
+      position: relative;
     }
 
     nav a {
@@ -46,96 +56,119 @@
       text-decoration: none;
       padding: 10px;
       font-size: 16px;
-      font-weight: 500;
+      display: inline-block;
     }
 
-    .submenu {
+    nav .submenu {
       display: none;
+      position: absolute;
+      background: #1976d2;
+      top: 40px;
+      left: 0;
+      min-width: 160px;
+      z-index: 999;
       flex-direction: column;
-      background-color: #1976d2;
     }
 
-    .nav-item:hover .submenu {
+    nav .menu:hover .submenu {
       display: flex;
+    }
+
+    nav .submenu a {
+      padding: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .hero {
-      background: linear-gradient(#0d47a1cc, #0d47a1cc), url('https://source.unsplash.com/featured/?mosquito,window') center/cover;
-      height: 280px;
-      color: white;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: flex-start;
-      text-align: left;
-      padding: 30px 20px;
+      padding: 40px 20px;
+      background: linear-gradient(#0d47a1cc, #0d47a1cc), url('https://cdn-icons-png.flaticon.com/512/709/709790.png') no-repeat right center;
+      background-size: contain;
+      color: white;
     }
 
     .hero h1 {
-      font-size: 26px;
+      font-size: 28px;
       margin-bottom: 10px;
     }
 
     .hero p {
-      font-size: 15px;
-      max-width: 100%;
+      font-size: 16px;
+      max-width: 500px;
     }
 
-    .section {
+    .btn-group {
+      margin-top: 20px;
+    }
+
+    .btn {
+      background-color: var(--accent-color);
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 14px;
+      margin-right: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    section {
       padding: 30px 20px;
-      text-align: left;
     }
 
-    .section h2 {
+    section h2 {
       font-size: 22px;
       margin-bottom: 15px;
-      color: #0d47a1;
+      color: var(--primary-color);
     }
 
     .description p {
       font-size: 16px;
-      max-width: 100%;
-      line-height: 1.6;
+      max-width: 700px;
     }
 
-    .services {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 15px;
+    .net-types {
       margin-top: 20px;
     }
 
-    .service-box {
-      background-color: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: left;
+    .net-types ul {
+      list-style: none;
+      padding-left: 0;
     }
 
-    .service-box h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-      color: #1565c0;
+    .net-types li {
+      margin-bottom: 10px;
+    }
+
+    .net-types a {
+      color: #0d47a1;
+      font-weight: 500;
+      text-decoration: underline;
+      font-size: 16px;
     }
 
     footer {
-      background-color: #0d47a1;
+      background-color: var(--primary-color);
       color: white;
       text-align: center;
-      padding: 10px 20px;
+      padding: 15px;
       font-size: 14px;
+      margin-top: 40px;
     }
 
-    @media (min-width: 600px) {
-      .services {
-        grid-template-columns: repeat(2, 1fr);
+    @media (min-width: 768px) {
+      .hero {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-position: right center;
+        padding: 60px 40px;
       }
-    }
 
-    @media (min-width: 900px) {
-      .services {
-        grid-template-columns: repeat(3, 1fr);
+      .hero-text {
+        max-width: 50%;
       }
     }
   </style>
@@ -143,68 +176,58 @@
 <body>
 
   <header>
-    Raj Marketing Mysore
+    <div class="logo">Raj Marketing Mysore</div>
   </header>
 
   <nav>
-    <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-      <div class="nav-item">
-        <a href="#">Menu ▼</a>
-        <div class="submenu">
-          <a href="#">Products</a>
-          <a href="#">Gallery</a>
-          <a href="#">Estimate</a>
-          <a href="#">Services</a>
-          <a href="#">Admin</a>
-        </div>
+    <a href="#">Home</a>
+    <div class="menu">
+      <a href="#">Products ▼</a>
+      <div class="submenu">
+        <a href="#">Velcro System</a>
+        <a href="#">Openable Type Nets</a>
+        <a href="#">Pleated Nets</a>
+        <a href="#">Fly Mesh Door</a>
+        <a href="#">Rework</a>
+        <a href="#">Replacement</a>
       </div>
     </div>
+    <a href="#">Gallery</a>
+    <a href="#">Estimate</a>
+    <a href="#">Services</a>
+    <a href="#">Admin</a>
   </nav>
 
   <section class="hero">
-    <h1>Mosquito Nets for Windows & Doors</h1>
-    <p>Elegant, durable, and protective net systems for a mosquito-free home.</p>
+    <div class="hero-text">
+      <h1>Protect Your Home with Style</h1>
+      <p>We install premium mosquito nets for windows and doors with professional craftsmanship and modern designs.</p>
+      <div class="btn-group">
+        <button class="btn">Get Estimate</button>
+        <button class="btn" style="background-color: #2196f3;">View Gallery</button>
+      </div>
+    </div>
   </section>
 
-  <section class="section description">
-    <h2>About Raj Marketing Mysore</h2>
+  <section class="description">
+    <h2>About Our Business</h2>
     <p>
-      Raj Marketing Mysore is a trusted name for premium mosquito net solutions in homes and commercial spaces. We offer a wide range of mosquito net systems such as Velcro System, Openable Nets, Pleated Nets, and Fly Mesh Doors. Our services include installation, replacement of old nets, and rework. 
-      We aim to provide stylish, clean, and highly functional mosquito protection for your windows and doors at affordable prices.
+      Raj Marketing Mysore is your trusted partner for mosquito net installations for homes, offices, and commercial spaces. 
+      We specialize in providing stylish and durable solutions, including Velcro systems, openable nets, pleated systems, and fly mesh doors.
+      With a strong focus on quality, service, and customer satisfaction, we aim to deliver comfort and protection to every doorstep.
     </p>
   </section>
 
-  <section class="section" id="services">
-    <h2>Our Services</h2>
-    <div class="services">
-      <div class="service-box">
-        <h3>Velcro System</h3>
-        <p>Easy to attach and perfect for windows of all sizes.</p>
-      </div>
-      <div class="service-box">
-        <h3>Openable Nets</h3>
-        <p>Best suited for frequent access through doors and balconies.</p>
-      </div>
-      <div class="service-box">
-        <h3>Pleated Nets</h3>
-        <p>Ideal for large doors and sliding windows with smooth movement.</p>
-      </div>
-      <div class="service-box">
-        <h3>Fly Mesh Doors</h3>
-        <p>Strong aluminum frames with stylish mesh protection.</p>
-      </div>
-      <div class="service-box">
-        <h3>Net Replacement</h3>
-        <p>Replace old nets with new, clean mesh fabric of your choice.</p>
-      </div>
-      <div class="service-box">
-        <h3>Rework & Repair</h3>
-        <p>Adjust, repair, and improve your current mosquito net systems.</p>
-      </div>
-    </div>
+  <section class="net-types">
+    <h2>Types of Nets We Offer</h2>
+    <ul>
+      <li><a href="#">✔ Velcro System</a></li>
+      <li><a href="#">✔ Openable Type Nets</a></li>
+      <li><a href="#">✔ Pleated Nets</a></li>
+      <li><a href="#">✔ Fly Mesh Door</a></li>
+      <li><a href="#">✔ Rework</a></li>
+      <li><a href="#">✔ Replacement of Old Nets</a></li>
+    </ul>
   </section>
 
   <footer>

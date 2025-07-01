@@ -1,11 +1,195 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html lang="en">
 <head>
-<title>Estimate - Raj Marketing Mysore</title>
+  <meta charset="UTF-8">
+  <title>Window Estimator App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#28a745">
+  <link rel="manifest" href="manifest.json">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      padding: 20px;
+    }
+    .app-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      font-size: 14px;
+      display: block;
+      margin-top: 15px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn-calc { background: #28a745; color: white; }
+    .btn-pdf { background: #ff9800; color: white; }
+    .btn-share { background: #25d366; color: white; }
+    .btn-save { background: #007bff; color: white; }
+    .result-box {
+      margin-top: 25px;
+      background: #e9f4ff;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+    .row-group {
+      border: 1px dashed #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+  </style>
 </head>
-<body>
-<h1>Estimate Calculator</h1>
-<!-- Estimate calculator will be embedded here -->
-<a href='index.html'>Back to Home</a>
-</body>
+<body><div class="app-container">
+  <h2>Window Estimator</h2><label>Aluminium Price per 12ft Rod (₹)</label> <input type="number" id="aluPrice" placeholder="e.g. 145">
+
+<label>Mesh Price per Sqft (₹)</label> <input type="number" id="meshPrice" placeholder="e.g. 26">
+
+  <div id="rows"></div>
+  <button class="btn btn-save" onclick="addRow()">Add Measurement Row</button><button class="btn btn-calc" onclick="calculate()">Calculate Estimate</button>
+
+  <div class="result-box" id="output"></div>  <h2>Customer Estimate</h2>
+  <label>Customer Name</label>
+  <input type="text" id="custName"><label>Mobile Number</label> <input type="text" id="custMobile">
+
+<label>Type of Nets</label> <select id="netType"> <option value="50">Velcro System - ₹50/sqft</option> <option value="160">Frame System - ₹160/sqft</option> <option value="380">Mesh Door - ₹380/sqft</option> <option value="350">Pleated Nets - ₹350/sqft</option> </select>
+
+<label>Material Cost (₹)</label> <input type="number" id="materialCost" placeholder="Auto-filled after Estimate" readonly>
+
+<button class="btn btn-calc" onclick="calculateCustomerEstimate()">Calculate Customer Estimate</button>
+
+  <div class="result-box" id="custOutput"></div>
+</div><script>
+let rowIndex = 0;
+let totalSqft = 0;
+let resultText = "";
+
+function addRow() {
+  const rowDiv = document.createElement('div');
+  rowDiv.className = 'row-group';
+  rowDiv.innerHTML = `
+    <label>Width (inches)</label>
+    <input type="number" class="width" placeholder="e.g. 30">
+    <label>Height (inches)</label>
+    <input type="number" class="height" placeholder="e.g. 54">
+    <label>Middle Piece (inches)</label>
+    <input type="number" class="middle" placeholder="e.g. 30">
+    <label>Quantity</label>
+    <input type="number" class="qty" placeholder="e.g. 2">
+  `;
+  document.getElementById('rows').appendChild(rowDiv);
+}
+
+function calculate() {
+  const aluPrice = parseFloat(document.getElementById("aluPrice").value);
+  const meshPrice = parseFloat(document.getElementById("meshPrice").value);
+
+  const widths = document.querySelectorAll('.width');
+  const heights = document.querySelectorAll('.height');
+  const middles = document.querySelectorAll('.middle');
+  const qtys = document.querySelectorAll('.qty');
+
+  let aluLength = 0;
+  let meshTotalSqft = 0;
+  let totalQty = 0;
+  let perRowDetails = "";
+
+  for (let i = 0; i < widths.length; i++) {
+    const w = parseFloat(widths[i].value) - 1.5;
+    const h = parseFloat(heights[i].value) - 1.5;
+    const m = parseFloat(middles[i].value) - 1.5;
+    const q = parseInt(qtys[i].value);
+    if (!w || !h || !m || !q) continue;
+
+    const frameInches = (2 * w + 2 * h + m);
+    const frameFt = (frameInches / 12) * q;
+    aluLength += frameFt;
+
+    const adjW = (w < 24 ? 2 : w / 12);
+    const adjH = Math.ceil(h / 12);
+    const sqft = adjW * adjH * q;
+    meshTotalSqft += sqft;
+    totalQty += q;
+
+    perRowDetails += `Row ${i+1}: Width=${w.toFixed(1)}", Height=${h.toFixed(1)}", Qty=${q}, Sqft=${sqft.toFixed(2)}\n`;
+  }
+
+  const aluRods = Math.ceil(aluLength / 12);
+  const aluCost = aluRods * aluPrice;
+  const meshCost = meshTotalSqft * meshPrice;
+
+  const corner = totalQty * 4 * 6;
+  const hinge = totalQty * 3 * 6;
+  const stopper = totalQty * 3 * 3;
+  const clip = totalQty * 4 * 4;
+  const accessoriesCost = corner + hinge + stopper + clip;
+
+  const totalMaterialCost = aluCost + meshCost + accessoriesCost;
+
+  totalSqft = meshTotalSqft;
+  document.getElementById("materialCost").value = totalMaterialCost.toFixed(2);
+
+  resultText = `${perRowDetails}\nTotal Qty: ${totalQty}\nAluminium: ${aluLength.toFixed(2)} ft (${aluRods} rods) = ₹${aluCost}\nMesh: ${meshTotalSqft.toFixed(2)} sqft = ₹${meshCost}\nAccessories: ₹${accessoriesCost}\n\nTotal Material Cost: ₹${totalMaterialCost}`;
+  document.getElementById("output").innerText = resultText;
+}
+
+function calculateCustomerEstimate() {
+  const pricePerSqft = parseFloat(document.getElementById("netType").value);
+  const materialCost = parseFloat(document.getElementById("materialCost").value);
+
+  if (!pricePerSqft || !materialCost || !totalSqft) {
+    alert("Please first complete the estimate and fill all fields.");
+    return;
+  }
+
+  const totalPrice = totalSqft * pricePerSqft;
+  const profit = totalPrice - materialCost;
+  const profitPercent = ((profit / materialCost) * 100).toFixed(2);
+
+  let discountText = "";
+  if (totalPrice < 10000) {
+    discountText = `You can offer a discount up to 10% only (₹${(totalPrice * 0.10).toFixed(0)})`;
+  } else {
+    discountText = `You can offer a discount up to 15% only (₹${(totalPrice * 0.15).toFixed(0)})`;
+  }
+
+  const out = `Customer Price: ₹${totalPrice.toFixed(2)}\nMaterial Cost: ₹${materialCost}\nProfit: ₹${profit.toFixed(2)} (${profitPercent}%)\n${discountText}`;
+
+  document.getElementById("custOutput").innerText = out;
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(() => console.log('Service Worker Registered'))
+      .catch(err => console.error('Service Worker Error:', err));
+  });
+}
+</script></body>
 </html>

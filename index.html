@@ -1,107 +1,138 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home - Raj Marketing Mysore</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
     body {
-      background: #f4f7fa;
-      color: #333;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eaf6ff;
+      color: #000;
     }
     header {
-      background: #6c5ce7;
+      background-color: #007acc;
       color: white;
-      padding: 20px;
-      text-align: center;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     nav {
-      background: #fff;
-      padding: 15px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background-color: #ffffff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     nav a {
-      margin: 0 10px;
-      color: #6c5ce7;
+      margin: 0 15px;
+      color: #007acc;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: bold;
     }
-    .hero {
-      padding: 60px 20px;
-      text-align: center;
-      background: linear-gradient(to right, #dfe6e9, #fff);
+    .submenu {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-top: 10px;
     }
-    .hero h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
+    .dropdown:hover .submenu {
+      display: block;
     }
-    .hero p {
-      font-size: 18px;
-      max-width: 700px;
-      margin: auto;
+    .submenu a {
+      display: block;
+      padding: 8px 15px;
+      color: #007acc;
     }
-    .logo {
+    .slider-box {
+      max-width: 800px;
       margin: 20px auto;
-      max-width: 150px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    .section {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
+    .quote {
+      display: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
       text-align: center;
     }
-    .section h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
-      color: #6c5ce7;
+    .quote.active {
+      display: block;
     }
-    .section img {
-      max-width: 200px;
-      margin-top: 20px;
+    .info-box {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-left: 6px solid #007acc;
+      border-radius: 8px;
     }
-    footer {
+    .footer {
       text-align: center;
       padding: 20px;
-      background: #eee;
-      margin-top: 40px;
+      background-color: #007acc;
+      color: white;
+      font-size: 14px;
+    }
+    a.dark-blue {
+      color: darkblue;
+      display: block;
+      margin: 5px 0;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Raj Marketing Mysore Logo" class="logo" />
-    <h1>Welcome to Raj Marketing Mysore</h1>
-    <p>Protecting Your Home & Family with Quality Mosquito Nets</p>
+    <div>📞 +91 9483037385</div>
+    <div>Raj Marketing Mysore</div>
   </header>  <nav>
     <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="estimate.html">Estimate</a>
-    <a href="product.html">Product</a>
-    <a href="services.html">Services</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="Metrial Calculater.html">M Calculator</a>
+    <a href="about.html">About</a>
+    <div class="dropdown" style="display: inline-block; position: relative;">
+      <a href="product.html">Products</a>
+      <div class="submenu">
+        <a href="gallery.html">Gallery</a>
+        <a href="estimate.html">Estimate</a>
+        <a href="admin/index.html">Admin</a>
+        <a href="services.html">Services</a>
+      </div>
+    </div>
     <a href="contact.html">Contact</a>
-    <a href="admin/index.html">Admin</a>
-  </nav>  <div class="hero">
-    <h1>Say Goodbye to Mosquitoes!</h1>
-    <p>Mosquito nets are essential for a healthy home. Every day, mosquitoes carry deadly diseases like Dengue, Malaria, and Chikungunya. A simple mesh can protect your family and improve sleep quality by preventing bites and irritations.</p>
-  </div>  <div class="section">
+  </nav>  <div class="slider-box">
+    <div class="quote active">"Protect your loved ones – mosquito nets save lives every day."</div>
+    <div class="quote">"Fresh air in, mosquitoes out – the smart way to live."</div>
+    <div class="quote">"Don’t let bites disturb your sleep – install window mesh today."</div>
+    <div class="quote">"Comfort, health, and elegance – all in one net."</div>
+    <div class="quote">"A simple mesh, a strong defense."</div>
+    <div class="quote">"Say goodbye to buzzing nightmares – choose Raj Marketing."</div>
+  </div>  <div class="info-box">
     <h2>Why Choose Our Mosquito Nets?</h2>
     <p>Our window mesh solutions are elegant, strong, and long-lasting. With over 15 years of experience, Raj Marketing Mysore offers high-quality mosquito net installations that blend with your interiors. They keep insects out without blocking air or sunlight.</p>
-    <img src="https://cdn-icons-png.flaticon.com/512/808/808486.png" alt="Cartoon mosquito" />
-    <p style="margin-top:20px; font-size:16px;">Every bite prevented is one step closer to a healthier home.</p>
-  </div>  <div class="section">
+    <p>🦟 Every bite prevented is one step closer to a healthier home.</p>
+  </div>  <div class="info-box">
     <h2>How It Works</h2>
     <p>We visit, measure, and install custom-fit mosquito nets for windows, balconies, and doors. Durable frames with high-grade mesh ensure maximum protection with zero compromise on ventilation or aesthetics.</p>
-  </div>  <footer>
-    &copy; 2025 Raj Marketing Mysore. All rights reserved.
-  </footer>
-</body>
-</html>
+  </div>  <div class="info-box">
+    <h2>Types of Nets</h2>
+    <a href="#" class="dark-blue">Velcro System</a>
+    <a href="#" class="dark-blue">Openable Type Nets</a>
+    <a href="#" class="dark-blue">Pleated Nets</a>
+    <a href="#" class="dark-blue">Fly Mesh Door</a>
+    <a href="#" class="dark-blue">Replacement of Old Nets</a>
+    <a href="#" class="dark-blue">Rework & Custom Solutions</a>
+  </div>  <div class="footer">
+    © 2025 Raj Marketing Mysore. All rights reserved.
+  </div>  <script>
+    let quotes = document.querySelectorAll('.quote');
+    let current = 0;
+    setInterval(() => {
+      quotes[current].classList.remove('active');
+      current = (current + 1) % quotes.length;
+      quotes[current].classList.add('active');
+    }, 3000);
+  </script></body>
+      </html>

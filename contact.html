@@ -1,11 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Contact Us - Raj Marketing Mysore</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Raj Marketing Mysore</title>
+  <style>
+    :root {
+      --primary-color: #0d47a1;
+      --accent-color: #43a047;
+      --bg-color: #f4f6f8;
+      --text-color: #333;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: #fff;
+      text-align: center;
+      padding: 1rem 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .container {
+      max-width: 500px;
+      background: #fff;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .container h2 {
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      color: var(--text-color);
+      font-weight: 500;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      resize: none;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: var(--accent-color);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #888;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-<h1>Contact Us</h1>
-<p>Call us at: 9483037385</p>
-<a href='index.html'>Back to Home</a>
+
+  <header>
+    <h1>Raj Marketing Mysore</h1>
+  </header>
+
+  <div class="container">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <label for="name">Name*</label>
+      <input type="text" id="name" required placeholder="Enter your name" />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" />
+
+      <label for="mobile">Mobile Number*</label>
+      <input type="tel" id="mobile" required placeholder="Enter your mobile number" />
+
+      <label for="message">Message*</label>
+      <textarea id="message" rows="4" required placeholder="Your message"></textarea>
+
+      <button type="submit">Submit on WhatsApp</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 Raj Marketing Mysore. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const text = `Contact Request from Raj Marketing Mysore:
+      
+Name: ${name}
+Mobile: ${mobile}
+Email: ${email || 'N/A'}
+Message: ${message}`;
+
+      const encodedMsg = encodeURIComponent(text);
+      const phone = "9483037385";
+      const waUrl = `https://wa.me/91${phone}?text=${encodedMsg}`;
+
+      window.open(waUrl, "_blank");
+    });
+  </script>
+
 </body>
 </html>

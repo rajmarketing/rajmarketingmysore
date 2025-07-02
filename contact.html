@@ -6,120 +6,129 @@
   <title>Contact Us - Raj Marketing Mysore</title>
   <style>
     :root {
-      --primary-color: #0d47a1;
-      --accent-color: #43a047;
-      --bg-color: #f4f6f8;
-      --text-color: #333;
+      --primary: #0d47a1;
+      --accent: #43a047;
+      --light-bg: #f4f6f8;
+      --white: #ffffff;
+      --text: #333;
     }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text);
+      padding-bottom: 2rem;
+    }
+
     header {
-      background-color: var(--primary-color);
-      color: #fff;
-      padding: 1rem 1rem;
+      background-color: var(--primary);
+      color: white;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      align-items: center;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     header h1 {
       font-size: 1.5rem;
-      margin: 0 auto;
-      text-align: center;
       flex: 1;
+      text-align: center;
     }
 
     .home-btn {
       background: white;
-      color: var(--primary-color);
+      color: var(--primary);
       border: none;
       padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 600;
       font-size: 0.9rem;
-      font-weight: bold;
-      border-radius: 8px;
       cursor: pointer;
-      margin-right: auto;
     }
 
     .container {
       max-width: 500px;
-      background: #fff;
       margin: 2rem auto;
+      background-color: var(--white);
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
     }
 
     .container h2 {
-      margin-bottom: 0.5rem;
-      color: var(--primary-color);
       text-align: center;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
     }
 
     .description {
-      font-size: 0.95rem;
       text-align: center;
-      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
       color: #555;
+      margin-bottom: 1.5rem;
     }
 
-    label {
-      display: block;
+    form label {
+      font-weight: 600;
       margin-top: 1rem;
-      color: var(--text-color);
-      font-weight: 500;
+      display: block;
+      margin-bottom: 0.3rem;
     }
 
     input, textarea {
       width: 100%;
       padding: 0.75rem;
-      margin-top: 0.25rem;
+      margin-bottom: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
-      resize: none;
+      transition: border 0.2s;
     }
 
-    button {
-      margin-top: 1.5rem;
+    input:focus, textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+
+    button[type="submit"] {
       width: 100%;
+      background-color: var(--accent);
+      color: white;
       padding: 0.75rem;
-      background-color: var(--accent-color);
       border: none;
       border-radius: 8px;
-      color: white;
-      font-size: 1.1rem;
+      font-size: 1rem;
+      font-weight: bold;
       cursor: pointer;
-      transition: 0.3s ease;
+      transition: background-color 0.3s ease;
     }
 
-    button:hover {
-      background-color: #388e3c;
+    button[type="submit"]:hover {
+      background-color: #2e7d32;
     }
 
     footer {
       text-align: center;
       margin-top: 3rem;
-      color: #888;
       font-size: 0.9rem;
-      padding-bottom: 1rem;
+      color: #888;
     }
 
-    @media screen and (max-width: 600px) {
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.2rem;
+      }
+
       .container {
         margin: 1rem;
         padding: 1.5rem;
-      }
-
-      header h1 {
-        font-size: 1.2rem;
       }
 
       .home-btn {
@@ -139,7 +148,7 @@
   <div class="container">
     <h2>Contact Us</h2>
     <p class="description">
-      Have a question, need a quote, or want to give feedback? Fill in your details below and we’ll respond as soon as possible. You can also message us directly on WhatsApp.
+      We'd love to hear from you! Fill in your details and our team will contact you soon. For urgent queries, message us directly on WhatsApp.
     </p>
 
     <form id="contactForm">
@@ -147,13 +156,13 @@
       <input type="text" id="name" required placeholder="Enter your name" />
 
       <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Enter your email" />
+      <input type="email" id="email" placeholder="Enter your email (optional)" />
 
       <label for="mobile">Mobile Number*</label>
       <input type="tel" id="mobile" required placeholder="Enter your mobile number" />
 
       <label for="message">Message*</label>
-      <textarea id="message" rows="4" required placeholder="Your message"></textarea>
+      <textarea id="message" rows="4" required placeholder="Type your message here..."></textarea>
 
       <button type="submit">Submit on WhatsApp</button>
     </form>
@@ -165,10 +174,10 @@
 
   <script>
     function goHome() {
-      window.location.href = "index.html"; // Change this if your homepage has a different file name or path
+      window.location.href = "index.html"; // Change to your homepage path
     }
 
-    document.getElementById("contactForm").addEventListener("submit", function(e) {
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
       const name = document.getElementById("name").value.trim();
@@ -176,18 +185,21 @@
       const mobile = document.getElementById("mobile").value.trim();
       const message = document.getElementById("message").value.trim();
 
+      if (!name || !mobile || !message) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
       const text = `Contact Request from Raj Marketing Mysore:
 
 Name: ${name}
 Mobile: ${mobile}
-Email: ${email || 'N/A'}
+Email: ${email || 'Not Provided'}
 Message: ${message}`;
 
       const encodedMsg = encodeURIComponent(text);
-      const phone = "9483037385";
-      const waUrl = `https://wa.me/91${phone}?text=${encodedMsg}`;
-
-      window.open(waUrl, "_blank");
+      const whatsappURL = `https://wa.me/919483037385?text=${encodedMsg}`;
+      window.open(whatsappURL, "_blank");
     });
   </script>
 

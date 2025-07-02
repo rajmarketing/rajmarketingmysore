@@ -8,78 +8,51 @@
     :root {
       --primary: #0d47a1;
       --accent: #43a047;
-      --light-bg: #f4f6f8;
-      --white: #ffffff;
-      --text: #333;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      --bg: #f5f5f5;
+      --text-dark: #333;
+      --text-light: #777;
     }
 
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: var(--light-bg);
-      color: var(--text);
-      padding-bottom: 2rem;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text-dark);
     }
 
     header {
-      background-color: var(--primary);
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 1.2rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    }
-
-    header h1 {
-      font-size: 1.5rem;
-      flex: 1;
+      background: var(--primary);
+      color: #fff;
+      padding: 1rem;
       text-align: center;
-    }
-
-    .home-btn {
-      background: white;
-      color: var(--primary);
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
     }
 
     .container {
-      max-width: 500px;
-      margin: 2rem auto;
-      background-color: var(--white);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-    }
-
-    .container h2 {
-      text-align: center;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
+      padding: 1rem;
+      max-width: 600px;
+      margin: auto;
     }
 
     .description {
-      text-align: center;
-      font-size: 0.95rem;
-      color: #555;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: var(--text-light);
     }
 
-    form label {
-      font-weight: 600;
-      margin-top: 1rem;
+    form {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    label {
       display: block;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
     }
 
     input, textarea {
@@ -87,53 +60,48 @@
       padding: 0.75rem;
       margin-bottom: 1rem;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 1rem;
-      transition: border 0.2s;
     }
 
-    input:focus, textarea:focus {
-      border-color: var(--primary);
-      outline: none;
-    }
-
-    button[type="submit"] {
+    button {
       width: 100%;
-      background-color: var(--accent);
-      color: white;
       padding: 0.75rem;
+      background-color: var(--accent);
       border: none;
-      border-radius: 8px;
+      color: #fff;
       font-size: 1rem;
       font-weight: bold;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
     }
 
-    button[type="submit"]:hover {
+    button:hover {
       background-color: #2e7d32;
+    }
+
+    .home-btn {
+      display: block;
+      margin: 1rem auto 0;
+      text-align: center;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
     }
 
     footer {
       text-align: center;
-      margin-top: 3rem;
+      margin-top: 2rem;
       font-size: 0.9rem;
-      color: #888;
+      color: var(--text-light);
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.2rem;
+      form {
+        padding: 1rem;
       }
-
-      .container {
-        margin: 1rem;
-        padding: 1.5rem;
-      }
-
-      .home-btn {
-        font-size: 0.8rem;
-        padding: 4px 10px;
+      input, textarea {
+        font-size: 1rem;
       }
     }
   </style>
@@ -141,31 +109,28 @@
 <body>
 
   <header>
-    <button class="home-btn" onclick="goHome()">Home</button>
     <h1>Raj Marketing Mysore</h1>
   </header>
 
   <div class="container">
-    <h2>Contact Us</h2>
-    <p class="description">
-      We'd love to hear from you! Fill in your details and our team will contact you soon. For urgent queries, message us directly on WhatsApp.
-    </p>
+    <div class="description">
+      <p>Need help or have questions? Contact us using the form below and we’ll respond quickly. We're happy to help with all your net installation and service inquiries.</p>
+    </div>
 
     <form id="contactForm">
-      <label for="name">Name*</label>
-      <input type="text" id="name" required placeholder="Enter your name" />
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required />
 
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Enter your email (optional)" />
+      <label for="phone">Mobile Number</label>
+      <input type="tel" id="phone" placeholder="Enter your number" required />
 
-      <label for="mobile">Mobile Number*</label>
-      <input type="tel" id="mobile" required placeholder="Enter your mobile number" />
+      <label for="message">Your Message</label>
+      <textarea id="message" rows="4" placeholder="Enter your message" required></textarea>
 
-      <label for="message">Message*</label>
-      <textarea id="message" rows="4" required placeholder="Type your message here..."></textarea>
-
-      <button type="submit">Submit on WhatsApp</button>
+      <button type="submit">Send via WhatsApp</button>
     </form>
+
+    <a href="index.html" class="home-btn">← Back to Home</a>
   </div>
 
   <footer>
@@ -173,35 +138,16 @@
   </footer>
 
   <script>
-    function goHome() {
-      window.location.href = "index.html"; // Change to your homepage path
-    }
-
-    document.getElementById("contactForm").addEventListener("submit", function (e) {
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
       e.preventDefault();
-
       const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const mobile = document.getElementById("mobile").value.trim();
+      const phone = document.getElementById("phone").value.trim();
       const message = document.getElementById("message").value.trim();
 
-      if (!name || !mobile || !message) {
-        alert("Please fill in all required fields.");
-        return;
-      }
-
-      const text = `Contact Request from Raj Marketing Mysore:
-
-Name: ${name}
-Mobile: ${mobile}
-Email: ${email || 'Not Provided'}
-Message: ${message}`;
-
-      const encodedMsg = encodeURIComponent(text);
-      const whatsappURL = `https://wa.me/919483037385?text=${encodedMsg}`;
-      window.open(whatsappURL, "_blank");
+      const fullMessage = `Hello Raj Marketing Mysore,%0AName: ${name}%0APhone: ${phone}%0AMessage: ${message}`;
+      const whatsappURL = `https://wa.me/919483037385?text=${fullMessage}`;
+      window.open(whatsappURL, '_blank');
     });
   </script>
-
 </body>
 </html>

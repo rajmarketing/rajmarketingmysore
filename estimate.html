@@ -1,195 +1,366 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Window Estimator App</title>
+  <title>Estimate Generator - Raj Marketing Mysore</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#28a745">
-  <link rel="manifest" href="manifest.json">
+  <!-- jsPDF CDN for PDF generation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f2f5;
-      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
     }
-    .app-container {
-      max-width: 500px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 14px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    .container {
+      background: #fff;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     h2 {
       text-align: center;
-      margin-bottom: 20px;
+      color: #0a6b3c;
+      margin-bottom: 10px;
+    }
+    .form-group {
+      margin-bottom: 15px;
     }
     label {
-      font-weight: bold;
-      font-size: 14px;
       display: block;
-      margin-top: 15px;
+      font-weight: 500;
+      margin-bottom: 4px;
     }
-    input, select {
+    input, select, textarea {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      padding: 7px 10px;
+      border: 1px solid #bbb;
+      border-radius: 3px;
+      font-size: 15px;
+      box-sizing: border-box;
     }
-    .btn {
+    .estimate-table {
       width: 100%;
-      padding: 12px;
+      border-collapse: collapse;
+      margin-top: 18px;
+      margin-bottom: 15px;
+    }
+    .estimate-table th, .estimate-table td {
+      border: 1px solid #bbb;
+      padding: 6px 7px;
+      text-align: center;
       font-size: 16px;
+    }
+    .estimate-table th {
+      background: #d2ffe7;
+    }
+    .add-row-btn {
+      background: #0a6b3c;
+      color: #fff;
       border: none;
-      border-radius: 10px;
+      padding: 7px 20px;
+      border-radius: 4px;
+      font-size: 15px;
       cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .remove-row-btn {
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .summary {
+      text-align: right;
+      font-size: 17px;
       margin-top: 10px;
     }
-    .btn-calc { background: #28a745; color: white; }
-    .btn-pdf { background: #ff9800; color: white; }
-    .btn-share { background: #25d366; color: white; }
-    .btn-save { background: #007bff; color: white; }
-    .result-box {
+    .download-btn {
+      background: #0a6b3c;
+      color: #fff;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 4px;
+      font-size: 18px;
+      cursor: pointer;
       margin-top: 25px;
-      background: #e9f4ff;
-      padding: 15px;
-      border-radius: 12px;
-      font-size: 14px;
+      display: block;
+      width: 100%;
+      transition: background 0.2s;
     }
-    .row-group {
-      border: 1px dashed #ccc;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 10px;
+    .download-btn:hover {
+      background: #09824e;
+    }
+    .authorised-sign {
+      margin-top: 40px;
+      text-align: right;
+      font-size: 15px;
+    }
+    @media (max-width: 700px) {
+      .container {
+        padding: 10px;
+      }
+      .estimate-table th, .estimate-table td {
+        font-size: 13px;
+        padding: 4px;
+      }
+      .download-btn {
+        font-size: 16px;
+        padding: 10px 14px;
+      }
     }
   </style>
 </head>
-<body><div class="app-container">
-  <h2>Window Estimator</h2><label>Aluminium Price per 12ft Rod (₹)</label> <input type="number" id="aluPrice" placeholder="e.g. 145">
+<body>
+  <div class="container">
+    <h2>Estimate Generator</h2>
+    <form id="estimateForm" autocomplete="off">
+      <div class="form-group">
+        <label for="customerName">Customer Name</label>
+        <input type="text" id="customerName" required>
+      </div>
+      <div class="form-group">
+        <label for="customerNumber">Customer Number</label>
+        <input type="text" id="customerNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="customerAddress">Customer Address</label>
+        <textarea id="customerAddress" rows="2" required></textarea>
+      </div>
+      <table class="estimate-table" id="estimateTable">
+        <thead>
+          <tr>
+            <th>Sl. No.</th>
+            <th>Type of Net</th>
+            <th>Width (inches)</th>
+            <th>Height (inches)</th>
+            <th>Qty</th>
+            <th>Per Sqft Price (₹)</th>
+            <th>Sqft</th>
+            <th>Price (₹)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="estimateBody"></tbody>
+      </table>
+      <button type="button" class="add-row-btn" onclick="addRow()">+ Add Row</button>
+      <div class="summary">
+        <div><strong>Total Sqft:</strong> <span id="totalSqft">0</span></div>
+        <div><strong>Total Price (₹):</strong> <span id="totalPrice">0</span></div>
+      </div>
+      <button type="button" class="download-btn" onclick="generatePDF()">Generate & Download PDF</button>
+    </form>
+    <div class="authorised-sign">
+      <div>Authorised Signatory</div>
+      <div style="font-weight:bold; margin-top:3px;">Raj Marketing Mysore</div>
+    </div>
+  </div>
 
-<label>Mesh Price per Sqft (₹)</label> <input type="number" id="meshPrice" placeholder="e.g. 26">
+  <script>
+    // Net types and prices
+    const netTypes = [
+      { label: 'Velcro System', price: 60 },
+      { label: 'Frame System', price: 180 },
+      { label: 'Pleated Nets', price: 350 },
+      { label: 'Mesh Door', price: 380 }
+    ];
 
-  <div id="rows"></div>
-  <button class="btn btn-save" onclick="addRow()">Add Measurement Row</button><button class="btn btn-calc" onclick="calculate()">Calculate Estimate</button>
+    // Add initial row
+    window.onload = function() {
+      addRow();
+    };
 
-  <div class="result-box" id="output"></div>  <h2>Customer Estimate</h2>
-  <label>Customer Name</label>
-  <input type="text" id="custName"><label>Mobile Number</label> <input type="text" id="custMobile">
+    function addRow() {
+      const tableBody = document.getElementById('estimateBody');
+      const rowCount = tableBody.rows.length;
+      const row = tableBody.insertRow();
 
-<label>Type of Nets</label> <select id="netType"> <option value="50">Velcro System - ₹50/sqft</option> <option value="160">Frame System - ₹160/sqft</option> <option value="380">Mesh Door - ₹380/sqft</option> <option value="350">Pleated Nets - ₹350/sqft</option> </select>
+      // Serial Number
+      const cell0 = row.insertCell(0);
+      cell0.innerHTML = rowCount + 1;
 
-<label>Material Cost (₹)</label> <input type="number" id="materialCost" placeholder="Auto-filled after Estimate" readonly>
+      // Net Type
+      const cell1 = row.insertCell(1);
+      let selectHtml = '<select onchange="updatePrice(this)">';
+      netTypes.forEach((type, idx) => {
+        selectHtml += `<option value="${type.price}">${type.label}</option>`;
+      });
+      selectHtml += '</select>';
+      cell1.innerHTML = selectHtml;
 
-<button class="btn btn-calc" onclick="calculateCustomerEstimate()">Calculate Customer Estimate</button>
+      // Width
+      const cell2 = row.insertCell(2);
+      cell2.innerHTML = `<input type="number" min="1" value="24" onchange="calculateRow(this)" oninput="calculateRow(this)" style="width: 70px;">`;
 
-  <div class="result-box" id="custOutput"></div>
-</div><script>
-let rowIndex = 0;
-let totalSqft = 0;
-let resultText = "";
+      // Height
+      const cell3 = row.insertCell(3);
+      cell3.innerHTML = `<input type="number" min="1" value="24" onchange="calculateRow(this)" oninput="calculateRow(this)" style="width: 70px;">`;
 
-function addRow() {
-  const rowDiv = document.createElement('div');
-  rowDiv.className = 'row-group';
-  rowDiv.innerHTML = `
-    <label>Width (inches)</label>
-    <input type="number" class="width" placeholder="e.g. 30">
-    <label>Height (inches)</label>
-    <input type="number" class="height" placeholder="e.g. 54">
-    <label>Middle Piece (inches)</label>
-    <input type="number" class="middle" placeholder="e.g. 30">
-    <label>Quantity</label>
-    <input type="number" class="qty" placeholder="e.g. 2">
-  `;
-  document.getElementById('rows').appendChild(rowDiv);
-}
+      // Qty
+      const cell4 = row.insertCell(4);
+      cell4.innerHTML = `<input type="number" min="1" value="1" onchange="calculateRow(this)" oninput="calculateRow(this)" style="width: 55px;">`;
 
-function calculate() {
-  const aluPrice = parseFloat(document.getElementById("aluPrice").value);
-  const meshPrice = parseFloat(document.getElementById("meshPrice").value);
+      // Per Sqft Price
+      const cell5 = row.insertCell(5);
+      cell5.innerHTML = `<input type="text" value="${netTypes[0].price}" readonly style="width: 65px;">`;
 
-  const widths = document.querySelectorAll('.width');
-  const heights = document.querySelectorAll('.height');
-  const middles = document.querySelectorAll('.middle');
-  const qtys = document.querySelectorAll('.qty');
+      // Sqft
+      const cell6 = row.insertCell(6);
+      cell6.innerHTML = `<input type="text" value="4.00" readonly style="width: 60px;">`;
 
-  let aluLength = 0;
-  let meshTotalSqft = 0;
-  let totalQty = 0;
-  let perRowDetails = "";
+      // Price
+      const cell7 = row.insertCell(7);
+      cell7.innerHTML = `<input type="text" value="${(4 * netTypes[0].price).toFixed(2)}" readonly style="width: 80px;">`;
 
-  for (let i = 0; i < widths.length; i++) {
-    const w = parseFloat(widths[i].value) - 1.5;
-    const h = parseFloat(heights[i].value) - 1.5;
-    const m = parseFloat(middles[i].value) - 1.5;
-    const q = parseInt(qtys[i].value);
-    if (!w || !h || !m || !q) continue;
+      // Remove Button
+      const cell8 = row.insertCell(8);
+      cell8.innerHTML = `<button type="button" class="remove-row-btn" onclick="removeRow(this)">Remove</button>`;
 
-    const frameInches = (2 * w + 2 * h + m);
-    const frameFt = (frameInches / 12) * q;
-    aluLength += frameFt;
+      updateTotals();
+    }
 
-    const adjW = (w < 24 ? 2 : w / 12);
-    const adjH = Math.ceil(h / 12);
-    const sqft = adjW * adjH * q;
-    meshTotalSqft += sqft;
-    totalQty += q;
+    function removeRow(btn) {
+      const row = btn.closest("tr");
+      row.parentNode.removeChild(row);
+      // Re-number serial numbers
+      const tableBody = document.getElementById('estimateBody');
+      for (let i = 0; i < tableBody.rows.length; i++) {
+        tableBody.rows[i].cells[0].innerText = i + 1;
+      }
+      updateTotals();
+    }
 
-    perRowDetails += `Row ${i+1}: Width=${w.toFixed(1)}", Height=${h.toFixed(1)}", Qty=${q}, Sqft=${sqft.toFixed(2)}\n`;
-  }
+    function updatePrice(select) {
+      const row = select.closest("tr");
+      const price = parseFloat(select.value);
+      row.cells[5].querySelector('input').value = price;
+      calculateRow(select);
+    }
 
-  const aluRods = Math.ceil(aluLength / 12);
-  const aluCost = aluRods * aluPrice;
-  const meshCost = meshTotalSqft * meshPrice;
+    function calculateRow(inputElem) {
+      const row = inputElem.closest("tr");
+      let width = parseFloat(row.cells[2].querySelector('input').value) || 0;
+      let height = parseFloat(row.cells[3].querySelector('input').value) || 0;
+      let qty = parseInt(row.cells[4].querySelector('input').value) || 0;
+      let pricePerSqft = parseFloat(row.cells[5].querySelector('input').value) || 0;
 
-  const corner = totalQty * 4 * 6;
-  const hinge = totalQty * 3 * 6;
-  const stopper = totalQty * 3 * 3;
-  const clip = totalQty * 4 * 4;
-  const accessoriesCost = corner + hinge + stopper + clip;
+      // Convert to feet (inches to feet, min 2ft for width/height)
+      width = Math.max(24, width) / 12;
+      height = Math.max(24, height) / 12;
+      // Sqft calculation
+      let sqft = width * height * qty;
+      sqft = isNaN(sqft) ? 0 : sqft;
 
-  const totalMaterialCost = aluCost + meshCost + accessoriesCost;
+      row.cells[6].querySelector('input').value = sqft.toFixed(2);
+      // Price calculation
+      let price = sqft * pricePerSqft;
+      row.cells[7].querySelector('input').value = price.toFixed(2);
+      updateTotals();
+    }
 
-  totalSqft = meshTotalSqft;
-  document.getElementById("materialCost").value = totalMaterialCost.toFixed(2);
+    function updateTotals() {
+      const tableBody = document.getElementById('estimateBody');
+      let totalSqft = 0, totalPrice = 0;
+      for (let i = 0; i < tableBody.rows.length; i++) {
+        let sqft = parseFloat(tableBody.rows[i].cells[6].querySelector('input').value) || 0;
+        let price = parseFloat(tableBody.rows[i].cells[7].querySelector('input').value) || 0;
+        totalSqft += sqft;
+        totalPrice += price;
+      }
+      document.getElementById('totalSqft').innerText = totalSqft.toFixed(2);
+      document.getElementById('totalPrice').innerText = totalPrice.toFixed(2);
+    }
 
-  resultText = `${perRowDetails}\nTotal Qty: ${totalQty}\nAluminium: ${aluLength.toFixed(2)} ft (${aluRods} rods) = ₹${aluCost}\nMesh: ${meshTotalSqft.toFixed(2)} sqft = ₹${meshCost}\nAccessories: ₹${accessoriesCost}\n\nTotal Material Cost: ₹${totalMaterialCost}`;
-  document.getElementById("output").innerText = resultText;
-}
+    // Attach listeners to all inputs for recalculation
+    document.getElementById('estimateTable').addEventListener('input', function(e) {
+      if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") {
+        calculateRow(e.target);
+      }
+    });
 
-function calculateCustomerEstimate() {
-  const pricePerSqft = parseFloat(document.getElementById("netType").value);
-  const materialCost = parseFloat(document.getElementById("materialCost").value);
+    // PDF Generation
+    function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: "pt", format: "a4" });
+      const pageWidth = doc.internal.pageSize.getWidth();
 
-  if (!pricePerSqft || !materialCost || !totalSqft) {
-    alert("Please first complete the estimate and fill all fields.");
-    return;
-  }
+      // Brand Heading
+      doc.setFontSize(20);
+      doc.setTextColor(10, 107, 60);
+      doc.text("Raj Marketing Mysore", pageWidth / 2, 40, { align: "center" });
 
-  const totalPrice = totalSqft * pricePerSqft;
-  const profit = totalPrice - materialCost;
-  const profitPercent = ((profit / materialCost) * 100).toFixed(2);
+      doc.setFontSize(13);
+      doc.setTextColor(0,0,0);
+      doc.text("Estimate", pageWidth / 2, 65, { align: "center" });
 
-  let discountText = "";
-  if (totalPrice < 10000) {
-    discountText = `You can offer a discount up to 10% only (₹${(totalPrice * 0.10).toFixed(0)})`;
-  } else {
-    discountText = `You can offer a discount up to 15% only (₹${(totalPrice * 0.15).toFixed(0)})`;
-  }
+      // Customer Details
+      doc.setFontSize(12);
+      doc.text(`Customer Name: ${document.getElementById('customerName').value || ''}`, 40, 95);
+      doc.text(`Contact Number: ${document.getElementById('customerNumber').value || ''}`, 40, 115);
+      doc.text(`Address: ${document.getElementById('customerAddress').value || ''}`, 40, 135);
 
-  const out = `Customer Price: ₹${totalPrice.toFixed(2)}\nMaterial Cost: ₹${materialCost}\nProfit: ₹${profit.toFixed(2)} (${profitPercent}%)\n${discountText}`;
+      // Table Headers
+      const startY = 160;
+      let y = startY;
+      doc.setFontSize(11);
+      doc.setFillColor(210, 255, 231);
+      doc.rect(30, y-11, pageWidth-60, 22, 'F');
+      doc.text("Sl.", 38, y);
+      doc.text("Type of Net", 60, y);
+      doc.text("Width (in)", 150, y);
+      doc.text("Height (in)", 220, y);
+      doc.text("Qty", 295, y);
+      doc.text("Per Sqft Price", 330, y);
+      doc.text("Sqft", 435, y);
+      doc.text("Price (₹)", 485, y);
 
-  document.getElementById("custOutput").innerText = out;
-}
+      // Table Rows
+      const tableBody = document.getElementById('estimateBody');
+      y += 18;
+      for (let i = 0; i < tableBody.rows.length; i++) {
+        if (y > 730) { // Add new page if needed
+          doc.addPage();
+          y = 40;
+        }
+        const row = tableBody.rows[i];
+        doc.setFontSize(10);
+        doc.setTextColor(0,0,0);
+        doc.text(`${i + 1}`, 38, y);
+        doc.text(row.cells[1].querySelector('select').selectedOptions[0].text, 60, y);
+        doc.text(row.cells[2].querySelector('input').value, 155, y, { align: "right" });
+        doc.text(row.cells[3].querySelector('input').value, 225, y, { align: "right" });
+        doc.text(row.cells[4].querySelector('input').value, 297, y, { align: "right" });
+        doc.text(row.cells[5].querySelector('input').value, 370, y, { align: "right" });
+        doc.text(row.cells[6].querySelector('input').value, 437, y, { align: "right" });
+        doc.text(row.cells[7].querySelector('input').value, 510, y, { align: "right" });
+        y += 18;
+      }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log('Service Worker Registered'))
-      .catch(err => console.error('Service Worker Error:', err));
-  });
-}
-</script></body>
+      // Totals
+      y += 10;
+      doc.setFontSize(12);
+      doc.setTextColor(10, 107, 60);
+      doc.text(`Total Sqft: ${document.getElementById('totalSqft').innerText}`, 370, y, { align: "right" });
+      doc.text(`Total Price (₹): ${document.getElementById('totalPrice').innerText}`, 510, y, { align: "right" });
+
+      // Signature
+      y += 60;
+      doc.setFontSize(11);
+      doc.setTextColor(0,0,0);
+      doc.text("Authorised Signatory", pageWidth - 170, y);
+      doc.setFontSize(13);
+      doc.setTextColor(10, 107, 60);
+      doc.text("Raj Marketing Mysore", pageWidth - 170, y + 18);
+
+      // Download
+      doc.save('Estimate_RajMarketing.pdf');
+    }
+  </script>
+</body>
 </html>

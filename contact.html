@@ -3,151 +3,272 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us - Raj Marketing Mysore</title>
+  <title>Contact Us | Raj Marketing Mysore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <style>
     :root {
-      --primary: #0d47a1;
-      --accent: #43a047;
-      --bg: #f5f5f5;
-      --text-dark: #333;
-      --text-light: #777;
+      --primary: #1976d2;
+      --primary-dark: #0d47a1;
+      --secondary: #22223b;
+      --accent: #ffb300;
+      --bg-light: #f7faff;
+      --bg-section: #e3f0ff;
+      --card-bg: #ffffff;
+      --font-heading: 'Poppins', 'Inter', Arial, sans-serif;
+      --font-body: 'Inter', Arial, sans-serif;
     }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text-dark);
+      font-family: var(--font-body);
+      background: var(--bg-light);
+      color: var(--secondary);
+      font-size: 17px;
+      min-height: 100dvh;
+      letter-spacing: 0.01em;
     }
-
     header {
-      background: var(--primary);
+      background: linear-gradient(100deg, var(--primary) 65%, var(--accent) 100%);
       color: #fff;
-      padding: 1rem;
+      padding: 30px 6vw 22px 6vw;
+      text-align: center;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 6px 26px rgba(25, 118, 210, 0.10);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-family: var(--font-heading);
+      font-size: 2.1rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      margin-bottom: 7px;
+      text-shadow: 0 2px 12px #1976d220;
+    }
+    header p {
+      font-size: 1.15rem;
+      letter-spacing: 0.3px;
+      font-weight: 600;
+      opacity: 0.98;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      background: #fff;
+      box-shadow: 0 1.2px 6px rgba(25,118,210,0.06);
+      padding: 12px 0 8px 0;
+      margin-bottom: 8px;
+      position: sticky;
+      top: 85px;
+      z-index: 90;
+      border-bottom: 2px solid #e3f0ff;
+    }
+    nav a {
+      color: var(--primary);
+      background: none;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 26px;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      font-size: 1.12rem;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.1px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    nav a:hover, nav a.active {
+      background: var(--primary);
+      color: #fff !important;
+    }
+    .section-contact {
+      background: var(--bg-section);
+      margin: 0 auto;
+      padding: 38px 6vw 28px 6vw;
+      max-width: 540px;
+      border-radius: 22px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 18px #1976d20d;
+    }
+    .contact-header {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 14px;
+      letter-spacing: 0.7px;
       text-align: center;
     }
-
-    .container {
-      padding: 1rem;
-      max-width: 600px;
-      margin: auto;
+    .contact-description {
+      color: #31445c;
+      font-size: 1.08rem;
+      margin-bottom: 21px;
+      text-align: center;
     }
-
-    .description {
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      color: var(--text-light);
-    }
-
     form {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      width: 100%;
-      box-sizing: border-box;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 2px 16px #1976d212;
+      padding: 23px 18px 19px 18px;
+      margin-bottom: 18px;
     }
-
     label {
       display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 1.07rem;
+      letter-spacing: 0.03em;
     }
-
     input, textarea {
       width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
+      padding: 10px 11px;
+      margin-bottom: 18px;
+      border: 1.5px solid #bbb;
+      border-radius: 8px;
+      font-size: 1.07rem;
+      background: #fafdfe;
+      font-family: var(--font-body);
+      transition: border 0.2s;
     }
-
+    input:focus, textarea:focus {
+      border: 1.5px solid var(--primary);
+      outline: none;
+    }
     button {
       width: 100%;
-      padding: 0.75rem;
-      background-color: var(--accent);
+      padding: 12px;
+      background-color: var(--primary);
       border: none;
       color: #fff;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 6px;
+      font-size: 1.13rem;
+      font-weight: 700;
+      border-radius: 8px;
       cursor: pointer;
+      box-shadow: 0 2px 8px #1976d215;
+      transition: background 0.2s;
     }
-
     button:hover {
-      background-color: #2e7d32;
+      background-color: var(--primary-dark);
     }
-
-    .home-btn {
-      display: block;
-      margin: 1rem auto 0;
-      text-align: center;
+    .contact-details {
+      background: #fffbe7;
+      border-radius: 13px;
+      color: #263142;
+      padding: 16px 14px;
+      margin-top: 11px;
+      font-size: 1.06rem;
+      box-shadow: 0 2px 10px #1976d214;
+    }
+    .contact-details div {
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .contact-details a {
       color: var(--primary);
-      text-decoration: none;
-      font-weight: bold;
+      text-decoration: underline;
+      font-weight: 700;
     }
-
-    footer {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: var(--text-light);
-    }
-
     @media (max-width: 600px) {
-      form {
-        padding: 1rem;
-      }
-      input, textarea {
-        font-size: 1rem;
-      }
+      .section-contact { padding: 12px 5vw; }
+      .contact-header { font-size: 1.05rem; }
+      .contact-details { font-size: 0.99rem; padding: 9px 5px; }
+      form { padding: 13px 6px 11px 6px; }
+      input, textarea { font-size: 1rem; }
+    }
+    footer {
+      background: var(--primary-dark);
+      color: #fff;
+      text-align: center;
+      padding: 22px 0 15px 0;
+      font-size: 1.09rem;
+      margin-top: 36px;
+      border-radius: 32px 32px 0 0;
+      letter-spacing: 0.23px;
+      box-shadow: 0 -4px 24px #1976d218;
+    }
+    .footer-contact {
+      margin-top: 7px;
+      font-size: 1.06rem;
+      opacity: 0.96;
+    }
+    @media (max-width: 600px) {
+      .footer-contact { font-size: 0.99rem; }
     }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>Raj Marketing Mysore</h1>
+    <h1><i class="fa-solid fa-shield-virus"></i> Raj Marketing Mysore</h1>
+    <p>Mosquito Net Experts | <span class="top-contact"><i class="fa-solid fa-phone"></i><a href="tel:+919483037385">(+91) 94830 37385</a></span></p>
+    <div class="top-contact">Serving Mysore, Mandya, Nanjangud, Srirangapatna & Surroundings</div>
   </header>
-
-  <div class="container">
-    <div class="description">
-      <p>Need help or have questions? Contact us using the form below and we’ll respond quickly. We're happy to help with all your net installation and service inquiries.</p>
+  <nav>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="products.html"><i class="fa-solid fa-boxes-stacked"></i> Products</a>
+    <a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a>
+    <a href="services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a>
+    <a href="estimate.html"><i class="fa-solid fa-calculator"></i> Estimate</a>
+    <a href="contact.html" class="active"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </nav>
+  <section class="section-contact">
+    <div class="contact-header">Get in Touch</div>
+    <div class="contact-description">
+      Have questions or want to book a free site visit?<br>
+      Contact us – we respond fast by phone, WhatsApp, or email!
     </div>
-
-    <form id="contactForm">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" placeholder="Enter your name" required />
-
-      <label for="phone">Mobile Number</label>
-      <input type="tel" id="phone" placeholder="Enter your number" required />
-
-      <label for="message">Your Message</label>
-      <textarea id="message" rows="4" placeholder="Enter your message" required></textarea>
-
-      <button type="submit">Send via WhatsApp</button>
+    <form id="contactForm" autocomplete="off">
+      <label for="name"><i class="fa-solid fa-user"></i> Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+      <label for="phone"><i class="fa-solid fa-phone"></i> Mobile Number</label>
+      <input type="tel" id="phone" placeholder="Enter your number" required>
+      <label for="message"><i class="fa-solid fa-comment"></i> Message</label>
+      <textarea id="message" rows="3" placeholder="How can we help you?" required></textarea>
+      <button type="submit"><i class="fa-brands fa-whatsapp"></i> Send via WhatsApp</button>
     </form>
-
-    <a href="index.html" class="home-btn">← Back to Home</a>
-  </div>
-
+    <div class="contact-details">
+      <div><i class="fa-solid fa-phone"></i> <b>Call:</b> <a href="tel:+919483037385">+91 94830 37385</a></div>
+      <div><i class="fa-brands fa-whatsapp"></i> <b>WhatsApp:</b> <a href="https://wa.me/919483037385">Message Now</a></div>
+      <div><i class="fa-solid fa-location-dot"></i> <b>Address:</b> No. 14, 1st Main, Jayanagar, Mysore, Karnataka 570014</div>
+      <div><i class="fa-solid fa-envelope"></i> <b>Email:</b> <a href="mailto:rajmarketingmysore@gmail.com">rajmarketingmysore@gmail.com</a></div>
+      <div><i class="fa-solid fa-clock"></i> <b>Hours:</b> Mon–Sat 9am–8pm</div>
+    </div>
+  </section>
   <footer>
-    &copy; 2025 Raj Marketing Mysore. All rights reserved.
+    &copy; 2025 Raj Marketing Mysore. All rights reserved.<br>
+    <div class="footer-contact">
+      <i class="fa-solid fa-location-dot"></i> No. 14, 1st Main, Jayanagar, Mysore<br>
+      <i class="fa-solid fa-phone"></i> <a href="tel:+919483037385">94830 37385</a>
+      &nbsp;|&nbsp;
+      <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
+      &nbsp;|&nbsp;
+      <i class="fa-solid fa-envelope"></i> <a href="mailto:rajmarketingmysore@gmail.com">Email</a>
+    </div>
+    <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
+      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur & more
+    </div>
   </footer>
-
   <script>
     document.getElementById("contactForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const name = document.getElementById("name").value.trim();
       const phone = document.getElementById("phone").value.trim();
       const message = document.getElementById("message").value.trim();
-
-      const fullMessage = `Hello Raj Marketing Mysore,%0AName: ${name}%0APhone: ${phone}%0AMessage: ${message}`;
+      // WhatsApp link
+      const fullMessage =
+        encodeURIComponent(
+          `Hello Raj Marketing Mysore,%0AName: ${name}%0APhone: ${phone}%0AMessage: ${message}`
+        );
       const whatsappURL = `https://wa.me/919483037385?text=${fullMessage}`;
       window.open(whatsappURL, '_blank');
     });
   </script>
 </body>
-</html>
+  </html>

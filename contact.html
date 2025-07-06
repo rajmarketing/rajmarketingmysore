@@ -15,8 +15,15 @@
       --bg-light: #f7faff;
       --bg-section: #e3f0ff;
       --card-bg: #ffffff;
+      --card-glass: rgba(255,255,255,0.85);
       --font-heading: 'Poppins', 'Inter', Arial, sans-serif;
       --font-body: 'Inter', Arial, sans-serif;
+      --input-bg: #fafdfe;
+      --input-border: #c5d6ef;
+      --input-focus: #1976d2;
+      --input-shadow: 0 4px 16px #1976d220;
+      --button-gradient: linear-gradient(92deg, #1976d2 60%, #ffb300 120%);
+      --button-hover: #0d47a1;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -109,51 +116,132 @@
       margin-bottom: 21px;
       text-align: center;
     }
+
+    /* ==== UPGRADED FORM DESIGN ==== */
     form {
-      background: var(--card-bg);
-      border-radius: 16px;
-      box-shadow: 0 2px 16px #1976d212;
-      padding: 23px 18px 19px 18px;
+      background: var(--card-glass);
+      border-radius: 22px;
+      box-shadow: 0 6px 32px #1976d226;
+      padding: 32px 20px 28px 20px;
       margin-bottom: 18px;
+      backdrop-filter: blur(2px);
+      position: relative;
+      overflow: hidden;
+      border: 1.5px solid #e6ecfa;
+      animation: fadeInForm 0.9s cubic-bezier(.29,1.11,.54,.97);
     }
-    label {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--primary-dark);
-      font-weight: 600;
-      font-size: 1.07rem;
-      letter-spacing: 0.03em;
+    @keyframes fadeInForm {
+      from { opacity: 0; transform: translateY(28px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .form-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+      font-size: 1.18rem;
+      opacity: 0.72;
+      z-index: 2;
     }
     input, textarea {
       width: 100%;
-      padding: 10px 11px;
-      margin-bottom: 18px;
-      border: 1.5px solid #bbb;
-      border-radius: 8px;
+      padding: 12px 14px 12px 42px;
+      border: 1.7px solid var(--input-border);
+      border-radius: 10px;
       font-size: 1.07rem;
-      background: #fafdfe;
+      background: var(--input-bg);
       font-family: var(--font-body);
-      transition: border 0.2s;
+      transition: border 0.22s, box-shadow 0.22s;
+      box-shadow: var(--input-shadow);
+      outline: none;
+      margin: 0;
+      color: #22304a;
+      font-weight: 500;
     }
     input:focus, textarea:focus {
-      border: 1.5px solid var(--primary);
-      outline: none;
+      border: 1.7px solid var(--input-focus);
+      background: #f3faff;
+      box-shadow: 0 0 0 2px #1976d230;
     }
-    button {
+    textarea {
+      min-height: 74px;
+      resize: vertical;
+    }
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 1.09rem;
+      letter-spacing: 0.01em;
+      margin-left: 4px;
+      margin-bottom: 13px;
+    }
+    .form-group input:invalid,
+    .form-group textarea:invalid {
+      border-color: #ffd6a0;
+    }
+    /* Button styling */
+    button[type="submit"] {
       width: 100%;
-      padding: 12px;
-      background-color: var(--primary);
+      padding: 14px 0;
+      background: var(--button-gradient);
       border: none;
       color: #fff;
-      font-size: 1.13rem;
-      font-weight: 700;
-      border-radius: 8px;
+      font-size: 1.19rem;
+      font-weight: 800;
+      border-radius: 9px;
       cursor: pointer;
-      box-shadow: 0 2px 8px #1976d215;
-      transition: background 0.2s;
+      box-shadow: 0 3px 14px #1976d226;
+      transition: background 0.22s, transform 0.1s;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 2px;
+      position: relative;
+      overflow: hidden;
     }
-    button:hover {
-      background-color: var(--primary-dark);
+    button[type="submit"]:hover {
+      background: linear-gradient(94deg, var(--button-hover) 60%, #e8a800 120%);
+      transform: translateY(-2px) scale(1.01);
+    }
+    .form-divider {
+      height: 1.7px;
+      background: linear-gradient(90deg, #e3f0ff 0%, #ffd97a 100%);
+      border-radius: 1px;
+      margin: 19px 0 15px 0;
+      opacity: 0.54;
+    }
+    .form-success {
+      background: #e3fff2;
+      border: 1.5px solid #1fe37a;
+      color: #187c4a;
+      padding: 12px 10px;
+      border-radius: 9px;
+      font-size: 1.07rem;
+      text-align: center;
+      margin-bottom: 22px;
+      font-weight: 600;
+      animation: fadeInForm 0.7s;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .section-contact { padding: 12px 2vw; }
+      .contact-header { font-size: 1.05rem; }
+      .contact-details { font-size: 0.99rem; padding: 9px 5px; }
+      form { padding: 16px 5px 13px 5px; border-radius: 14px;}
+      input, textarea { font-size: 1rem; border-radius: 7px;}
+      label { font-size: 0.97rem; margin-bottom: 11px;}
+      button[type="submit"] { font-size: 1rem; padding: 11px 0; border-radius: 7px;}
+      .form-icon { font-size: 1.06rem; left: 11px; }
     }
     .contact-details {
       background: #fffbe7;
@@ -174,13 +262,6 @@
       color: var(--primary);
       text-decoration: underline;
       font-weight: 700;
-    }
-    @media (max-width: 600px) {
-      .section-contact { padding: 12px 5vw; }
-      .contact-header { font-size: 1.05rem; }
-      .contact-details { font-size: 0.99rem; padding: 9px 5px; }
-      form { padding: 13px 6px 11px 6px; }
-      input, textarea { font-size: 1rem; }
     }
     footer {
       background: var(--primary-dark);
@@ -225,12 +306,25 @@
       Contact us – we respond fast by phone, WhatsApp, or email!
     </div>
     <form id="contactForm" autocomplete="off">
-      <label for="name"><i class="fa-solid fa-user"></i> Full Name</label>
-      <input type="text" id="name" placeholder="Enter your name" required>
-      <label for="phone"><i class="fa-solid fa-phone"></i> Mobile Number</label>
-      <input type="tel" id="phone" placeholder="Enter your number" required>
-      <label for="message"><i class="fa-solid fa-comment"></i> Message</label>
-      <textarea id="message" rows="3" placeholder="How can we help you?" required></textarea>
+      <div id="formSuccess" class="form-success" style="display:none;">
+        Thank you! Your message is ready to send on WhatsApp. <br>Our team will respond swiftly!
+      </div>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <span class="form-icon"><i class="fa-solid fa-user"></i></span>
+        <input type="text" id="name" placeholder="Enter your name" required autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label for="phone">Mobile Number</label>
+        <span class="form-icon"><i class="fa-solid fa-phone"></i></span>
+        <input type="tel" id="phone" placeholder="Enter your number" required autocomplete="tel">
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <span class="form-icon"><i class="fa-solid fa-comment"></i></span>
+        <textarea id="message" rows="3" placeholder="How can we help you?" required></textarea>
+      </div>
+      <div class="form-divider"></div>
       <button type="submit"><i class="fa-brands fa-whatsapp"></i> Send via WhatsApp</button>
     </form>
     <div class="contact-details">
@@ -261,14 +355,20 @@
       const name = document.getElementById("name").value.trim();
       const phone = document.getElementById("phone").value.trim();
       const message = document.getElementById("message").value.trim();
-      // WhatsApp link
+      if (!name || !phone || !message) return;
       const fullMessage =
         encodeURIComponent(
           `Hello Raj Marketing Mysore,%0AName: ${name}%0APhone: ${phone}%0AMessage: ${message}`
         );
       const whatsappURL = `https://wa.me/919483037385?text=${fullMessage}`;
-      window.open(whatsappURL, '_blank');
+      // Show the success message before redirecting
+      document.getElementById("formSuccess").style.display = "block";
+      setTimeout(function() {
+        window.open(whatsappURL, '_blank');
+        document.getElementById("formSuccess").style.display = "none";
+        document.getElementById("contactForm").reset();
+      }, 1000);
     });
   </script>
 </body>
-  </html>
+</html>

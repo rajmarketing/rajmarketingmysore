@@ -1,11 +1,230 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Gallery - Raj Marketing Mysore</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery | Raj Marketing Mysore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #1976d2;
+      --primary-dark: #0d47a1;
+      --secondary: #22223b;
+      --accent: #ffb300;
+      --bg-light: #f7faff;
+      --bg-section: #e3f0ff;
+      --card-bg: #ffffff;
+      --font-heading: 'Poppins', 'Inter', Arial, sans-serif;
+      --font-body: 'Inter', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-light);
+      color: var(--secondary);
+      font-size: 17px;
+      min-height: 100dvh;
+      letter-spacing: 0.01em;
+    }
+    header {
+      background: linear-gradient(100deg, var(--primary) 65%, var(--accent) 100%);
+      color: #fff;
+      padding: 30px 6vw 22px 6vw;
+      text-align: center;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 6px 26px rgba(25, 118, 210, 0.10);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-family: var(--font-heading);
+      font-size: 2.1rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      margin-bottom: 7px;
+      text-shadow: 0 2px 12px #1976d220;
+    }
+    header p {
+      font-size: 1.15rem;
+      letter-spacing: 0.3px;
+      font-weight: 600;
+      opacity: 0.98;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      background: #fff;
+      box-shadow: 0 1.2px 6px rgba(25,118,210,0.06);
+      padding: 12px 0 8px 0;
+      margin-bottom: 8px;
+      position: sticky;
+      top: 85px;
+      z-index: 90;
+      border-bottom: 2px solid #e3f0ff;
+    }
+    nav a {
+      color: var(--primary);
+      background: none;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 26px;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      font-size: 1.12rem;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.1px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    nav a:hover, nav a.active {
+      background: var(--primary);
+      color: #fff !important;
+    }
+    .section {
+      background: var(--bg-section);
+      margin: 0 auto;
+      padding: 38px 6vw 28px 6vw;
+      max-width: 1100px;
+      border-radius: 22px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 18px #1976d20d;
+    }
+    .gallery-header {
+      font-family: var(--font-heading);
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+      letter-spacing: 0.7px;
+      text-align: center;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 22px;
+      margin-top: 10px;
+    }
+    .gallery-item {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 2px 14px #1976d216;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.15s;
+      min-height: 260px;
+      position: relative;
+    }
+    .gallery-img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-caption {
+      padding: 13px 10px 9px 10px;
+      text-align: center;
+      font-size: 1.05rem;
+      color: #31445c;
+      font-weight: 600;
+      background: #fafdfe;
+      width: 100%;
+    }
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .section { padding: 16px 2vw 10px 2vw; }
+      .gallery-header { font-size: 1.1rem; }
+      .gallery-grid { grid-template-columns: 1fr; gap: 14px; }
+      .gallery-img { height: 140px; }
+      .gallery-item { min-height: 0; }
+      .gallery-caption { font-size: 0.99rem; }
+    }
+    footer {
+      background: var(--primary-dark);
+      color: #fff;
+      text-align: center;
+      padding: 22px 0 15px 0;
+      font-size: 1.09rem;
+      margin-top: 36px;
+      border-radius: 32px 32px 0 0;
+      letter-spacing: 0.23px;
+      box-shadow: 0 -4px 24px #1976d218;
+    }
+    .footer-contact {
+      margin-top: 7px;
+      font-size: 1.06rem;
+      opacity: 0.96;
+    }
+    @media (max-width: 600px) {
+      .footer-contact { font-size: 0.99rem; }
+    }
+  </style>
 </head>
 <body>
-<h1>Gallery</h1>
-<p>Image placeholders here</p>
-<a href='index.html'>Back to Home</a>
+  <header>
+    <h1><i class="fa-solid fa-shield-virus"></i> Raj Marketing Mysore</h1>
+    <p>Mosquito Net Experts | <span class="top-contact"><i class="fa-solid fa-phone"></i><a href="tel:+919483037385">(+91) 94830 37385</a></span></p>
+    <div class="top-contact">Serving Mysore, Mandya, Nanjangud, Srirangapatna & Surroundings</div>
+  </header>
+  <nav>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="products.html"><i class="fa-solid fa-boxes-stacked"></i> Products</a>
+    <a href="gallery.html" class="active"><i class="fa-solid fa-images"></i> Gallery</a>
+    <a href="services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a>
+    <a href="estimate.html"><i class="fa-solid fa-calculator"></i> Estimate</a>
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </nav>
+  <section class="section">
+    <div class="gallery-header">Gallery – Our Work & Installations</div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://5.imimg.com/data5/SELLER/Default/2022/10/YO/RE/XK/1778140/velcro-mosquito-net-1000x1000.jpg" alt="Velcro System on window">
+        <div class="gallery-caption">Velcro Mosquito Net on Living Room Window</div>
+      </div>
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://www.mosquitonet.in/assets/images/products/openable_window_net.jpg" alt="Openable frame net">
+        <div class="gallery-caption">Openable Aluminium Frame on Balcony Door</div>
+      </div>
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://www.phiferindia.com/wp-content/uploads/2022/10/pleated-mosquito-net.jpg" alt="Pleated net for balcony">
+        <div class="gallery-caption">Pleated Retractable Net for French Window</div>
+      </div>
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://www.phiferindia.com/wp-content/uploads/2022/10/sliding-door-mosquito-net.jpg" alt="Sliding mesh door">
+        <div class="gallery-caption">Sliding Mesh Door – Kitchen Entrance</div>
+      </div>
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://www.mosquitonet.co.in/wp-content/uploads/2022/04/mosquito-net-repair.jpg" alt="Mosquito net repair">
+        <div class="gallery-caption">Net Repair – Replacing Damaged Mesh</div>
+      </div>
+      <div class="gallery-item">
+        <img class="gallery-img" src="https://www.phiferindia.com/wp-content/uploads/2022/10/mosquito-net-replacement.jpg" alt="Mosquito net replacement">
+        <div class="gallery-caption">Upgrading Old Nets to New Modern Frames</div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    &copy; 2025 Raj Marketing Mysore. All rights reserved.<br>
+    <div class="footer-contact">
+      <i class="fa-solid fa-location-dot"></i> No. 14, 1st Main, Jayanagar, Mysore<br>
+      <i class="fa-solid fa-phone"></i> <a href="tel:+919483037385">94830 37385</a>
+      &nbsp;|&nbsp;
+      <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
+      &nbsp;|&nbsp;
+      <i class="fa-solid fa-envelope"></i> <a href="mailto:rajmarketingmysore@gmail.com">Email</a>
+    </div>
+    <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
+      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur & more
+    </div>
+  </footer>
 </body>
 </html>

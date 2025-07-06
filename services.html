@@ -1,11 +1,260 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Services - Raj Marketing Mysore</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Services | Raj Marketing Mysore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #1976d2;
+      --primary-dark: #0d47a1;
+      --secondary: #22223b;
+      --accent: #ffb300;
+      --bg-light: #f7faff;
+      --bg-section: #e3f0ff;
+      --card-bg: #ffffff;
+      --font-heading: 'Poppins', 'Inter', Arial, sans-serif;
+      --font-body: 'Inter', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-light);
+      color: var(--secondary);
+      font-size: 17px;
+      min-height: 100dvh;
+      letter-spacing: 0.01em;
+    }
+    header {
+      background: linear-gradient(100deg, var(--primary) 65%, var(--accent) 100%);
+      color: #fff;
+      padding: 30px 6vw 22px 6vw;
+      text-align: center;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 6px 26px rgba(25, 118, 210, 0.10);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-family: var(--font-heading);
+      font-size: 2.1rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      margin-bottom: 7px;
+      text-shadow: 0 2px 12px #1976d220;
+    }
+    header p {
+      font-size: 1.15rem;
+      letter-spacing: 0.3px;
+      font-weight: 600;
+      opacity: 0.98;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      background: #fff;
+      box-shadow: 0 1.2px 6px rgba(25,118,210,0.06);
+      padding: 12px 0 8px 0;
+      margin-bottom: 8px;
+      position: sticky;
+      top: 85px;
+      z-index: 90;
+      border-bottom: 2px solid #e3f0ff;
+    }
+    nav a {
+      color: var(--primary);
+      background: none;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 26px;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      font-size: 1.12rem;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.1px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    nav a:hover, nav a.active {
+      background: var(--primary);
+      color: #fff !important;
+    }
+    .section {
+      background: var(--bg-section);
+      margin: 0 auto;
+      padding: 38px 6vw 28px 6vw;
+      max-width: 980px;
+      border-radius: 22px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 18px #1976d20d;
+    }
+    .services-header {
+      font-family: var(--font-heading);
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 18px;
+      letter-spacing: 0.7px;
+      text-align: center;
+    }
+    .service-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 14px;
+    }
+    .service-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: 0 2px 16px #1976d212;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 22px 18px 20px 18px;
+      border-top: 5px solid var(--accent);
+      min-height: 260px;
+      transition: box-shadow 0.18s;
+      position: relative;
+      text-align: left;
+      gap: 12px;
+    }
+    .service-icon {
+      color: var(--primary);
+      font-size: 2.3rem;
+      border-radius: 12px;
+      background: #e3f0ff;
+      padding: 10px 14px;
+      margin-bottom: 7px;
+      box-shadow: 0 2px 8px #1976d218;
+      display: inline-block;
+    }
+    .service-title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+      letter-spacing: 0.16px;
+    }
+    .service-desc {
+      font-size: 1.05rem;
+      color: #3e4e6c;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+    @media (max-width: 900px) {
+      .service-list { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .section { padding: 16px 2vw 10px 2vw; }
+      .services-header { font-size: 1.1rem; }
+      .service-list { grid-template-columns: 1fr; gap: 14px; }
+      .service-card { min-height: 0; padding: 13px 6px 10px 6px; }
+      .service-title { font-size: 1.03rem; }
+      .service-desc { font-size: 0.99rem; }
+    }
+    footer {
+      background: var(--primary-dark);
+      color: #fff;
+      text-align: center;
+      padding: 22px 0 15px 0;
+      font-size: 1.09rem;
+      margin-top: 36px;
+      border-radius: 32px 32px 0 0;
+      letter-spacing: 0.23px;
+      box-shadow: 0 -4px 24px #1976d218;
+    }
+    .footer-contact {
+      margin-top: 7px;
+      font-size: 1.06rem;
+      opacity: 0.96;
+    }
+    @media (max-width: 600px) {
+      .footer-contact { font-size: 0.99rem; }
+    }
+  </style>
 </head>
 <body>
-<h1>Our Services</h1>
-<ul><li>Installation</li><li>Replacement</li><li>Rework</li></ul>
-<a href='index.html'>Back to Home</a>
+  <header>
+    <h1><i class="fa-solid fa-shield-virus"></i> Raj Marketing Mysore</h1>
+    <p>Mosquito Net Experts | <span class="top-contact"><i class="fa-solid fa-phone"></i><a href="tel:+919483037385">(+91) 94830 37385</a></span></p>
+    <div class="top-contact">Serving Mysore, Mandya, Nanjangud, Srirangapatna & Surroundings</div>
+  </header>
+  <nav>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="products.html"><i class="fa-solid fa-boxes-stacked"></i> Products</a>
+    <a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a>
+    <a href="services.html" class="active"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a>
+    <a href="estimate.html"><i class="fa-solid fa-calculator"></i> Estimate</a>
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </nav>
+  <section class="section">
+    <div class="services-header">Our Services</div>
+    <div class="service-list">
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-ruler-combined"></i></div>
+        <div class="service-title">Free On-Site Consultation & Measurement</div>
+        <div class="service-desc">
+          We visit your home or office and provide expert advice, take accurate measurements, and suggest the most suitable net solutions—absolutely free.
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-shield-virus"></i></div>
+        <div class="service-title">Mosquito Net Installation</div>
+        <div class="service-desc">
+          Professional and neat installation of all types of mosquito nets for windows, doors, balconies, kitchens, and large openings. Custom fit for every space.
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-cubes"></i></div>
+        <div class="service-title">Custom Frame Fabrication</div>
+        <div class="service-desc">
+          We manufacture and supply powder-coated aluminum frames in various colors and designs to blend with your interiors and ensure long-lasting durability.
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <div class="service-title">Net Replacement & Upgrades</div>
+        <div class="service-desc">
+          Upgrade your old or damaged nets with modern, highly durable, and aesthetic mesh products. Options available for every budget and need.
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+        <div class="service-title">Repairs & Maintenance</div>
+        <div class="service-desc">
+          Quick repairs for torn, loose, or dirty mosquito nets. Annual maintenance and check-ups to keep your protection at 100%.
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-users"></i></div>
+        <div class="service-title">Bulk & Institutional Orders</div>
+        <div class="service-desc">
+          Special rates and expert handling for hostels, hospitals, hotels, offices, schools, and apartment projects. Fast delivery and installation guaranteed.
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    &copy; 2025 Raj Marketing Mysore. All rights reserved.<br>
+    <div class="footer-contact">
+      <i class="fa-solid fa-location-dot"></i> No. 14, 1st Main, Jayanagar, Mysore<br>
+      <i class="fa-solid fa-phone"></i> <a href="tel:+919483037385">94830 37385</a>
+      &nbsp;|&nbsp;
+      <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
+      &nbsp;|&nbsp;
+      <i class="fa-solid fa-envelope"></i> <a href="mailto:rajmarketingmysore@gmail.com">Email</a>
+    </div>
+    <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
+      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur & more
+    </div>
+  </footer>
 </body>
-</html>
+          </html>

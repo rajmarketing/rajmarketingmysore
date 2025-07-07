@@ -588,4 +588,54 @@
       &nbsp;|&nbsp;
       <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
       &nbsp;|&nbsp;
-      <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">E
+      <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">Email</a>
+    </div>
+    <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
+      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur &amp; more
+    </div>
+  </footer>
+  <!-- Visitor Counter JS -->
+  <script>
+    // Visitor Counter (localStorage for demo; for real site, use server/db)
+    const countKey = 'rajmarketing-visitor-count';
+    let count = Number(localStorage.getItem(countKey) || 0);
+    if (!sessionStorage.getItem('visited')) {
+      count++;
+      localStorage.setItem(countKey, count);
+      sessionStorage.setItem('visited', 'yes');
+    }
+    document.getElementById('visitorCount').innerHTML = `<i class="fa-solid fa-users"></i> ${count.toLocaleString()}`;
+  </script>
+  <!-- Hamburger Menu Script & Sticky CTA -->
+  <script>
+    const menuBtn = document.querySelector('.menu-btn');
+    const nav = document.querySelector('nav');
+    const overlay = document.querySelector('.nav-overlay');
+    menuBtn.addEventListener('click', function() {
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+    overlay.addEventListener('click', function() {
+      nav.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+    // Close nav on link click (mobile)
+    nav.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A' && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        overlay.classList.remove('active');
+      }
+    });
+    // Sticky CTA for mobile
+    function showStickyCTA() {
+      if (window.innerWidth <= 700) {
+        document.querySelector('.sticky-cta').style.display = 'flex';
+      } else {
+        document.querySelector('.sticky-cta').style.display = 'none';
+      }
+    }
+    window.addEventListener('resize', showStickyCTA);
+    window.addEventListener('DOMContentLoaded', showStickyCTA);
+  </script>
+</body>
+</html>

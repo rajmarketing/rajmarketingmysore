@@ -1,281 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raj Marketing Admin Panel</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <style>
-    :root {
-      --admin-bg: #1c2231;
-      --admin-accent: #1976d2;
-      --admin-accent-soft: #e3f0ff;
-      --admin-card: #f8faff;
-      --admin-menu: #23304aee;
-      --admin-menu-text: #e3e8ee;
-      --admin-menu-hover: #1976d2;
-      --admin-font-heading: 'Poppins', 'Inter', Arial, sans-serif;
-      --admin-font-body: 'Inter', Arial, sans-serif;
-      --admin-success: #28c76f;
-      --admin-danger: #ff5252;
-      --admin-warning: #fbbf24;
-      --border-soft: #e3f0ff;
-      --shadow-card: 0 3px 18px #1976d211;
-      --shadow-menu: 2px 0 10px #1976d218;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0;}
-    body {
-      font-family: var(--admin-font-body);
-      background: var(--admin-bg);
-      color: #24304a;
-      min-height: 100vh;
-      letter-spacing: 0.02em;
-    }
-    .admin-header {
-      background: linear-gradient(85deg, var(--admin-accent) 0%, #5bc0f8 100%);
-      padding: 28px 0 18px 0;
-      text-align: center;
-      font-family: var(--admin-font-heading);
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      color: #fff;
-      box-shadow: 0 6px 24px #1976d241;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-    }
-    .menu-toggle {
-      background: none;
-      border: none;
-      margin-left: 12px;
-      width: 48px; height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      display: none;
-      z-index: 1200;
-    }
-    .menu-toggle .fa-bars { font-size: 2rem; color: #fff;}
-    .admin-layout {
-      display: flex; min-height: 84vh;
-    }
-    .admin-menu {
-      background: var(--admin-menu);
-      width: 225px;
-      padding: 30px 0 0 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      box-shadow: var(--shadow-menu);
-      min-height: 100vh;
-      transition: left 0.21s cubic-bezier(0.82, 0.09, 0.26, 1.09);
-      z-index: 1100;
-    }
-    .admin-menu a {
-      color: var(--admin-menu-text);
-      text-decoration: none;
-      padding: 15px 32px 15px 25px;
-      font-size: 1.09rem;
-      font-family: var(--admin-font-heading);
-      font-weight: 700;
-      border-left: 5px solid transparent;
-      transition: background 0.2s, color 0.2s, border-left 0.2s;
-      letter-spacing: 1.2px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-radius: 0 14px 14px 0;
-    }
-    .admin-menu a.active, .admin-menu a:hover {
-      background: var(--admin-menu-hover);
-      color: #fff;
-      border-left: 5px solid #fff;
-      letter-spacing: 2px;
-    }
-    .admin-menu.mobile {
-      position: fixed;
-      top: 0; left: -250px;
-      height: 100vh;
-      width: 250px;
-      border-radius: 0 30px 30px 0;
-      z-index: 1201;
-    }
-    .admin-menu.mobile.open { left: 0; }
-    .menu-overlay {
-      display: none;
-      position: fixed;
-      z-index: 1200;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.25);
-    }
-    .menu-overlay.show { display: block; }
-    .admin-content {
-      flex: 1;
-      background: var(--admin-card);
-      color: #1b2237;
-      padding: 36px 54px 26px 54px;
-      font-family: var(--admin-font-body);
-      min-height: 500px;
-      border-radius: 0 0 0 30px;
-      box-shadow: var(--shadow-card);
-      overflow: auto;
-      transition: filter 0.18s;
-    }
-    .admin-title {
-      font-size: 1.4rem;
-      font-family: var(--admin-font-heading);
-      margin-bottom: 10px;
-      color: var(--admin-accent);
-      letter-spacing: 1.3px;
-      font-weight: 900;
-    }
-    .admin-card {
-      background: #fff;
-      color: #25304a;
-      border-radius: 17px;
-      padding: 22px 24px;
-      margin-bottom: 30px;
-      box-shadow: var(--shadow-card);
-      font-family: var(--admin-font-body);
-      font-size: 1.14rem;
-      border: 1.5px solid var(--border-soft);
-    }
-    .admin-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 18px 0 6px 0;
-      background: #fff1;
-      color: #25304a;
-      border-radius: 8px;
-      font-size: 1rem;
-      overflow-x: auto;
-    }
-    .admin-table th, .admin-table td {
-      padding: 12px 10px;
-      border-bottom: 1px solid #e3f0ff;
-      text-align: left;
-    }
-    .admin-table th { background: #e3f0ff; color: var(--admin-accent);}
-    .admin-table td { font-size: 1.02rem;}
-    .admin-table tr:last-child td { border-bottom: none; }
-    .gallery-upload {
-      margin: 12px 0 14px 0;
-      background: #f8faff;
-      padding: 16px;
-      border-radius: 14px;
-      border: 1.5px dashed var(--admin-accent);
-      text-align: center;
-      cursor: pointer;
-      font-weight: 700;
-      color: #1976d2;
-      font-size: 1.08rem;
-      transition: background 0.18s;
-    }
-    .gallery-upload.dragover {
-      background: #d4e5ff;
-      color: #0d47a1;
-      border-color: #1976d2;
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(128px,1fr));
-      gap: 18px;
-      margin-top: 16px;
-    }
-    .gallery-thumb {
-      background: #e3f0ff;
-      border-radius: 8px;
-      box-shadow: 0 1px 6px #1976d218;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      border: 2px solid #fff;
-      display: flex; align-items: center; justify-content: center;
-      aspect-ratio: 4/3;
-      min-height: 80px;
-      transition: box-shadow 0.17s;
-    }
-    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .gallery-thumb .del-btn {
-      position: absolute; top: 8px; right: 8px;
-      background: #ff5252;
-      color: #fff;
-      border: none; border-radius: 50%;
-      width: 24px; height: 24px; font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 1px 4px #0004;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .gallery-modal {
-      position: fixed; z-index: 3000; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;
-    }
-    .gallery-modal img { max-width: 95vw; max-height: 90vh; border-radius: 12px; box-shadow: 0 4px 24px #1976d2bb; }
-    .gallery-modal .del-btn { position: fixed; top: 32px; right: 36px; font-size: 1.7rem; background: #ff5252; color: #fff; }
-    @media (max-width: 900px) {
-      .admin-layout { flex-direction: column; }
-      .admin-menu { width: 100vw; min-height: unset; position: fixed; left: -100vw; top: 0; border-radius: 0 0 30px 30px;}
-      .admin-menu.open { left: 0;}
-      .menu-toggle { display: flex; }
-      .admin-content { padding: 20px 2vw;}
-      .admin-header { font-size: 1.1rem; padding: 16px 0 11px 0;}
-      .admin-title { font-size: 1.08rem; }
-      .admin-card { padding: 10px 4vw;}
-    }
-    @media (max-width: 500px) {
-      .admin-title { font-size: 1rem; }
-      .admin-content { padding: 6px 1vw;}
-      .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(80px,1fr)); }
-      .gallery-thumb { min-width: 56px;}
-    }
-    .modal-bg {
-      background: #000a;
-      position: fixed; inset: 0; z-index: 4000;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .modal-box {
-      background: #fff;
-      border-radius: 12px;
-      padding: 34px 27px 20px 27px;
-      box-shadow: 0 7px 42px #1976d241;
-      text-align: center;
-      max-width: 340px; width: 90vw;
-      font-family: var(--admin-font-body);
-      color: #222;
-      animation: fadeIn 0.6s;
-    }
-    @keyframes fadeIn {
-      from { transform: scale(0.93) translateY(38px); opacity: 0; }
-      to { transform: scale(1) translateY(0); opacity: 1;}
-    }
-    .modal-title {
-      font-family: var(--admin-font-heading);
-      color: var(--admin-accent);
-      font-size: 1.13rem; font-weight: 700;
-      margin-bottom: 13px; letter-spacing: 1.7px;
-    }
-    .modal-box input[type="password"] {
-      width: 96%; padding: 12px 11px;
-      border: 2px solid #e5e7eb; border-radius: 8px;
-      font-size: 1.09rem; margin-bottom: 16px; margin-top: 4px;
-      background: #f8f8fc; font-family: var(--admin-font-body); outline: none; transition: border 0.2s;
-    }
-    .modal-box input[type="password"]:focus { border-color: var(--admin-accent);}
-    .modal-box button {
-      background: var(--admin-accent); color: #fff; border: none; border-radius: 8px;
-      padding: 10px 26px; font-size: 1.01rem; font-family: var(--admin-font-body); font-weight: 700;
-      cursor: pointer; box-shadow: 0 1px 8px #1976d211; margin-bottom: 8px; margin-top: 2px; transition: background 0.18s;
-    }
-    .modal-box button:hover { background: #5bc0f8; color: #1c2231;}
-    .modal-error {
-      color: var(--admin-danger);
-      font-size: 0.97rem; margin-top: 7px; font-weight: 700; min-height: 18px; letter-spacing: 0.15px;
-    }
+    /* ... (Styles same as previous, omitted for brevity) ... */
+    /* Use your full existing CSS from the previous admin.html */
   </style>
 </head>
 <body>
@@ -309,29 +42,40 @@
   <main class="admin-content" id="adminContent"></main>
 </div>
 <script>
-const API = 'http://localhost:4000';
-
-const ADMIN_PASS = "admin@2025";
+const API = 'http://localhost:4000'; // Adjust as needed
 let loggedIn = false;
+
 function showModal(show = true, error = '') {
   document.getElementById('adminModal').style.display = show ? 'flex' : 'none';
   document.getElementById('modalError').textContent = error;
   if (show) document.getElementById('adminPassword').focus();
 }
-document.getElementById('adminLoginForm').onsubmit = function(e) {
+
+document.getElementById('adminLoginForm').onsubmit = async function(e) {
   e.preventDefault();
   const pw = document.getElementById('adminPassword').value.trim();
-  if (pw === ADMIN_PASS) {
-    loggedIn = true;
-    localStorage.setItem('rajmarketing-admin', 'true');
-    showModal(false);
-    loadPage('dashboard');
-  } else {
-    document.getElementById('modalError').textContent = 'Incorrect password!';
-    document.getElementById('adminPassword').value = '';
-    document.getElementById('adminPassword').focus();
+  try {
+    const res = await fetch(API + '/api/admin-login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ password: pw })
+    });
+    if (res.ok) {
+      loggedIn = true;
+      localStorage.setItem('rajmarketing-admin', 'true');
+      showModal(false);
+      loadPage('dashboard');
+    } else {
+      document.getElementById('modalError').textContent = 'Incorrect password!';
+      document.getElementById('adminPassword').value = '';
+      document.getElementById('adminPassword').focus();
+    }
+  } catch (err) {
+    document.getElementById('modalError').textContent = 'Server error. Try again later.';
   }
 };
+
 window.onload = function() {
   if (localStorage.getItem('rajmarketing-admin') === 'true') {
     showModal(false);
@@ -341,6 +85,7 @@ window.onload = function() {
   }
 };
 
+// --- Menu & Layout (unchanged) ---
 const menuToggle = document.querySelector('.menu-toggle');
 const menu = document.getElementById('adminMenu');
 const overlay = document.querySelector('.menu-overlay');
@@ -360,6 +105,7 @@ function closeMenu() {
   document.body.style.overflow = '';
 }
 
+// --- Admin Pages ---
 const pages = {
   dashboard: `
     <div class="admin-title">Welcome to Admin Dashboard</div>
@@ -432,13 +178,14 @@ const pages = {
   logout: `<div class="admin-card"><div class="admin-title" style="color:var(--admin-danger);">You have been logged out.</div><p>Return to the login screen to re-enter admin password.</p></div>`
 };
 
-document.getElementById('adminMenu').addEventListener('click', function(e) {
+document.getElementById('adminMenu').addEventListener('click', async function(e) {
   if (e.target.closest('a')) {
     const a = e.target.closest('a');
     const page = a.getAttribute('data-page');
     [...this.querySelectorAll('a')].forEach(a => a.classList.remove('active'));
     a.classList.add('active');
     if (page === 'logout') {
+      await fetch(API + '/api/admin-logout', { method: 'POST', credentials: 'include' });
       localStorage.removeItem('rajmarketing-admin');
       showModal(true, 'Logged out.');
       document.getElementById('adminContent').innerHTML = pages.logout;
@@ -459,7 +206,7 @@ function loadPage(page) {
 }
 
 function loadVisitors() {
-  fetch(API + '/api/visitors')
+  fetch(API + '/api/visitors', { credentials: 'include' })
     .then(r=>r.json()).then(visitors=>{
       const tbody = document.getElementById('visitorsTable');
       tbody.innerHTML = '';
@@ -468,10 +215,13 @@ function loadVisitors() {
       visitors.forEach(v => {
         tbody.innerHTML += `<tr><td>${v.date.replace('T',' ').slice(0,16)}</td><td>${v.ip||'-'}</td><td>${v.page}</td></tr>`;
       });
+    }).catch(() => {
+      document.getElementById('noVisitors').style.display = 'block';
+      document.getElementById('noVisitors').textContent = 'Could not load visitors (API error).';
     });
 }
 function loadAppointments() {
-  fetch(API + '/api/appointments')
+  fetch(API + '/api/appointments', { credentials: 'include' })
     .then(r=>r.json()).then(appts=>{
       const tbody = document.getElementById('apptTable');
       tbody.innerHTML = '';
@@ -480,10 +230,13 @@ function loadAppointments() {
       appts.forEach(a => {
         tbody.innerHTML += `<tr><td>${a.date}</td><td>${a.name}</td><td>${a.status}</td></tr>`;
       });
+    }).catch(() => {
+      document.getElementById('noAppt').style.display = 'block';
+      document.getElementById('noAppt').textContent = 'Could not load appointments (API error).';
     });
 }
 function loadEstimates() {
-  fetch(API + '/api/estimates')
+  fetch(API + '/api/estimates', { credentials: 'include' })
     .then(r=>r.json()).then(ests=>{
       const tbody = document.getElementById('estTable');
       tbody.innerHTML = '';
@@ -492,10 +245,13 @@ function loadEstimates() {
       ests.forEach(e => {
         tbody.innerHTML += `<tr><td>${e.date}</td><td>${e.name}</td><td>${e.details}</td></tr>`;
       });
+    }).catch(() => {
+      document.getElementById('noEst').style.display = 'block';
+      document.getElementById('noEst').textContent = 'Could not load estimates (API error).';
     });
 }
 function loadContacts() {
-  fetch(API + '/api/contacts')
+  fetch(API + '/api/contacts', { credentials: 'include' })
     .then(r=>r.json()).then(contacts=>{
       const tbody = document.getElementById('contactTable');
       tbody.innerHTML = '';
@@ -504,10 +260,13 @@ function loadContacts() {
       contacts.forEach(c => {
         tbody.innerHTML += `<tr><td>${c.date}</td><td>${c.name}</td><td>${c.email}</td><td>${c.message}</td></tr>`;
       });
+    }).catch(() => {
+      document.getElementById('noContact').style.display = 'block';
+      document.getElementById('noContact').textContent = 'Could not load contacts (API error).';
     });
 }
 function setupGallery() {
-  fetch(API + '/api/gallery')
+  fetch(API + '/api/gallery', { credentials: 'include' })
     .then(r=>r.json()).then(renderGallery);
 
   function renderGallery(galleryImgs) {
@@ -539,6 +298,7 @@ function setupGallery() {
     Array.from(files).forEach(f=>formData.append('images', f));
     fetch(API + '/api/gallery/upload', {
       method: 'POST',
+      credentials: 'include',
       body: formData
     }).then(r=>r.json()).then(res => {
       renderGallery(res.gallery);

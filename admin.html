@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raj Marketing Admin Panel</title>
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <!-- FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <style>
     :root {
-      --admin-bg: #22223b;
-      --admin-accent: #ffb300;
-      --admin-card: #39375b;
-      --admin-menu: #282848;
-      --admin-menu-text: #fff;
-      --admin-menu-hover: #ffb300;
-      --admin-content-bg: #f8faff;
-      --admin-font: 'Orbitron', 'Roboto Mono', monospace, Arial, sans-serif;
-      --admin-font2: 'Roboto Mono', monospace, Arial, sans-serif;
+      --admin-bg: #1c2231;
+      --admin-accent: #1976d2;
+      --admin-accent-soft: #e3f0ff;
+      --admin-card: #f8faff;
+      --admin-menu: #23304aee;
+      --admin-menu-text: #e3e8ee;
+      --admin-menu-hover: #1976d2;
+      --admin-font-heading: 'Poppins', 'Inter', Arial, sans-serif;
+      --admin-font-body: 'Inter', Arial, sans-serif;
       --admin-success: #28c76f;
       --admin-danger: #ff5252;
       --admin-warning: #fbbf24;
-      --transition: 0.21s cubic-bezier(0.82, 0.09, 0.26, 1.09);
+      --border-soft: #e3f0ff;
+      --shadow-card: 0 3px 18px #1976d211;
+      --shadow-menu: 2px 0 10px #1976d218;
     }
     * { box-sizing: border-box; margin: 0; padding: 0;}
     body {
-      font-family: var(--admin-font2);
+      font-family: var(--admin-font-body);
       background: var(--admin-bg);
-      color: #fff;
+      color: #24304a;
       min-height: 100vh;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
     }
     .admin-header {
-      background: linear-gradient(85deg, var(--admin-accent) 0%, #ffcc80 80%);
-      padding: 32px 0 19px 0;
+      background: linear-gradient(85deg, var(--admin-accent) 0%, #5bc0f8 100%);
+      padding: 28px 0 18px 0;
       text-align: center;
-      font-family: var(--admin-font);
-      font-size: 2.1rem;
-      font-weight: 800;
-      letter-spacing: 3px;
-      box-shadow: 0 6px 30px #ffb30040;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      font-family: var(--admin-font-heading);
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #fff;
+      box-shadow: 0 6px 24px #1976d241;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 15px;
+      gap: 14px;
     }
-    /* Hamburger */
     .menu-toggle {
       background: none;
       border: none;
-      margin-left: 18px;
+      margin-left: 12px;
       width: 48px; height: 48px;
       display: flex;
       align-items: center;
@@ -62,58 +61,50 @@
       display: none;
       z-index: 1200;
     }
-    .menu-toggle .fa-bars {
-      font-size: 2.1rem;
-      color: #fff;
-      filter: drop-shadow(0 2px 4px #0008);
-    }
-    /* Layout */
+    .menu-toggle .fa-bars { font-size: 2rem; color: #fff;}
     .admin-layout {
-      display: flex;
-      min-height: 84vh;
+      display: flex; min-height: 84vh;
     }
     .admin-menu {
       background: var(--admin-menu);
-      width: 240px;
-      padding: 34px 0 0 0;
+      width: 225px;
+      padding: 30px 0 0 0;
       display: flex;
       flex-direction: column;
-      gap: 7px;
-      box-shadow: 2px 0 16px #0001;
+      gap: 6px;
+      box-shadow: var(--shadow-menu);
       min-height: 100vh;
-      position: relative;
-      transition: left var(--transition);
+      transition: left 0.21s cubic-bezier(0.82, 0.09, 0.26, 1.09);
       z-index: 1100;
     }
     .admin-menu a {
       color: var(--admin-menu-text);
       text-decoration: none;
-      padding: 15px 42px 15px 28px;
-      font-size: 1.13rem;
-      font-family: var(--admin-font);
+      padding: 15px 32px 15px 25px;
+      font-size: 1.09rem;
+      font-family: var(--admin-font-heading);
       font-weight: 700;
       border-left: 5px solid transparent;
-      transition: background 0.2s, color 0.2s, border-left 0.2s, letter-spacing 0.2s;
-      letter-spacing: 1.5px;
+      transition: background 0.2s, color 0.2s, border-left 0.2s;
+      letter-spacing: 1.2px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      border-radius: 0 14px 14px 0;
     }
     .admin-menu a.active, .admin-menu a:hover {
       background: var(--admin-menu-hover);
-      color: #222;
+      color: #fff;
       border-left: 5px solid #fff;
-      letter-spacing: 2.2px;
+      letter-spacing: 2px;
     }
-    /* Mobile menu overlay */
     .admin-menu.mobile {
       position: fixed;
       top: 0; left: -250px;
       height: 100vh;
       width: 250px;
       border-radius: 0 30px 30px 0;
-      transition: left var(--transition);
       z-index: 1201;
     }
     .admin-menu.mobile.open { left: 0; }
@@ -122,168 +113,145 @@
       position: fixed;
       z-index: 1200;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.3);
+      background: rgba(0,0,0,0.25);
     }
     .menu-overlay.show { display: block; }
-    /* Content */
     .admin-content {
       flex: 1;
-      background: var(--admin-content-bg);
-      color: #23213a;
-      padding: 40px 60px 30px 60px;
-      font-family: var(--admin-font2);
+      background: var(--admin-card);
+      color: #1b2237;
+      padding: 36px 54px 26px 54px;
+      font-family: var(--admin-font-body);
       min-height: 500px;
-      border-radius: 0 0 0 32px;
-      box-shadow: 0 2px 24px #ffb30014;
+      border-radius: 0 0 0 30px;
+      box-shadow: var(--shadow-card);
       overflow: auto;
       transition: filter 0.18s;
     }
-    .admin-card {
-      background: var(--admin-card);
-      color: #fff;
-      border-radius: 18px;
-      padding: 28px 32px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 18px #0002;
-      font-family: var(--admin-font2);
-      font-size: 1.16rem;
-    }
     .admin-title {
-      font-size: 1.5rem;
-      font-family: var(--admin-font);
+      font-size: 1.4rem;
+      font-family: var(--admin-font-heading);
       margin-bottom: 10px;
       color: var(--admin-accent);
-      letter-spacing: 1.5px;
-      font-weight: 800;
+      letter-spacing: 1.3px;
+      font-weight: 900;
+    }
+    .admin-card {
+      background: #fff;
+      color: #25304a;
+      border-radius: 17px;
+      padding: 22px 24px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-card);
+      font-family: var(--admin-font-body);
+      font-size: 1.14rem;
+      border: 1.5px solid var(--border-soft);
     }
     .admin-table {
       width: 100%;
       border-collapse: collapse;
       margin: 18px 0 6px 0;
       background: #fff1;
-      color: #fff;
+      color: #25304a;
       border-radius: 8px;
       font-size: 1rem;
       overflow-x: auto;
     }
     .admin-table th, .admin-table td {
       padding: 12px 10px;
-      border-bottom: 1px solid #444;
+      border-bottom: 1px solid #e3f0ff;
+      text-align: left;
     }
-    .admin-table th { background: #2e2e4e; color: var(--admin-accent);}
+    .admin-table th { background: #e3f0ff; color: var(--admin-accent);}
     .admin-table td { font-size: 1.02rem;}
     .admin-table tr:last-child td { border-bottom: none; }
-    /* Stats Cards */
-    .stats-cards {
-      display: flex;
-      gap: 22px;
-      margin-bottom: 34px;
-      flex-wrap: wrap;
-    }
-    .stats-card {
-      background: #fff2;
-      color: #ffb300;
-      border-radius: 12px;
-      padding: 23px 28px;
-      font-size: 1.37rem;
-      font-family: var(--admin-font);
-      font-weight: 700;
-      min-width: 180px;
-      text-align: center;
-      box-shadow: 0 1px 6px #0003;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-    .stats-card .fa-solid { font-size: 2rem; }
-    /* Gallery */
+    /* Gallery upgrade */
     .gallery-upload {
-      margin: 18px 0 12px 0;
+      margin: 12px 0 14px 0;
+      background: #f8faff;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1.5px dashed var(--admin-accent);
+      text-align: center;
+      cursor: pointer;
+      font-weight: 700;
+      color: #1976d2;
+      font-size: 1.08rem;
+      transition: background 0.18s;
     }
-    .gallery-preview {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 18px;
+    .gallery-upload.dragover {
+      background: #d4e5ff;
+      color: #0d47a1;
+      border-color: #1976d2;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(128px,1fr));
+      gap: 18px;
+      margin-top: 16px;
     }
     .gallery-thumb {
-      width: 120px; height: 90px;
-      border-radius: 7px;
+      background: #e3f0ff;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px #1976d218;
       overflow: hidden;
-      background: #fff3;
-      box-shadow: 0 1px 5px #0002;
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      cursor: pointer;
+      border: 2px solid #fff;
+      display: flex; align-items: center; justify-content: center;
+      aspect-ratio: 4/3;
+      min-height: 80px;
+      transition: box-shadow 0.17s;
     }
-    .gallery-thumb img {
-      width: 100%; height: 100%; object-fit: cover;
-      display: block;
-    }
+    .gallery-thumb.selected { box-shadow: 0 0 0 3px #1976d2; border-color: #1976d2;}
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .gallery-thumb .del-btn {
-      position: absolute;
-      top: 4px; right: 4px;
+      position: absolute; top: 8px; right: 8px;
       background: #ff5252;
       color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 24px; height: 24px;
-      font-size: 1rem;
+      border: none; border-radius: 50%;
+      width: 24px; height: 24px; font-size: 1rem;
       cursor: pointer;
       box-shadow: 0 1px 4px #0004;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
-    /* Responsive Design */
+    .gallery-modal {
+      position: fixed; z-index: 3000; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-modal img { max-width: 95vw; max-height: 90vh; border-radius: 12px; box-shadow: 0 4px 24px #1976d2bb; }
+    .gallery-modal .del-btn { position: fixed; top: 32px; right: 36px; font-size: 1.7rem; background: #ff5252; color: #fff; }
+    /* Responsive */
     @media (max-width: 900px) {
       .admin-layout { flex-direction: column; }
-      .admin-menu { 
-        flex-direction: column; 
-        width: 100vw; 
-        min-height: unset; 
-        position: fixed; 
-        left: -100vw; 
-        top: 0; 
-        border-radius: 0 0 30px 30px;
-      }
-      .admin-menu.open { left: 0; }
+      .admin-menu { width: 100vw; min-height: unset; position: fixed; left: -100vw; top: 0; border-radius: 0 0 30px 30px;}
+      .admin-menu.open { left: 0;}
       .menu-toggle { display: flex; }
-      .admin-content { padding: 22px 4vw;}
-      .stats-cards { flex-direction: column; gap: 13px;}
-      .admin-header { font-size: 1.3rem; padding: 20px 0 14px 0;}
-      .admin-title { font-size: 1.13rem; }
-      .admin-card { padding: 14px 7vw;}
+      .admin-content { padding: 20px 2vw;}
+      .admin-header { font-size: 1.1rem; padding: 16px 0 11px 0;}
+      .admin-title { font-size: 1.08rem; }
+      .admin-card { padding: 10px 4vw;}
     }
     @media (max-width: 500px) {
-      .admin-header { font-size: 1.13rem; }
       .admin-title { font-size: 1rem; }
-      .admin-card { padding: 7px 2vw;}
-      .admin-content { padding: 8px 1vw;}
-      .gallery-thumb { width: 70px; height: 54px; }
+      .admin-content { padding: 6px 1vw;}
+      .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(80px,1fr)); }
+      .gallery-thumb { min-width: 56px;}
     }
     /* Modal */
     .modal-bg {
       background: #000a;
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: fixed; inset: 0; z-index: 4000;
+      display: flex; align-items: center; justify-content: center;
     }
     .modal-box {
       background: #fff;
-      border-radius: 14px;
-      padding: 40px 34px 30px 34px;
-      box-shadow: 0 6px 42px #ffb30033;
+      border-radius: 12px;
+      padding: 34px 27px 20px 27px;
+      box-shadow: 0 7px 42px #1976d241;
       text-align: center;
-      max-width: 345px;
-      width: 90vw;
-      font-family: var(--admin-font2);
+      max-width: 340px; width: 90vw;
+      font-family: var(--admin-font-body);
       color: #222;
       animation: fadeIn 0.6s;
     }
@@ -292,55 +260,27 @@
       to { transform: scale(1) translateY(0); opacity: 1;}
     }
     .modal-title {
-      font-family: var(--admin-font);
+      font-family: var(--admin-font-heading);
       color: var(--admin-accent);
-      font-size: 1.22rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-      letter-spacing: 2px;
+      font-size: 1.13rem; font-weight: 700;
+      margin-bottom: 13px; letter-spacing: 1.7px;
     }
     .modal-box input[type="password"] {
-      width: 96%;
-      padding: 13px 12px;
-      border: 2px solid #e5e7eb;
-      border-radius: 9px;
-      font-size: 1.13rem;
-      margin-bottom: 18px;
-      margin-top: 6px;
-      background: #f8f8fc;
-      font-family: var(--admin-font2);
-      outline: none;
-      transition: border 0.2s;
+      width: 96%; padding: 12px 11px;
+      border: 2px solid #e5e7eb; border-radius: 8px;
+      font-size: 1.09rem; margin-bottom: 16px; margin-top: 4px;
+      background: #f8f8fc; font-family: var(--admin-font-body); outline: none; transition: border 0.2s;
     }
-    .modal-box input[type="password"]:focus {
-      border-color: var(--admin-accent);
-    }
+    .modal-box input[type="password"]:focus { border-color: var(--admin-accent);}
     .modal-box button {
-      background: var(--admin-accent);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 11px 32px;
-      font-size: 1.06rem;
-      font-family: var(--admin-font2);
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 2px 10px #ffb30022;
-      margin-bottom: 8px;
-      margin-top: 4px;
-      transition: background 0.18s;
+      background: var(--admin-accent); color: #fff; border: none; border-radius: 8px;
+      padding: 10px 26px; font-size: 1.01rem; font-family: var(--admin-font-body); font-weight: 700;
+      cursor: pointer; box-shadow: 0 1px 8px #1976d211; margin-bottom: 8px; margin-top: 2px; transition: background 0.18s;
     }
-    .modal-box button:hover {
-      background: #ffd85c;
-      color: #222;
-    }
+    .modal-box button:hover { background: #5bc0f8; color: #1c2231;}
     .modal-error {
       color: var(--admin-danger);
-      font-size: 1rem;
-      margin-top: 7px;
-      font-weight: 700;
-      min-height: 22px;
-      letter-spacing: 0.2px;
+      font-size: 0.97rem; margin-top: 7px; font-weight: 700; min-height: 18px; letter-spacing: 0.15px;
     }
   </style>
 </head>
@@ -359,355 +299,263 @@
 </div>
 <div class="admin-header">
   <button class="menu-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
-  <span style="color:#fff; filter:drop-shadow(0 2px 8px #ffb30030);"><i class="fa-solid fa-shield-halved"></i> Raj Marketing Admin</span>
+  <span><i class="fa-solid fa-shield-halved"></i> Raj Marketing Admin</span>
 </div>
 <div class="menu-overlay"></div>
 <div class="admin-layout">
   <nav class="admin-menu" id="adminMenu">
     <a data-page="dashboard" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a>
-    <a data-page="analytics"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+    <a data-page="visitors"><i class="fa-solid fa-users"></i> Visitors</a>
     <a data-page="appointments"><i class="fa-solid fa-calendar-check"></i> Appointments</a>
     <a data-page="estimates"><i class="fa-solid fa-calculator"></i> Estimates</a>
     <a data-page="contacts"><i class="fa-solid fa-envelope"></i> Contacts</a>
     <a data-page="gallery"><i class="fa-solid fa-images"></i> Gallery</a>
-    <a data-page="pages"><i class="fa-solid fa-file"></i> Pages</a>
-    <a data-page="team"><i class="fa-solid fa-users"></i> Team</a>
-    <a data-page="settings"><i class="fa-solid fa-gear"></i> Settings</a>
     <a data-page="logout" style="color:var(--admin-danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
   </nav>
-  <main class="admin-content" id="adminContent">
-    <!-- Dynamic content loaded here -->
-  </main>
+  <main class="admin-content" id="adminContent"></main>
 </div>
-<!-- SCRIPTS -->
 <script>
-  // --- Password Protection ---
-  const ADMIN_PASS = "admin@2025";
-  let loggedIn = false;
-  function showModal(show = true, error = '') {
-    document.getElementById('adminModal').style.display = show ? 'flex' : 'none';
-    document.getElementById('modalError').textContent = error;
-    if (show) document.getElementById('adminPassword').focus();
+const API = 'http://localhost:4000'; // Set this to your backend URL
+
+// --- Password Modal ---
+const ADMIN_PASS = "admin@2025";
+let loggedIn = false;
+function showModal(show = true, error = '') {
+  document.getElementById('adminModal').style.display = show ? 'flex' : 'none';
+  document.getElementById('modalError').textContent = error;
+  if (show) document.getElementById('adminPassword').focus();
+}
+document.getElementById('adminLoginForm').onsubmit = function(e) {
+  e.preventDefault();
+  const pw = document.getElementById('adminPassword').value.trim();
+  if (pw === ADMIN_PASS) {
+    loggedIn = true;
+    localStorage.setItem('rajmarketing-admin', 'true');
+    showModal(false);
+    loadPage('dashboard');
+  } else {
+    document.getElementById('modalError').textContent = 'Incorrect password!';
+    document.getElementById('adminPassword').value = '';
+    document.getElementById('adminPassword').focus();
   }
-  document.getElementById('adminLoginForm').onsubmit = function(e) {
+};
+window.onload = function() {
+  if (localStorage.getItem('rajmarketing-admin') === 'true') {
+    showModal(false);
+    loadPage('dashboard');
+  } else {
+    showModal(true);
+  }
+};
+
+// --- Menu ---
+const menuToggle = document.querySelector('.menu-toggle');
+const menu = document.getElementById('adminMenu');
+const overlay = document.querySelector('.menu-overlay');
+menuToggle.addEventListener('click', function(e){
+  if (menu.classList.contains('open')) closeMenu();
+  else openMenu();
+});
+overlay.addEventListener('click', closeMenu);
+function openMenu() {
+  menu.classList.add('open', 'mobile');
+  overlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  menu.classList.remove('open', 'mobile');
+  overlay.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// --- Pages ---
+const pages = {
+  dashboard: `
+    <div class="admin-title">Welcome to Admin Dashboard</div>
+    <div class="admin-card">
+      <ul style="line-height:1.7; color:#1976d2; font-size:1.09rem;">
+        <li>Live visitor tracking and analytics</li>
+        <li>Manage appointments, estimates, contacts</li>
+        <li>Upload and organize gallery images (instantly update home page)</li>
+      </ul>
+    </div>
+  `,
+  visitors: `
+    <div class="admin-title">Live Visitor Tracker</div>
+    <div class="admin-card">
+      <table style="width:100%;" class="admin-table">
+        <thead>
+          <tr><th>Date & Time</th><th>IP / Location</th><th>Page Visited</th></tr>
+        </thead>
+        <tbody id="visitorsTable"></tbody>
+      </table>
+      <div id="noVisitors" style="color:#777; margin-top: 10px; display:none;">No visitors yet.</div>
+    </div>
+  `,
+  appointments: `
+    <div class="admin-title">Appointments</div>
+    <div class="admin-card">
+      <table style="width:100%;" class="admin-table">
+        <thead>
+          <tr><th>Date</th><th>Name</th><th>Status</th></tr>
+        </thead>
+        <tbody id="apptTable"></tbody>
+      </table>
+      <div id="noAppt" style="color:#777; margin-top: 10px; display:none;">No appointments yet.</div>
+    </div>
+  `,
+  estimates: `
+    <div class="admin-title">Customer Estimates</div>
+    <div class="admin-card">
+      <table style="width:100%;" class="admin-table">
+        <thead>
+          <tr><th>Date</th><th>Name</th><th>Details</th></tr>
+        </thead>
+        <tbody id="estTable"></tbody>
+      </table>
+      <div id="noEst" style="color:#777; margin-top: 10px; display:none;">No estimates yet.</div>
+    </div>
+  `,
+  contacts: `
+    <div class="admin-title">Contact Form Reports</div>
+    <div class="admin-card">
+      <table style="width:100%;" class="admin-table">
+        <thead>
+          <tr><th>Date</th><th>Name</th><th>Email</th><th>Message</th></tr>
+        </thead>
+        <tbody id="contactTable"></tbody>
+      </table>
+      <div id="noContact" style="color:#777; margin-top: 10px; display:none;">No contact messages yet.</div>
+    </div>
+  `,
+  gallery: `
+    <div class="admin-title">Gallery Manager</div>
+    <div class="admin-card">
+      <form id="galleryUploadForm" class="gallery-upload">
+        <input type="file" id="galleryInput" accept="image/*" multiple hidden>
+        <span id="galleryUploadText"><i class="fa-solid fa-cloud-arrow-up"></i> Drag & Drop or Click to Upload Images</span>
+      </form>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  `,
+  logout: `<div class="admin-card"><div class="admin-title" style="color:var(--admin-danger);">You have been logged out.</div><p>Return to the login screen to re-enter admin password.</p></div>`
+};
+
+// Menu navigation
+document.getElementById('adminMenu').addEventListener('click', function(e) {
+  if (e.target.closest('a')) {
+    const a = e.target.closest('a');
+    const page = a.getAttribute('data-page');
+    [...this.querySelectorAll('a')].forEach(a => a.classList.remove('active'));
+    a.classList.add('active');
+    if (page === 'logout') {
+      localStorage.removeItem('rajmarketing-admin');
+      showModal(true, 'Logged out.');
+      document.getElementById('adminContent').innerHTML = pages.logout;
+      closeMenu();
+    } else if (pages[page]) {
+      loadPage(page);
+      closeMenu();
+    }
+  }
+});
+function loadPage(page) {
+  document.getElementById('adminContent').innerHTML = pages[page] || '';
+  if (page === 'visitors') loadVisitors();
+  if (page === 'appointments') loadAppointments();
+  if (page === 'estimates') loadEstimates();
+  if (page === 'contacts') loadContacts();
+  if (page === 'gallery') setupGallery();
+}
+
+// --- Data functions: Connect to backend API ---
+function loadVisitors() {
+  fetch(API + '/api/visitors')
+    .then(r=>r.json()).then(visitors=>{
+      const tbody = document.getElementById('visitorsTable');
+      tbody.innerHTML = '';
+      if (!visitors.length) document.getElementById('noVisitors').style.display = 'block';
+      else document.getElementById('noVisitors').style.display = 'none';
+      visitors.forEach(v => {
+        tbody.innerHTML += `<tr><td>${v.date.replace('T',' ').slice(0,16)}</td><td>${v.ip||'-'}</td><td>${v.page}</td></tr>`;
+      });
+    });
+}
+function loadAppointments() {
+  fetch(API + '/api/appointments')
+    .then(r=>r.json()).then(appts=>{
+      const tbody = document.getElementById('apptTable');
+      tbody.innerHTML = '';
+      if (!appts.length) document.getElementById('noAppt').style.display = 'block';
+      else document.getElementById('noAppt').style.display = 'none';
+      appts.forEach(a => {
+        tbody.innerHTML += `<tr><td>${a.date}</td><td>${a.name}</td><td>${a.status}</td></tr>`;
+      });
+    });
+}
+function loadEstimates() {
+  fetch(API + '/api/estimates')
+    .then(r=>r.json()).then(ests=>{
+      const tbody = document.getElementById('estTable');
+      tbody.innerHTML = '';
+      if (!ests.length) document.getElementById('noEst').style.display = 'block';
+      else document.getElementById('noEst').style.display = 'none';
+      ests.forEach(e => {
+        tbody.innerHTML += `<tr><td>${e.date}</td><td>${e.name}</td><td>${e.details}</td></tr>`;
+      });
+    });
+}
+function loadContacts() {
+  fetch(API + '/api/contacts')
+    .then(r=>r.json()).then(contacts=>{
+      const tbody = document.getElementById('contactTable');
+      tbody.innerHTML = '';
+      if (!contacts.length) document.getElementById('noContact').style.display = 'block';
+      else document.getElementById('noContact').style.display = 'none';
+      contacts.forEach(c => {
+        tbody.innerHTML += `<tr><td>${c.date}</td><td>${c.name}</td><td>${c.email}</td><td>${c.message}</td></tr>`;
+      });
+    });
+}
+// --- Gallery upgrade ---
+function setupGallery() {
+  fetch(API + '/api/gallery')
+    .then(r=>r.json()).then(renderGallery);
+
+  function renderGallery(galleryImgs) {
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = '';
+    if (!galleryImgs.length) {
+      grid.innerHTML = '<div style="color:#888;text-align:center;padding:20px 0;">No images in gallery yet.</div>';
+    } else {
+      galleryImgs.forEach((img,i) => {
+        grid.innerHTML += `<div class="gallery-thumb" data-idx="${i}" tabindex="0">
+          <img src="${API}${img.url}" alt="Gallery ${i+1}">
+        </div>`;
+      });
+    }
+  }
+
+  // Drag & drop upload
+  const uploadForm = document.getElementById('galleryUploadForm');
+  const uploadInput = document.getElementById('galleryInput');
+  const uploadText = document.getElementById('galleryUploadText');
+  uploadForm.onclick = () => uploadInput.click();
+  uploadForm.ondragover = e => { e.preventDefault(); uploadForm.classList.add('dragover'); };
+  uploadForm.ondragleave = e => { uploadForm.classList.remove('dragover'); };
+  uploadForm.ondrop = function(e) {
     e.preventDefault();
-    const pw = document.getElementById('adminPassword').value.trim();
-    if (pw === ADMIN_PASS) {
-      loggedIn = true;
-      localStorage.setItem('rajmarketing-admin', 'true');
-      showModal(false);
-    } else {
-      document.getElementById('modalError').textContent = 'Incorrect password!';
-      document.getElementById('adminPassword').value = '';
-      document.getElementById('adminPassword').focus();
-    }
+    uploadForm.classList.remove('dragover');
+    handleFiles(e.dataTransfer.files);
   };
-  window.onload = function() {
-    if (localStorage.getItem('rajmarketing-admin') === 'true') {
-      showModal(false);
-      loadPage('dashboard');
-    } else {
-      showModal(true);
-    }
-  };
-
-  // --- Mobile Hamburger Menu ---
-  const menuToggle = document.querySelector('.menu-toggle');
-  const menu = document.getElementById('adminMenu');
-  const overlay = document.querySelector('.menu-overlay');
-  function openMenu() {
-    menu.classList.add('open', 'mobile');
-    overlay.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    menu.classList.remove('open', 'mobile');
-    overlay.classList.remove('show');
-    document.body.style.overflow = '';
-  }
-  menuToggle.addEventListener('click', function(e){
-    if (menu.classList.contains('open')) closeMenu();
-    else openMenu();
-  });
-  overlay.addEventListener('click', closeMenu);
-
-  // --- Navigation & Pages ---
-  const pages = {
-    dashboard: `
-      <div class="admin-title">Welcome to Admin Dashboard</div>
-      <div class="stats-cards">
-        <div class="stats-card"><i class="fa-solid fa-users"></i> <span id="stat-visitors">0</span><br>Visitors Today</div>
-        <div class="stats-card"><i class="fa-solid fa-calendar-check"></i> <span id="stat-appointments">0</span><br>Appointments</div>
-        <div class="stats-card"><i class="fa-solid fa-envelope"></i> <span id="stat-contacts">0</span><br>New Contacts</div>
-        <div class="stats-card"><i class="fa-solid fa-chart-line"></i> <span id="stat-top-page">-</span><br>Top Page</div>
-      </div>
-      <div class="admin-card">
-        <div class="admin-title">Quick Overview</div>
-        <ul style="line-height:1.8; color:#ffb300; margin-left:1.2em;">
-          <li>Live visitor stats & most visited pages</li>
-          <li>View daily/weekly/monthly analytics</li>
-          <li>Manage all appointments and estimates</li>
-          <li>Upload or update gallery images instantly</li>
-          <li>Track contact form responses</li>
-        </ul>
-      </div>
-    `,
-    analytics: `
-      <div class="admin-title">Visitor Analytics</div>
-      <div class="admin-card">
-        <form style="margin-bottom:18px;">
-          <label>Show:
-            <select id="analytics-range">
-              <option value="today">Today</option>
-              <option value="week">This Week</option>
-              <option value="month">This Month</option>
-              <option value="all">All Time</option>
-            </select>
-          </label>
-        </form>
-        <table class="admin-table" id="analyticsTable">
-          <thead>
-            <tr><th>Date</th><th>Visits</th><th>Top Page</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    `,
-    appointments: `
-      <div class="admin-title">Appointments</div>
-      <div class="admin-card">
-        <table class="admin-table" id="apptTable">
-          <thead>
-            <tr><th>ID</th><th>Name</th><th>Date</th><th>Status</th><th>Action</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    `,
-    estimates: `
-      <div class="admin-title">Customer Estimates</div>
-      <div class="admin-card">
-        <table class="admin-table" id="estimateTable">
-          <thead>
-            <tr><th>ID</th><th>Name</th><th>Date</th><th>Details</th><th>Status</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    `,
-    contacts: `
-      <div class="admin-title">Contact Form Reports</div>
-      <div class="admin-card">
-        <table class="admin-table" id="contactTable">
-          <thead>
-            <tr><th>ID</th><th>Name</th><th>Email</th><th>Date</th><th>Message</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    `,
-    gallery: `
-      <div class="admin-title">Gallery Manager</div>
-      <div class="admin-card">
-        <form id="galleryUploadForm" class="gallery-upload">
-          <input type="file" id="galleryInput" accept="image/*" multiple required>
-          <button type="submit" style="margin-left:12px;"><i class="fa-solid fa-upload"></i> Upload</button>
-        </form>
-        <div class="gallery-preview" id="galleryPreview"></div>
-        <div style="color:#ffb300; margin-top:8px;">New images will show on the home page instantly!</div>
-      </div>
-    `,
-    pages: `
-      <div class="admin-title">Most Visited Pages</div>
-      <div class="admin-card">
-        <table class="admin-table" id="pagesTable">
-          <thead>
-            <tr><th>Page</th><th>Visits</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    `,
-    team: `
-      <div class="admin-title">Team Management</div>
-      <div class="admin-card">
-        <p>Manage admin and staff logins, add new users, set roles and permissions (feature coming soon).</p>
-      </div>
-    `,
-    settings: `
-      <div class="admin-title">Admin Settings</div>
-      <div class="admin-card">
-        <button onclick="localStorage.removeItem('rajmarketing-admin'); location.reload();" style="background:#ff5252; color:#fff; border:none; border-radius:7px; padding:9px 22px; font-weight:700; cursor:pointer;">
-          <i class="fa-solid fa-right-from-bracket"></i> Logout
-        </button>
-        <p style="margin-top:18px;">Change password, notification preferences &amp; more (feature coming soon).</p>
-      </div>
-    `,
-    logout: `
-      <div class="admin-card">
-        <div class="admin-title" style="color:var(--admin-danger);">You have been logged out.</div>
-        <p>Return to the login screen to re-enter admin password.</p>
-      </div>
-    `
-  };
-
-  // Navigation click
-  document.getElementById('adminMenu').addEventListener('click', function(e) {
-    if (e.target.closest('a')) {
-      const a = e.target.closest('a');
-      const page = a.getAttribute('data-page');
-      // Remove active from all
-      [...this.querySelectorAll('a')].forEach(a => a.classList.remove('active'));
-      a.classList.add('active');
-      if (page === 'logout') {
-        localStorage.removeItem('rajmarketing-admin');
-        showModal(true, 'Logged out.');
-        document.getElementById('adminContent').innerHTML = pages.logout;
-        closeMenu();
-      } else if (pages[page]) {
-        loadPage(page);
-        closeMenu();
-      }
-    }
-  });
-
-  function loadPage(page) {
-    document.getElementById('adminContent').innerHTML = pages[page] || '';
-    if (page === 'dashboard') loadDashboardStats();
-    if (page === 'analytics') loadAnalytics();
-    if (page === 'appointments') loadAppointments();
-    if (page === 'estimates') loadEstimates();
-    if (page === 'contacts') loadContacts();
-    if (page === 'gallery') setupGallery();
-    if (page === 'pages') loadPagesStats();
-  }
-
-  // --- Demo Data/Handlers (Replace with backend AJAX in real use) ---
-  function loadDashboardStats() {
-    document.getElementById('stat-visitors').textContent = 128;
-    document.getElementById('stat-appointments').textContent = 7;
-    document.getElementById('stat-contacts').textContent = 2;
-    document.getElementById('stat-top-page').textContent = "Products";
-  }
-  function loadAnalytics() {
-    const rows = [
-      ['2025-07-07', 128, 'Products'],
-      ['2025-07-06', 152, 'Gallery'],
-      ['2025-07-05', 97, 'Estimate'],
-      ['2025-07-04', 101, 'Home'],
-    ];
-    const tbody = document.querySelector('#analyticsTable tbody');
-    tbody.innerHTML = rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
-    document.getElementById('analytics-range').onchange = function(){
-      // Dynamic filter (stub)
-      loadAnalytics();
-    }
-  }
-  function loadAppointments() {
-    const rows = [
-      [123, "Ravi Kumar", "2025-07-07", "Completed", '<button>View</button>'],
-      [124, "Anu S", "2025-07-06", "Pending", '<button>View</button>'],
-    ];
-    document.querySelector('#apptTable tbody').innerHTML = rows.map(r =>
-      `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`
-    ).join('');
-  }
-  function loadEstimates() {
-    const rows = [
-      [201, "Shiva R", "2025-07-06", "3 Windows", "New"],
-      [202, "Deepa T", "2025-07-05", "Balcony Door", "Follow-up"]
-    ];
-    document.querySelector('#estimateTable tbody').innerHTML = rows.map(r =>
-      `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`
-    ).join('');
-  }
-  function loadContacts() {
-    const rows = [
-      [3101, "Krishna", "krishna@gmail.com", "2025-07-07", "Need net for 2 doors"],
-      [3102, "Jaya", "jaya@yahoo.com", "2025-07-05", "Cost for pleated net?"]
-    ];
-    document.querySelector('#contactTable tbody').innerHTML = rows.map(r =>
-      `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`
-    ).join('');
-  }
-  function loadPagesStats() {
-    const rows = [
-      ["index.html", 2500],
-      ["products.html", 1850],
-      ["gallery.html", 1700],
-      ["estimate.html", 1200],
-    ];
-    document.querySelector('#pagesTable tbody').innerHTML = rows.map(r =>
-      `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`
-    ).join('');
-  }
-  // --- Gallery Upload/Preview (front-end only, replace with server logic for prod) ---
-  function setupGallery() {
-    let galleryImages = JSON.parse(localStorage.getItem('rajmarketing-gallery')||'[]');
-    function renderGallery() {
-      const cont = document.getElementById('galleryPreview');
-      if (!cont) return;
-      cont.innerHTML = galleryImages.map((url,i) => `
-        <div class="gallery-thumb">
-          <img src="${url}" alt="Gallery ${i+1}">
-          <button class="del-btn" data-idx="${i}" title="Delete"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-      `).join('');
-      cont.querySelectorAll('.del-btn').forEach(btn=>{
-        btn.onclick = ()=>{
-          galleryImages.splice(+btn.dataset.idx, 1);
-          localStorage.setItem('rajmarketing-gallery', JSON.stringify(galleryImages));
-          renderGallery();
-          syncGalleryToHome();
-        }
-      });
-      syncGalleryToHome();
-    }
-    document.getElementById('galleryUploadForm').onsubmit = function(e){
-      e.preventDefault();
-      const files = document.getElementById('galleryInput').files;
-      Array.from(files).forEach(f=>{
-        const reader = new FileReader();
-        reader.onload = function(ev){
-          galleryImages.push(ev.target.result);
-          localStorage.setItem('rajmarketing-gallery', JSON.stringify(galleryImages));
-          renderGallery();
-          syncGalleryToHome();
-        };
-        reader.readAsDataURL(f);
-      });
-      this.reset();
-    }
-    renderGallery();
-  }
-  // --- Simulate Instant Gallery Sync to Home Page (for demo) ---
-  function syncGalleryToHome() {
-    // In real deployment, push image URLs to server and update homepage via backend or API call.
-    // For demo: store in localStorage; have index.html read from localStorage['rajmarketing-gallery']
-  }
-
-  // --- Prevent right-click/copy (for demo only) ---
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('keydown', e => {
-    if ((e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'c')) {
-      e.preventDefault();
-    }
-  });
-
-  // --- Hide admin content if not logged in (JS fallback) ---
-  function checkAdmin() {
-    if (!loggedIn && localStorage.getItem('rajmarketing-admin') !== 'true') {
-      showModal(true);
-      document.querySelector('.admin-header').style.filter = "blur(4px)";
-      document.querySelector('.admin-content').style.filter = "blur(10px)";
-    } else {
-      showModal(false);
-      document.querySelector('.admin-header').style.filter = "";
-      document.querySelector('.admin-content').style.filter = "";
-    }
-  }
-  setInterval(checkAdmin, 1000);
-
-</script>
-</body>
-</html>
+  uploadInput.onchange = () => handleFiles(uploadInput.files);
+  function handleFiles(files) {
+    const formData = new FormData();
+    Array.from(files).forEach(f=>formData.append('images', f));
+    fetch(API + '/api/gallery/upload', {
+      method: 'POST',
+      body: formData
+    }).then(r=>r.json()).then(res => {
+      renderGallery(res.gallery);
+    });
+    uploadInput.value = "

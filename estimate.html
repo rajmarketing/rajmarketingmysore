@@ -580,4 +580,73 @@
 
     function generatePDF() {
       const { jsPDF } = window.jspdf;
-    
+      const doc = new jsPDF({ unit: "pt", format: "a4" });
+      const pageWidth = doc.internal.pageSize.getWidth();
+      doc.setFontSize(20);
+      doc.setTextColor(25, 118, 210);
+      doc.text("Raj Marketing Mysore", pageWidth / 2, 40, { align: "center" });
+      doc.setFontSize(13);
+      doc.setTextColor(0,0,0);
+      doc.text("Estimate", pageWidth / 2, 65, { align: "center" });
+      doc.setFontSize(12);
+      doc.text(`Customer Name: ${document.getElementById('customerName').value || ''}`, 40, 95);
+      doc.text(`Contact Number: ${document.getElementById('customerNumber').value || ''}`, 40, 115);
+      doc.text(`Address: ${document.getElementById('customerAddress').value || ''}`, 40, 135);
+
+      // Table header
+      const tableY = 160;
+      let y = tableY;
+      doc.setFontSize(11);
+      doc.setTextColor(25, 118, 210);
+      doc.text("Sl.", 40, y);
+      doc.text("Type of Net", 60, y);
+      doc.text("Width", 170, y);
+      doc.text("Height", 220, y);
+      doc.text("Qty", 270, y);
+      doc.text("Per Sqft (₹)", 310, y);
+      doc.text("Sqft", 390, y);
+      doc.text("Price (₹)", 440, y);
+      doc.setDrawColor(200, 200, 200);
+      doc.line(35, y+4, pageWidth-35, y+4);
+
+      // Table body
+      y += 20;
+      const tableBody = document.getElementById('estimateBody');
+      doc.setFontSize(10);
+      doc.setTextColor(0, 0, 0);
+      for (let i = 0; i < tableBody.rows.length; i++) {
+        const row = tableBody.rows[i];
+        doc.text(`${i+1}`, 40, y);
+        doc.text(row.cells[1].querySelector('select').selectedOptions[0].text, 60, y);
+        doc.text(row.cells[2].querySelector('input').value, 170, y);
+        doc.text(row.cells[3].querySelector('input').value, 220, y);
+        doc.text(row.cells[4].querySelector('input').value, 270, y);
+        doc.text(row.cells[5].querySelector('input').value, 310, y);
+        doc.text(row.cells[6].querySelector('input').value, 390, y);
+        doc.text(row.cells[7].querySelector('input').value, 440, y);
+        y += 18;
+      }
+
+      // Totals
+      y += 12;
+      doc.setFontSize(12);
+      doc.setTextColor(25, 118, 210);
+      doc.text(`Total Sqft: ${document.getElementById('totalSqft').innerText}`, 310, y);
+      y += 18;
+      doc.text(`Total Price (₹): ${document.getElementById('totalPrice').innerText}`, 310, y);
+
+      // Signature
+      y += 40;
+      doc.setFontSize(11);
+      doc.setTextColor(0,0,0);
+      doc.text("Authorised Signatory", pageWidth-160, y);
+      y += 16;
+      doc.setFont("Poppins", "bold");
+      doc.setTextColor(25, 118, 210);
+      doc.text("Raj Marketing Mysore", pageWidth-160, y);
+
+      doc.save("estimate.pdf");
+    }
+  </script>
+</body>
+</html>

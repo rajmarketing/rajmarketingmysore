@@ -608,4 +608,59 @@
       [123, "Ravi Kumar", "2025-07-07", "Completed", '<button>View</button>'],
       [124, "Anu S", "2025-07-06", "Pending", '<button>View</button>'],
     ];
+    document.querySelector('#apptTable tbody').innerHTML = rows.map(r =>
+      `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`
+    ).join('');
+  }
+  function loadEstimates() {
+    const rows = [
+      [201, "Shiva R", "2025-07-06", "3 Windows", "New"],
+      [202, "Deepa T", "2025-07-05", "Balcony Door", "Follow-up"]
+    ];
+    document.querySelector('#estimateTable tbody').innerHTML = rows.map(r =>
+      `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`
+    ).join('');
+  }
+  function loadContacts() {
+    const rows = [
+      [3101, "Krishna", "krishna@gmail.com", "2025-07-07", "Need net for 2 doors"],
+      [3102, "Jaya", "jaya@yahoo.com", "2025-07-05", "Cost for pleated net?"]
+    ];
+    document.querySelector('#contactTable tbody').innerHTML = rows.map(r =>
+      `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`
+    ).join('');
+  }
+  function loadPagesStats() {
+    const rows = [
+      ["index.html", 2500],
+      ["products.html", 1850],
+      ["gallery.html", 1700],
+      ["estimate.html", 1200],
+    ];
+    document.querySelector('#pagesTable tbody').innerHTML = rows.map(r =>
+      `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`
+    ).join('');
+  }
+  // --- Gallery Upload/Preview (front-end only, replace with server logic for prod) ---
+  function setupGallery() {
+    let galleryImages = JSON.parse(localStorage.getItem('rajmarketing-gallery')||'[]');
+    function renderGallery() {
+      const cont = document.getElementById('galleryPreview');
+      if (!cont) return;
+      cont.innerHTML = galleryImages.map((url,i) => `
+        <div class="gallery-thumb">
+          <img src="${url}" alt="Gallery ${i+1}">
+          <button class="del-btn" data-idx="${i}" title="Delete"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      `).join('');
+      cont.querySelectorAll('.del-btn').forEach(btn=>{
+        btn.onclick = ()=>{
+          galleryImages.splice(+btn.dataset.idx, 1);
+          localStorage.setItem('rajmarketing-gallery', JSON.stringify(galleryImages));
+          renderGallery();
+          syncGalleryToHome();
+        }
+      });
+      syncGalleryToHome();
+    }
     

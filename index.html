@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raj Marketing Mysore | Mosquito Net Experts</title>
-  <!-- Google Fonts: Montserrat (headings), Roboto (body), Pacifico (logo) -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;900&family=Roboto:wght@400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Outfit (logo), Montserrat (headings), Roboto (body) -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600&family=Montserrat:wght@600;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- FontAwesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <style>
@@ -18,7 +18,7 @@
       --accent: #10b981;
       --radius: 18px;
       --shadow: 0 2px 24px rgba(10,37,64,0.06);
-      --font-logo: 'Pacifico', cursive;
+      --font-logo: 'Outfit', Arial, sans-serif;
       --font-heading: 'Montserrat', Arial, sans-serif;
       --font-body: 'Roboto', Arial, sans-serif;
     }
@@ -55,28 +55,21 @@
     }
     .logo {
       font-family: var(--font-logo);
-      font-size: 2.2rem;
+      font-weight: 600;
+      font-size: 2.45rem;
       color: var(--secondary);
-      letter-spacing: 2px;
+      letter-spacing: 1.2px;
       display: flex;
       align-items: center;
       gap: 10px;
       line-height: 1.1;
-      text-shadow: 0 1px 8px #0a254030;
+      text-shadow: 0 2px 8px #0a254030;
+      text-transform: uppercase;
     }
     .logo i {
-      font-size: 2.1rem;
+      font-size: 2.2rem;
       color: var(--accent);
       margin-right: 2px;
-    }
-    .menu-btn {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 2rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
     }
     .slogan {
       font-family: var(--font-heading);
@@ -86,10 +79,19 @@
       margin-top: 2px;
       margin-bottom: 2px;
       letter-spacing: 0.04em;
-      opacity: 0.95;
+      opacity: 0.96;
       text-align: center;
       width: 100%;
       text-shadow: 0 1px 8px #0a254030;
+    }
+    .menu-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
     }
     .nav-overlay {
       position: fixed;
@@ -244,60 +246,89 @@
       .promo-slide { height: 160px; }
       .promo-quote { font-size: 1rem; padding: 10px 13px 9px 12px; }
       .promo-dot { width: 9px; height: 9px; }
+      .logo { font-size: 1.45rem; }
     }
-    /* Remaining sections the same as previous answer:
-      .hero, .section, .card-list, .product-list, .appointment-banner, .counter, footer, responsive */
-    /* ... copy from previous code ... */
+    /* HERO UPGRADED DESIGN */
     .hero {
-      min-height: 75vh;
+      min-height: 270px;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: center;
+      padding: 0;
+      margin: 0 auto 18px auto;
+      max-width: 980px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: linear-gradient(120deg, #f8fafc 65%, #e3f4ff 100%);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-img {
+      width: 40%;
+      min-width: 160px;
+      background: #fff;
+      display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 42px 5vw 30px 5vw;
-      background: radial-gradient(circle at top right, #fbbf2464 0%, #f8fafc 80%);
-      border-radius: var(--radius);
-      margin: 18px 0 14px 0;
-      box-shadow: var(--shadow);
+      border-radius: var(--radius) 0 0 var(--radius);
+      box-shadow: 0 6px 28px #0a254021;
       position: relative;
       overflow: hidden;
     }
-    .hero-img {
-      width: 112px; height:112px;
-      margin-bottom: 20px;
-      border-radius: 50%;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 0 6px 28px #0a254021;
-      border: 3px solid var(--secondary);
-      display: flex;
-      align-items: center; justify-content: center;
-    }
     .hero-img img {
-      width: 80px; height: 80px; object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      max-width: 290px;
+      min-height: 220px;
+      border-radius: var(--radius) 0 0 var(--radius);
       filter: drop-shadow(0 2px 8px #0a254018);
+    }
+    .hero-content {
+      width: 60%;
+      padding: 36px 5vw 32px 4vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
+      background: transparent;
+    }
+    .badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent) 60%, #a7f3d0 100%);
+      color: var(--primary);
+      border-radius: 15px;
+      font-size: 1.05rem;
+      padding: 7px 18px;
+      margin-bottom: 16px;
+      font-weight: 800;
+      box-shadow: 0 2px 7px #10b9811b;
+      letter-spacing: 0.05em;
     }
     .hero-title {
       font-family: var(--font-heading);
-      font-size: 2.1rem;
+      font-size: 1.6rem;
       font-weight: 900;
       color: var(--primary);
-      margin-bottom: 13px;
-      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+      line-height: 1.23;
+      text-shadow: 0 2px 8px #fff5;
     }
     .hero-desc {
-      font-size: 1.22rem;
+      font-size: 1.05rem;
       color: #435068;
       max-width: 440px;
-      margin: 0 auto 21px auto;
+      margin: 0 0 18px 0;
       font-weight: 500;
       opacity: 0.97;
     }
     .hero-btns {
       display: flex;
-      gap: 18px;
-      justify-content: center;
+      gap: 13px;
+      justify-content: flex-start;
       flex-wrap: wrap;
       margin-top: 6px;
     }
@@ -306,14 +337,14 @@
       color: #fff;
       border: none;
       border-radius: 24px;
-      padding: 15px 34px;
+      padding: 13px 28px;
       font-family: var(--font-heading);
-      font-size: 1.1rem;
+      font-size: 1.02rem;
       font-weight: 800;
       cursor: pointer;
       transition: background 0.18s, scale 0.14s;
       box-shadow: 0 2px 12px #0a254017;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       display: flex; align-items: center; gap: 7px;
     }
     .hero-btn.secondary {
@@ -321,18 +352,15 @@
       color: var(--primary);
     }
     .hero-btn:active { scale: 0.97; }
-    .badge {
-      display: inline-block;
-      background: linear-gradient(90deg, var(--accent) 60%, #a7f3d0 100%);
-      color: var(--primary);
-      border-radius: 15px;
-      font-size: 1.1rem;
-      padding: 8px 24px;
-      margin-bottom: 19px;
-      font-weight: 800;
-      box-shadow: 0 2px 7px #10b9811b;
-      letter-spacing: 0.05em;
+    @media (max-width: 850px) {
+      .hero { flex-direction: column; }
+      .hero-img, .hero-content { width: 100%; border-radius: var(--radius); }
+      .hero-img { border-radius: var(--radius) var(--radius) 0 0; }
+      .hero-img img { border-radius: var(--radius) var(--radius) 0 0; min-height: 140px; }
+      .hero-content { padding: 24px 7vw 18px 7vw; text-align: center; align-items: center; }
+      .hero-btns { justify-content: center; }
     }
+    /* Remaining sections: .section, .card-list, .product-list, .appointment-banner, .counter, footer, sticky-cta, responsive etc. - as before */
     .section {
       background: var(--card);
       margin: 0 auto;
@@ -516,17 +544,11 @@
     footer a { color: var(--secondary); text-decoration: underline; font-weight: 700; }
     .footer-contact { margin-top: 8px; font-size: 1rem; opacity: 0.93; }
     @media (min-width: 600px) {
-      .hero-title { font-size: 2.5rem; }
-      .hero-img { width: 150px; height:150px; }
-      .hero-img img { width: 110px; height: 110px; }
+      .hero-title { font-size: 2.1rem; }
+      .logo { font-size: 2.7rem; }
       .section-title { font-size: 1.7rem; }
     }
     @media (min-width: 900px) {
-      .hero { flex-direction: row; text-align: left; min-height: 70vh; }
-      .hero-img { margin-right: 40px; margin-bottom: 0; }
-      .hero-content { flex: 1; }
-      .hero-btns { justify-content: flex-start; }
-      .card-list, .product-list { flex-wrap: wrap; overflow-x: visible; justify-content: center; }
       .card, .product-card { min-width: 250px; max-width: 320px; }
       .appointment-banner { flex-direction: row; justify-content: space-between; text-align: left; }
     }
@@ -553,7 +575,7 @@
 <body>
   <header>
     <div class="logo-row">
-      <span class="logo"><i class="fa-solid fa-shield-virus"></i> Raj Marketing</span>
+      <span class="logo"><i class="fa-solid fa-shield-virus"></i> Raj Marketing Mysore</span>
       <button class="menu-btn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
     </div>
     <div class="slogan">“Breathe Easy, Sleep Safe – Advanced Mosquito Net Solutions”</div>
@@ -574,7 +596,6 @@
   <!-- PROMOTION SLIDER -->
   <div class="promo-slider-container">
     <div class="promo-slider" id="promoSlider">
-      <!-- 8 Slides: image src and quote for each -->
       <div class="promo-slide">
         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=cover&w=640&q=80" alt="Clean Home">
         <div class="promo-quote">Enjoy Peaceful Nights with Our Premium Mosquito Nets</div>
@@ -621,199 +642,4 @@
       <div class="hero-desc">
         <b>Raj Marketing Mysore</b> delivers stylish, premium mosquito net solutions for windows, doors, balconies and kitchens. Enjoy fresh air and 100% protection—Installed by experts, trusted by 4000+ customers!
       </div>
-      <div class="hero-btns">
-        <button class="hero-btn" onclick="location.href='estimate.html'"><i class="fa-solid fa-calculator"></i> Get Free Estimate</button>
-        <button class="hero-btn secondary" onclick="location.href='products.html'"><i class="fa-solid fa-boxes-stacked"></i> View Products</button>
-      </div>
-    </div>
-  </section>
-  <!-- WHY CHOOSE US -->
-  <section class="section">
-    <div class="section-title">Why Choose <span style="color:var(--secondary)">Raj Marketing Mysore?</span></div>
-    <div class="card-list">
-      <div class="card">
-        <div class="card-icon"><i class="fa-solid fa-user-tie"></i></div>
-        <div class="card-content">
-          <h4>Expert Installation</h4>
-          <p>Trained staff ensure perfect fit and finish for every window and door. Neat, quick, and professional service at your doorstep.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-icon"><i class="fa-solid fa-layer-group"></i></div>
-        <div class="card-content">
-          <h4>Wide Product Range</h4>
-          <p>Velcro, Openable, Pleated, Magnetic &amp; Sliding systems—customized for homes, offices, hotels and kitchens.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
-        <div class="card-content">
-          <h4>Modern Aesthetics</h4>
-          <p>Sleek designs that blend with interiors. Multiple mesh colors, frame shades and patterns to match your décor.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-icon"><i class="fa-solid fa-handshake-angle"></i></div>
-        <div class="card-content">
-          <h4>After Sales Support</h4>
-          <p>Maintenance, rework and replacement for old or damaged nets. Quick repairs and annual check-ups available.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-icon"><i class="fa-solid fa-face-smile"></i></div>
-        <div class="card-content">
-          <h4>Trusted by 4000+ Customers</h4>
-          <p>Serving Mysore since 2010. 4.9★ Google rating. 100% satisfaction guaranteed!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- PRODUCTS -->
-  <section class="section">
-    <div class="section-title">Our Mosquito Net Solutions</div>
-    <div class="product-list">
-      <div class="product-card">
-        <div class="product-img">
-          <img src="https://5.imimg.com/data5/SELLER/Default/2022/10/YO/RE/XK/1778140/velcro-mosquito-net-1000x1000.jpg" alt="Velcro Mosquito Net">
-        </div>
-        <h4><a href="velcro.html">Velcro System</a></h4>
-        <p>Budget-friendly, easy to remove &amp; wash. Ideal for all window types. Simple DIY maintenance.</p>
-      </div>
-      <div class="product-card">
-        <div class="product-img">
-          <img src="https://www.mosquitonet.in/assets/images/products/openable_window_net.jpg" alt="Openable Mosquito Net">
-        </div>
-        <h4><a href="openable.html">Openable Nets</a></h4>
-        <p>Sturdy aluminum frames that swing open like a window or door. Elegant, durable and rust-proof.</p>
-      </div>
-      <div class="product-card">
-        <div class="product-img">
-          <img src="https://www.phiferindia.com/wp-content/uploads/2022/10/pleated-mosquito-net.jpg" alt="Pleated Mosquito Net">
-        </div>
-        <h4><a href="pleated.html">Pleated Nets</a></h4>
-        <p>Premium retractable system, smooth sliding, perfect for large windows, balconies or French doors.</p>
-      </div>
-      <div class="product-card">
-        <div class="product-img">
-          <img src="https://mosquitonetservices.in/assets/products/magnetic-door-net.jpg" alt="Magnetic Mosquito Net">
-        </div>
-        <h4><a href="magnetic.html">Magnetic Nets</a></h4>
-        <p>Easy to open and auto-close with magnets. Great for families and frequent use doors.</p>
-      </div>
-      <div class="product-card">
-        <div class="product-img">
-          <img src="https://mosquitonetservices.in/assets/products/sliding-mosquito-net.jpg" alt="Sliding Mosquito Net">
-        </div>
-        <h4><a href="sliding.html">Sliding Systems</a></h4>
-        <p>Sleek sliding frames for windows and doors, smooth operation and space saving design.</p>
-      </div>
-    </div>
-  </section>
-  <!-- APPOINTMENT BANNER -->
-  <div class="appointment-banner" id="appointment">
-    <h4><i class="fa-solid fa-calendar-check"></i> Book an Appointment</h4>
-    <p>Schedule a free site visit for measurement and installation at your convenience.<br>Track your appointment and installation status online.</p>
-    <button class="appointment-btn" onclick="location.href='Customerappointment.html'"><i class="fa-solid fa-calendar-plus"></i> Schedule Now</button>
-  </div>
-  <!-- Sticky mobile CTA -->
-  <div class="sticky-cta" style="display:none;">
-    <button class="appointment-btn" onclick="location.href='Customerappointment.html'"><i class="fa-solid fa-calendar-plus"></i> Book Free Appointment</button>
-  </div>
-  <div class="counter">
-    <span id="visitorCount"><i class="fa-solid fa-users"></i> </span>
-    <span style="color:var(--text); font-size:0.97rem; font-weight:600; opacity:.8;">Customer Visits</span>
-  </div>
-  <footer>
-    &copy; 2025 Raj Marketing Mysore. All rights reserved.<br>
-    <div class="footer-contact">
-      <i class="fa-solid fa-location-dot"></i> No. 14, 1st Main, Jayanagar, Mysore<br>
-      <i class="fa-solid fa-phone"></i> <a href="tel:+919483037385">94830 37385</a>
-      &nbsp;|&nbsp;
-      <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
-      &nbsp;|&nbsp;
-      <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">Email</a>
-    </div>
-    <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
-      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur &amp; more
-    </div>
-  </footer>
-  <!-- Visitor Counter JS -->
-  <script>
-    // Visitor Counter (localStorage for demo; for real site, use server/db)
-    const countKey = 'rajmarketing-visitor-count';
-    let count = Number(localStorage.getItem(countKey) || 0);
-    if (!sessionStorage.getItem('visited')) {
-      count++;
-      localStorage.setItem(countKey, count);
-      sessionStorage.setItem('visited', 'yes');
-    }
-    document.getElementById('visitorCount').innerHTML = `<i class="fa-solid fa-users"></i> ${count.toLocaleString()}`;
-  </script>
-  <!-- Hamburger Menu Script, Sticky CTA, Promo Slider -->
-  <script>
-    // Hamburger & overlay
-    const menuBtn = document.querySelector('.menu-btn');
-    const nav = document.querySelector('nav');
-    const overlay = document.querySelector('.nav-overlay');
-    menuBtn.addEventListener('click', function() {
-      nav.classList.toggle('active');
-      overlay.classList.toggle('active');
-    });
-    overlay.addEventListener('click', function() {
-      nav.classList.remove('active');
-      overlay.classList.remove('active');
-    });
-    nav.addEventListener('click', function(e) {
-      if (e.target.tagName === 'A' && nav.classList.contains('active')) {
-        nav.classList.remove('active');
-        overlay.classList.remove('active');
-      }
-    });
-    // Sticky CTA for mobile
-    function showStickyCTA() {
-      if (window.innerWidth <= 700) {
-        document.querySelector('.sticky-cta').style.display = 'flex';
-      } else {
-        document.querySelector('.sticky-cta').style.display = 'none';
-      }
-    }
-    window.addEventListener('resize', showStickyCTA);
-    window.addEventListener('DOMContentLoaded', showStickyCTA);
-
-    // Promo Slider
-    const slider = document.getElementById('promoSlider');
-    const dots = document.getElementById('promoSliderDots');
-    const slides = slider.children;
-    let current = 0;
-    function showSlide(idx) {
-      if(idx < 0) idx = slides.length-1;
-      if(idx >= slides.length) idx = 0;
-      slider.style.transform = `translateX(-${idx*100}%)`;
-      for(let i=0;i<slides.length;i++) {
-        dots.children[i].classList.toggle('active', i===idx);
-      }
-      current = idx;
-    }
-    // Create dots
-    for(let i=0;i<slides.length;i++) {
-      let dot = document.createElement('span');
-      dot.className = 'promo-dot' + (i===0?' active':'');
-      dot.onclick = ()=>showSlide(i);
-      dots.appendChild(dot);
-    }
-    // Auto-advance
-    setInterval(()=>showSlide(current+1), 5000);
-    // Manual swipe for mobile
-    let startX = null;
-    slider.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; }, false);
-    slider.addEventListener('touchend', (e)=>{
-      if(startX!==null) {
-        let dx = e.changedTouches[0].clientX - startX;
-        if(dx > 40) showSlide(current-1);
-        else if(dx < -40) showSlide(current+1);
-      }
-      startX = null;
-    }, false);
-  </script>
-</body>
-</html>
+     

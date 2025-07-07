@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raj Marketing Admin Panel</title>
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <style>
     :root {
@@ -163,6 +165,7 @@
     .admin-table th { background: #e3f0ff; color: var(--admin-accent);}
     .admin-table td { font-size: 1.02rem;}
     .admin-table tr:last-child td { border-bottom: none; }
+    /* Gallery upgrade */
     .gallery-upload {
       margin: 12px 0 14px 0;
       background: #f8faff;
@@ -200,6 +203,7 @@
       min-height: 80px;
       transition: box-shadow 0.17s;
     }
+    .gallery-thumb.selected { box-shadow: 0 0 0 3px #1976d2; border-color: #1976d2;}
     .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .gallery-thumb .del-btn {
       position: absolute; top: 8px; right: 8px;
@@ -217,6 +221,7 @@
     }
     .gallery-modal img { max-width: 95vw; max-height: 90vh; border-radius: 12px; box-shadow: 0 4px 24px #1976d2bb; }
     .gallery-modal .del-btn { position: fixed; top: 32px; right: 36px; font-size: 1.7rem; background: #ff5252; color: #fff; }
+    /* Responsive */
     @media (max-width: 900px) {
       .admin-layout { flex-direction: column; }
       .admin-menu { width: 100vw; min-height: unset; position: fixed; left: -100vw; top: 0; border-radius: 0 0 30px 30px;}
@@ -233,6 +238,7 @@
       .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(80px,1fr)); }
       .gallery-thumb { min-width: 56px;}
     }
+    /* Modal */
     .modal-bg {
       background: #000a;
       position: fixed; inset: 0; z-index: 4000;
@@ -309,7 +315,9 @@
   <main class="admin-content" id="adminContent"></main>
 </div>
 <script>
-const API = 'http://localhost:4000';
+const API = 'http://localhost:4000'; // Set this to your backend URL
+
+// --- Password Modal ---
 const ADMIN_PASS = "admin@2025";
 let loggedIn = false;
 function showModal(show = true, error = '') {
@@ -340,6 +348,7 @@ window.onload = function() {
   }
 };
 
+// --- Menu ---
 const menuToggle = document.querySelector('.menu-toggle');
 const menu = document.getElementById('adminMenu');
 const overlay = document.querySelector('.menu-overlay');
@@ -359,6 +368,7 @@ function closeMenu() {
   document.body.style.overflow = '';
 }
 
+// --- Pages ---
 const pages = {
   dashboard: `
     <div class="admin-title">Welcome to Admin Dashboard</div>
@@ -431,6 +441,7 @@ const pages = {
   logout: `<div class="admin-card"><div class="admin-title" style="color:var(--admin-danger);">You have been logged out.</div><p>Return to the login screen to re-enter admin password.</p></div>`
 };
 
+// Menu navigation
 document.getElementById('adminMenu').addEventListener('click', function(e) {
   if (e.target.closest('a')) {
     const a = e.target.closest('a');
@@ -457,6 +468,7 @@ function loadPage(page) {
   if (page === 'gallery') setupGallery();
 }
 
+// --- Data functions: Connect to backend API ---
 function loadVisitors() {
   fetch(API + '/api/visitors')
     .then(r=>r.json()).then(visitors=>{
@@ -505,6 +517,7 @@ function loadContacts() {
       });
     });
 }
+// --- Gallery upgrade ---
 function setupGallery() {
   fetch(API + '/api/gallery')
     .then(r=>r.json()).then(renderGallery);
@@ -522,8 +535,11 @@ function setupGallery() {
       });
     }
   }
+
+  // Drag & drop upload
   const uploadForm = document.getElementById('galleryUploadForm');
   const uploadInput = document.getElementById('galleryInput');
+  const uploadText = document.getElementById('galleryUploadText');
   uploadForm.onclick = () => uploadInput.click();
   uploadForm.ondragover = e => { e.preventDefault(); uploadForm.classList.add('dragover'); };
   uploadForm.ondragleave = e => { uploadForm.classList.remove('dragover'); };
@@ -542,18 +558,4 @@ function setupGallery() {
     }).then(r=>r.json()).then(res => {
       renderGallery(res.gallery);
     });
-    uploadInput.value = "";
-  }
-}
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  if ((e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'c')) {
-    e.preventDefault();
-  }
-});
-function checkAdmin() {
-  if (!loggedIn && localStorage.getItem('rajmarketing-admin') !== 'true') {
-    showModal(true);
-    document.querySelector('.admin-header').style.filter = "blur(3px)";
     

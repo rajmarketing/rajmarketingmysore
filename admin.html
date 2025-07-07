@@ -663,4 +663,51 @@
       });
       syncGalleryToHome();
     }
-    
+    document.getElementById('galleryUploadForm').onsubmit = function(e){
+      e.preventDefault();
+      const files = document.getElementById('galleryInput').files;
+      Array.from(files).forEach(f=>{
+        const reader = new FileReader();
+        reader.onload = function(ev){
+          galleryImages.push(ev.target.result);
+          localStorage.setItem('rajmarketing-gallery', JSON.stringify(galleryImages));
+          renderGallery();
+          syncGalleryToHome();
+        };
+        reader.readAsDataURL(f);
+      });
+      this.reset();
+    }
+    renderGallery();
+  }
+  // --- Simulate Instant Gallery Sync to Home Page (for demo) ---
+  function syncGalleryToHome() {
+    // In real deployment, push image URLs to server and update homepage via backend or API call.
+    // For demo: store in localStorage; have index.html read from localStorage['rajmarketing-gallery']
+  }
+
+  // --- Prevent right-click/copy (for demo only) ---
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'c')) {
+      e.preventDefault();
+    }
+  });
+
+  // --- Hide admin content if not logged in (JS fallback) ---
+  function checkAdmin() {
+    if (!loggedIn && localStorage.getItem('rajmarketing-admin') !== 'true') {
+      showModal(true);
+      document.querySelector('.admin-header').style.filter = "blur(4px)";
+      document.querySelector('.admin-content').style.filter = "blur(10px)";
+    } else {
+      showModal(false);
+      document.querySelector('.admin-header').style.filter = "";
+      document.querySelector('.admin-content').style.filter = "";
+    }
+  }
+  setInterval(checkAdmin, 1000);
+
+</script>
+</body>
+</html>

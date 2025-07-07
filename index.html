@@ -4,585 +4,515 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raj Marketing Mysore | Mosquito Net Experts</title>
-  <!-- Google Fonts: Poppins & Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Montserrat (headings), Roboto (body) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- FontAwesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <style>
     :root {
-      --primary: #1976d2;
-      --primary-dark: #0d47a1;
-      --accent: #ffb300;
-      --bg-light: #f7faff;
-      --bg-section: #e3f0ff;
-      --secondary: #22223b;
-      --card-bg: #fff;
-      --danger: #ff5252;
-      --font-heading: 'Poppins', 'Inter', Arial, sans-serif;
-      --font-body: 'Inter', Arial, sans-serif;
+      --primary: #0a2540;
+      --secondary: #fbbf24;
+      --bg: #f8fafc;
+      --card: #fff;
+      --text: #222b45;
+      --accent: #10b981;
+      --radius: 18px;
+      --shadow: 0 2px 24px rgba(10,37,64,0.06);
+      --font-heading: 'Montserrat', Arial, sans-serif;
+      --font-body: 'Roboto', Arial, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
+      background: var(--bg);
+      color: var(--text);
       font-family: var(--font-body);
-      background: var(--bg-light);
-      color: var(--secondary);
+      min-height: 100vh;
       font-size: 17px;
-      line-height: 1.75;
-      min-height: 100dvh;
+      line-height: 1.7;
       letter-spacing: 0.01em;
     }
-    /* Header */
+    /* HEADER */
     header {
-      background: linear-gradient(100deg, var(--primary) 65%, var(--accent) 100%);
-      color: #fff;
-      padding: 34px 6vw 25px 6vw;
-      text-align: center;
-      border-radius: 0 0 32px 32px;
-      box-shadow: 0 6px 24px rgba(25, 118, 210, 0.16);
       position: sticky;
       top: 0;
-      z-index: 200;
-    }
-    header h1 {
-      font-family: var(--font-heading);
-      font-size: 2.4rem;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      margin-bottom: 8px;
-      text-shadow: 0 2px 12px #1976d220;
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      z-index: 99;
+      box-shadow: var(--shadow);
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 6vw 12px 6vw;
+    }
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 900;
+      display: flex;
       align-items: center;
       gap: 10px;
+      letter-spacing: 0.06em;
     }
-    header p {
-      font-size: 1.18rem;
-      font-weight: 600;
-      opacity: 0.97;
-      margin-bottom: 2px;
-    }
-    .top-contact { margin-top: 8px; font-size: 1.08rem; opacity: 0.9; }
-    .top-contact a {
-      color: #fff;
-      text-decoration: underline;
-      margin-left: 3px;
-      font-weight: 700;
-    }
-    /* Hamburger menu button */
-    .menu-toggle {
-      position: absolute;
-      top: 28px;
-      right: 24px;
+    .logo i { color: var(--secondary); font-size: 1.7rem; }
+    .menu-btn {
       background: none;
       border: none;
+      color: #fff;
+      font-size: 2rem;
       cursor: pointer;
-      z-index: 300;
-      display: none;
-      width: 44px; height: 44px;
-      justify-content: center;
+      display: flex;
       align-items: center;
     }
-    .menu-toggle:focus { outline: 2px solid var(--accent); }
-    .hamburger {
-      width: 32px; height: 32px;
+    /* NAV MENU OVERLAY */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,37,64,0.60);
+      z-index: 98;
+      display: none;
+    }
+    .nav-overlay.active { display: block; }
+    nav {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      width: 85vw;
+      max-width: 340px;
+      background: var(--card);
+      box-shadow: -3px 0 24px rgba(10,37,64,0.09);
+      z-index: 100;
+      transform: translateX(100%);
+      transition: transform 0.23s cubic-bezier(.77, .2, .21, .97);
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: 7px;
+      padding-top: 70px;
     }
-    .hamburger span {
-      display: block;
-      height: 5px;
-      border-radius: 3px;
-      background: #fff;
-      transition: 0.3s;
-    }
-    /* Navigation Menu */
-    nav {
-      background: #fff;
-      box-shadow: 0 1.2px 6px rgba(25,118,210,0.07);
-      border-bottom: 2px solid #e3f0ff;
-      font-family: var(--font-heading);
-      padding: 0;
-      margin-bottom: 8px;
-      position: sticky;
-      top: 93px;
-      z-index: 150;
-      transition: left 0.27s cubic-bezier(0.82, 0.09, 0.26, 1.09);
-    }
+    nav.active { transform: translateX(0); }
     nav ul {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
       list-style: none;
-      padding: 12px 0 8px 0;
-      margin: 0;
-      transition: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 0 28px;
     }
-    nav ul li {}
     nav a {
       color: var(--primary);
-      background: none;
       text-decoration: none;
-      padding: 11px 23px;
-      border-radius: 26px;
-      font-weight: 800;
       font-size: 1.12rem;
-      transition: background 0.2s, color 0.2s;
-      letter-spacing: 0.1px;
+      font-weight: 700;
+      padding: 15px 0;
+      border-bottom: 1px solid #f1f5f9;
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 10px;
+      border-radius: 0;
+      transition: background 0.18s, color 0.16s;
     }
-    nav a:hover, nav a.active {
-      background: var(--primary);
-      color: #fff !important;
-    }
-    /* Hamburger menu for mobile/tablet */
-    @media (max-width: 900px) {
-      .menu-toggle { display: flex; }
+    nav a:last-child { border-bottom: none; }
+    nav a.active, nav a:hover { color: var(--secondary); background: #f8fafc; }
+    /* DESKTOP NAV */
+    @media (min-width: 900px) {
+      .menu-btn, .nav-overlay { display: none; }
       nav {
-        position: fixed;
-        left: -100vw;
-        top: 0;
-        height: 100vh;
-        width: 77vw;
-        max-width: 330px;
-        min-width: 220px;
-        background: #fff;
-        box-shadow: 2px 0 24px #1976d226;
-        border-radius: 0 26px 26px 0;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        padding-top: 95px;
-        transition: left 0.27s cubic-bezier(0.82, 0.09, 0.26, 1.09);
-      }
-      nav.open { left: 0; }
-      nav ul {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0;
-        gap: 0;
-      }
-      nav ul li { border-bottom: 1px solid #e3f0ff; }
-      nav ul li:last-child { border-bottom: none; }
-      nav a {
-        border-radius: 0;
-        font-size: 1.09rem;
-        padding: 20px 8vw;
+        position: static;
+        transform: none !important;
         background: none;
+        box-shadow: none;
+        height: auto; max-width: none; width: auto;
+        flex-direction: row;
+        padding-top: 0;
       }
-      nav a.active, nav a:hover {
-        background: var(--primary);
-        color: #fff !important;
+      nav ul {
+        flex-direction: row;
+        gap: 16px;
+        padding: 0;
       }
+      nav a {
+        color: #fff;
+        font-size: 1.05rem;
+        border-bottom: none;
+        background: none;
+        padding: 12px 14px;
+        border-radius: var(--radius);
+      }
+      nav a.active, nav a:hover { background: var(--secondary); color: var(--primary); }
     }
-    /* Overlay for nav open */
-    .nav-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.21);
-      z-index: 120;
-      transition: opacity 0.2s;
-    }
-    .nav-overlay.show { display: block; }
-    /* Hero Section */
+    /* HERO */
     .hero {
-      background: linear-gradient(110deg, #f8fbff 60%, #e7f4ff 100%);
-      padding: 38px 6vw 30px 6vw;
+      min-height: 75vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      border-radius: 22px;
-      margin: 26px auto 18px auto;
-      box-shadow: 0 6px 28px #1976d212;
-      max-width: 800px;
+      padding: 42px 5vw 30px 5vw;
+      background: radial-gradient(circle at top right, #fbbf2464 0%, #f8fafc 80%);
+      border-radius: var(--radius);
+      margin: 18px 0 14px 0;
+      box-shadow: var(--shadow);
       position: relative;
-    }
-    .hero-img {
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 7px 32px #1976d220;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 13px;
-      border: 3px solid var(--accent);
       overflow: hidden;
     }
-    .hero-img img {
-      width: 84px; height: 84px; object-fit: contain;
-      filter: drop-shadow(0 2px 8px #1976d220);
-    }
-    .hero h2 {
-      font-family: var(--font-heading);
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--primary-dark);
-      margin-bottom: 12px;
-      letter-spacing: 0.8px;
-    }
-    .hero p {
-      font-size: 1.18rem;
-      max-width: 520px;
-      margin: 0 auto 23px auto;
-      color: #24304a;
-      opacity: 0.97;
-      font-weight: 600;
-    }
-    .hero .btns {
+    .hero-img {
+      width: 112px; height:112px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 28px #0a254021;
+      border: 3px solid var(--secondary);
       display: flex;
-      gap: 24px;
-      justify-content: center;
-      margin-top: 15px;
-      flex-wrap: wrap;
+      align-items: center; justify-content: center;
     }
-    .hero .btn {
+    .hero-img img {
+      width: 80px; height: 80px; object-fit: cover;
+      filter: drop-shadow(0 2px 8px #0a254018);
+    }
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 13px;
+      letter-spacing: 0.03em;
+    }
+    .hero-desc {
+      font-size: 1.22rem;
+      color: #435068;
+      max-width: 440px;
+      margin: 0 auto 21px auto;
+      font-weight: 500;
+      opacity: 0.97;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .hero-btn {
       background: var(--primary);
       color: #fff;
       border: none;
-      border-radius: 22px;
-      padding: 15px 38px;
-      font-size: 1.18rem;
-      font-weight: 800;
+      border-radius: 24px;
+      padding: 15px 34px;
       font-family: var(--font-heading);
-      box-shadow: 0 2px 12px #1976d220;
+      font-size: 1.1rem;
+      font-weight: 800;
       cursor: pointer;
-      transition: background 0.18s, scale 0.15s;
-      outline: none;
+      transition: background 0.18s, scale 0.14s;
+      box-shadow: 0 2px 12px #0a254017;
       margin-bottom: 4px;
+      display: flex; align-items: center; gap: 7px;
     }
-    .hero .btn.secondary {
-      background: var(--accent);
-      color: var(--primary-dark);
+    .hero-btn.secondary {
+      background: var(--secondary);
+      color: var(--primary);
     }
-    .hero .btn:active { scale: 0.97; }
+    .hero-btn:active { scale: 0.97; }
     .badge {
       display: inline-block;
-      background: linear-gradient(90deg, var(--accent) 70%, #ffd85c 100%);
-      color: var(--primary-dark);
-      border-radius: 13px;
+      background: linear-gradient(90deg, var(--accent) 60%, #a7f3d0 100%);
+      color: var(--primary);
+      border-radius: 15px;
+      font-size: 1.1rem;
+      padding: 8px 24px;
+      margin-bottom: 19px;
       font-weight: 800;
-      font-size: 1.11rem;
-      padding: 7px 22px;
-      margin: 7px 0 14px 0;
-      box-shadow: 0 2px 7px #ffb30023;
-      letter-spacing: 0.2px;
+      box-shadow: 0 2px 7px #10b9811b;
+      letter-spacing: 0.05em;
     }
-    /* Section */
+    /* WHY CHOOSE US */
     .section {
-      background: var(--bg-section);
+      background: var(--card);
       margin: 0 auto;
-      padding: 44px 6vw 33px 6vw;
+      padding: 32px 5vw 24px 5vw;
       max-width: 980px;
-      border-radius: 22px;
-      margin-bottom: 32px;
-      box-shadow: 0 2px 18px #1976d20d;
+      border-radius: var(--radius);
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
     }
-    .section h3 {
+    .section-title {
       font-family: var(--font-heading);
-      font-size: 1.35rem;
+      font-size: 1.34rem;
       color: var(--primary);
       margin-bottom: 17px;
       font-weight: 900;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.03em;
+      text-align: center;
     }
-    .section p {
-      font-size: 1.14rem;
-      margin-bottom: 15px;
-      color: #24304a;
-      line-height: 1.7;
-      opacity: 0.93;
-    }
-    /* Cards */
     .card-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 22px;
-      margin-top: 16px;
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      padding-bottom: 7px;
+      margin-top: 15px;
     }
     .card {
-      background: var(--card-bg);
-      border-radius: 18px;
-      box-shadow: 0 2px 16px #1976d212;
-      padding: 22px 22px 16px 22px;
+      min-width: 230px;
+      background: var(--bg);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 12px #0a254014;
+      padding: 20px 16px 17px 16px;
       display: flex;
+      flex-direction: column;
       align-items: flex-start;
-      gap: 18px;
-      transition: box-shadow 0.17s;
+      gap: 12px;
       border-left: 6px solid var(--accent);
       position: relative;
       min-height: 105px;
+      flex-shrink: 0;
+      transition: box-shadow 0.17s;
     }
     .card-icon {
-      height: 57px;
-      width: 57px;
+      height: 45px;
+      width: 45px;
       background: var(--primary);
-      border-radius: 14px;
+      border-radius: 13px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
-      font-size: 2.3rem;
-      flex-shrink: 0;
-      border: 2.5px solid var(--accent);
-      box-shadow: 0 2px 8px #1976d218;
-      overflow: hidden;
+      font-size: 1.6rem;
+      border: 2px solid var(--secondary);
+      box-shadow: 0 2px 8px #0a254016;
+      margin-bottom: 5px;
     }
     .card-content h4 {
-      font-size: 1.17rem;
+      font-size: 1.08rem;
       font-family: var(--font-heading);
-      margin-bottom: 2px;
+      margin-bottom: 3px;
       font-weight: 800;
-      color: var(--primary-dark);
+      color: var(--primary);
     }
     .card-content p {
-      font-size: 1.09rem;
-      color: #3e4e6c;
-      margin-bottom: 0;
+      font-size: 0.98rem;
+      color: #42506a;
       font-weight: 500;
     }
-    .card-content a {
-      color: var(--primary);
-      text-decoration: underline;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-    /* Product Cards */
+    /* PRODUCTS */
     .product-list {
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 24px;
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      margin-top: 15px;
+      padding-bottom: 9px;
     }
     .product-card {
+      min-width: 210px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 10px #0a254010;
+      padding: 16px;
+      display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      border-left: none;
-      border-top: 5px solid var(--accent);
-      padding-top: 13px;
-      min-height: 250px;
       position: relative;
+      border-top: 5px solid var(--secondary);
+      margin-bottom: 8px;
+      flex-shrink: 0;
     }
     .product-img {
-      width: 110px; height: 110px; border-radius: 16px;
+      width: 88px; height: 88px; border-radius: 13px;
       background: #f4faff;
       overflow: hidden;
-      margin-bottom: 13px;
+      margin-bottom: 11px;
       border: 2px solid var(--primary);
       display: flex; align-items: center; justify-content: center;
     }
-    .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: scale 0.18s; }
-    .product-card:hover .product-img img { scale: 1.05; }
-    /* Appointment Card */
-    .appointment-card {
-      background: var(--card-bg);
-      border-radius: 18px;
-      box-shadow: 0 2px 16px #1976d212;
-      padding: 20px 22px 19px 22px;
-      display: flex;
-      align-items: flex-start;
-      gap: 18px;
-      border-left: 6px solid var(--primary);
-      position: relative;
-      min-height: 100px;
-      margin-bottom: 34px;
-      margin-top: 0;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .appointment-icon {
-      height: 57px;
-      width: 57px;
-      background: var(--accent);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary-dark);
-      font-size: 2.18rem;
-      flex-shrink: 0;
-      border: 2.5px solid var(--primary);
-      box-shadow: 0 2px 8px #1976d218;
-      overflow: hidden;
-    }
-    .appointment-content h4 {
-      font-size: 1.21rem;
+    .product-img img { width: 100%; height: 100%; object-fit: cover; }
+    .product-card h4 a {
+      color: var(--primary);
       font-family: var(--font-heading);
-      margin-bottom: 3px;
-      font-weight: 900;
-      color: var(--primary-dark);
-      letter-spacing: 0.1px;
+      text-decoration: none;
+      font-size: 1.03rem;
+      font-weight: 800;
+      transition: color 0.16s;
     }
-    .appointment-content p {
-      font-size: 1.09rem;
-      color: #25304f;
-      margin-bottom: 7px;
+    .product-card h4 a:hover { color: var(--secondary);}
+    .product-card p {
+      color: #42506a;
+      font-size: 0.96rem;
       font-weight: 500;
     }
-    .appointment-content a {
-      display: inline-block;
-      margin-top: 6px;
+    /* APPOINTMENT BANNER */
+    .appointment-banner {
+      background: linear-gradient(90deg, var(--secondary) 60%, var(--accent) 100%);
+      color: var(--primary);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 10px #fbbf2433;
+      padding: 20px 8vw 18px 8vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+      margin: 0 auto 22px auto;
+      max-width: 700px;
+    }
+    .appointment-banner h4 {
+      font-family: var(--font-heading);
+      font-size: 1.13rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+    }
+    .appointment-banner p {
+      font-size: 1.02rem;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .appointment-btn {
       background: var(--primary);
       color: #fff;
-      text-decoration: none;
-      padding: 10px 29px;
-      border-radius: 22px;
-      font-weight: 800;
-      font-size: 1.06rem;
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 1.03rem;
+      border: none;
+      border-radius: 21px;
+      padding: 12px 32px;
+      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 7px;
+      box-shadow: 0 2px 10px #0a254013;
       transition: background 0.18s;
     }
-    .appointment-content a:hover { background: var(--primary-dark); }
-    /* Counter */
+    .appointment-btn:hover { background: #0c3058; }
+    /* COUNTER */
     .counter {
-      background: #fff;
+      background: var(--card);
       color: var(--primary);
-      padding: 13px 0 6px 0;
+      padding: 14px 0 5px 0;
       text-align: center;
-      font-size: 1.11rem;
+      font-size: 1.05rem;
       font-family: var(--font-heading);
-      border-radius: 15px 15px 0 0;
-      box-shadow: 0 -2px 16px #1976d220;
-      margin-bottom: -11px;
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 -2px 12px #0a25401a;
+      margin-bottom: -9px;
       font-weight: 800;
-      letter-spacing: 0.21px;
+      letter-spacing: 0.08em;
       margin-top: 14px;
-      max-width: 800px;
+      max-width: 700px;
       margin-left: auto;
       margin-right: auto;
     }
-    /* Footer */
+    /* FOOTER */
     footer {
-      background: var(--primary-dark);
+      background: var(--primary);
       color: #fff;
       text-align: center;
-      padding: 25px 0 18px 0;
-      font-size: 1.11rem;
+      padding: 26px 0 16px 0;
+      font-size: 1.06rem;
       margin-top: 44px;
-      border-radius: 32px 32px 0 0;
-      letter-spacing: 0.23px;
-      box-shadow: 0 -4px 24px #1976d218;
+      border-radius: 22px 22px 0 0;
+      letter-spacing: 0.08em;
+      box-shadow: 0 -4px 20px #0a254017;
     }
-    footer a { color: var(--accent); text-decoration: underline; font-weight: 700; }
-    .footer-contact { margin-top: 8px; font-size: 1.07rem; opacity: 0.96; }
-    @media (max-width: 1200px) {
-      .product-list { grid-template-columns: 1fr 1fr; }
+    footer a { color: var(--secondary); text-decoration: underline; font-weight: 700; }
+    .footer-contact { margin-top: 8px; font-size: 1rem; opacity: 0.93; }
+    @media (min-width: 600px) {
+      .hero-title { font-size: 2.5rem; }
+      .hero-img { width: 150px; height:150px; }
+      .hero-img img { width: 110px; height: 110px; }
+      .section-title { font-size: 1.7rem; }
     }
-    @media (max-width: 900px) {
-      .product-list { grid-template-columns: 1fr; }
-      .hero { margin: 18px 0 12px 0; }
-      .section { padding: 28px 3vw 18px 3vw; }
-      .appointment-card, .counter { max-width: 97vw; }
+    @media (min-width: 900px) {
+      .hero { flex-direction: row; text-align: left; min-height: 70vh; }
+      .hero-img { margin-right: 40px; margin-bottom: 0; }
+      .hero-content { flex: 1; }
+      .hero-btns { justify-content: flex-start; }
+      .card-list, .product-list { flex-wrap: wrap; overflow-x: visible; justify-content: center; }
+      .card, .product-card { min-width: 250px; max-width: 320px; }
+      .appointment-banner { flex-direction: row; justify-content: space-between; text-align: left; }
     }
-    @media (max-width: 700px) {
-      header h1 { font-size: 1.4rem; }
-      .hero h2 { font-size: 1.18rem; }
-      .badge { font-size: 1rem; }
-      .section h3 { font-size: 1.09rem; }
-      .hero-img { width: 80px; height: 80px; }
-      .hero-img img { width: 54px; height: 54px; }
-      .product-img { width: 70px; height: 70px; }
-      .appointment-icon, .card-icon { width: 37px; height: 37px; font-size: 1.2rem; }
-      .counter { font-size: 1.01rem; }
-      .footer-contact { font-size: 0.97rem; }
-      .appointment-card, .card, .product-card { flex-direction: column; align-items: stretch; }
-      .appointment-icon, .card-icon { margin-bottom: 10px; }
-    }
-    @media (max-width: 400px) {
-      header h1 { font-size: 1rem; }
-      .product-img { width: 44px; height: 44px; }
-      .section, .hero { padding: 10px 1vw 7px 1vw; }
+    /* Sticky appointment btn for mobile */
+    @media (max-width:700px) {
+      .sticky-cta {
+        position: fixed;
+        bottom: 20px;
+        left: 0; right: 0;
+        width: 90vw;
+        margin: 0 auto;
+        z-index: 120;
+        display: flex; justify-content: center;
+        pointer-events: none;
+      }
+      .appointment-btn {
+        pointer-events: all;
+        width: 100%;
+        max-width: 380px;
+        box-shadow: 0 6px 18px #0a254031;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <button class="menu-toggle" aria-label="Open menu" aria-controls="mainnav" aria-expanded="false">
-      <span class="hamburger" aria-hidden="true">
-        <span style="width:100%"></span>
-        <span style="width:100%"></span>
-        <span style="width:100%"></span>
-      </span>
-    </button>
-    <h1><i class="fa-solid fa-shield-virus"></i> Raj Marketing Mysore</h1>
-    <p>Mosquito Net Experts | <span class="top-contact"><i class="fa-solid fa-phone"></i><a href="tel:+919483037385">(+91) 94830 37385</a></span></p>
-    <div class="top-contact">Serving Mysore, Mandya, Nanjangud, Srirangapatna &amp; Surroundings</div>
+    <span class="logo"><i class="fa-solid fa-shield-virus"></i> Raj Marketing Mysore</span>
+    <button class="menu-btn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a></li>
+        <li><a href="products.html"><i class="fa-solid fa-boxes-stacked"></i> Products</a></li>
+        <li><a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a></li>
+        <li><a href="services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a></li>
+        <li><a href="estimate.html"><i class="fa-solid fa-calculator"></i> Estimate</a></li>
+        <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+        <li><a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
+      </ul>
+    </nav>
+    <div class="nav-overlay"></div>
   </header>
-  <div class="nav-overlay"></div>
-  <nav id="mainnav" aria-label="Main navigation">
-    <ul>
-      <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-      <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a></li>
-      <li><a href="products.html"><i class="fa-solid fa-boxes-stacked"></i> Products</a></li>
-      <li><a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a></li>
-      <li><a href="services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Services</a></li>
-      <li><a href="estimate.html"><i class="fa-solid fa-calculator"></i> Estimate</a></li>
-      <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
-      <li><a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
-    </ul>
-  </nav>
-  <!-- APPOINTMENT OPTION -->
-  <section class="appointment-card">
-    <div class="appointment-icon">
-      <i class="fa-solid fa-calendar-check"></i>
-    </div>
-    <div class="appointment-content">
-      <h4>Book an Appointment</h4>
-      <p>
-        Schedule a free site visit for measurement and mosquito net installation at your convenience. Track your appointment and installation status online.
-      </p>
-      <a href="Customerappointment.html"><i class="fa-solid fa-calendar-plus"></i> Schedule Now</a>
-    </div>
-  </section>
   <!-- HERO -->
   <section class="hero">
-    <div class="badge">Now Get Free On-site Estimate!</div>
     <div class="hero-img">
       <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=cover&w=256&q=80" alt="Mosquito Net Home" />
     </div>
-    <h2>Modern Mosquito Nets for Every Home &amp; Office</h2>
-    <p>
-      <b>Raj Marketing Mysore</b> brings you stylish, premium mosquito net solutions for windows, doors, balconies &amp; kitchens. Enjoy healthy living, cool breeze, and 100% mosquito protection—Install today and experience the difference!
-    </p>
-    <div class="btns">
-      <button class="btn" onclick="location.href='estimate.html'"><i class="fa-solid fa-calculator"></i> Get Free Estimate</button>
-      <button class="btn secondary" onclick="location.href='products.html'"><i class="fa-solid fa-boxes-stacked"></i> View Products</button>
+    <div class="hero-content">
+      <div class="badge">Free On-site Estimate!</div>
+      <div class="hero-title">Modern Mosquito Nets for Every Home &amp; Office</div>
+      <div class="hero-desc">
+        <b>Raj Marketing Mysore</b> delivers stylish, premium mosquito net solutions for windows, doors, balconies and kitchens. Enjoy fresh air and 100% protection—Installed by experts, trusted by 4000+ customers!
+      </div>
+      <div class="hero-btns">
+        <button class="hero-btn" onclick="location.href='estimate.html'"><i class="fa-solid fa-calculator"></i> Get Free Estimate</button>
+        <button class="hero-btn secondary" onclick="location.href='products.html'"><i class="fa-solid fa-boxes-stacked"></i> View Products</button>
+      </div>
     </div>
   </section>
-  <!-- WHY CHOOSE -->
+  <!-- WHY CHOOSE US -->
   <section class="section">
-    <h3>Why Choose <span style="color:var(--primary-dark)">Raj Marketing Mysore?</span></h3>
+    <div class="section-title">Why Choose <span style="color:var(--secondary)">Raj Marketing Mysore?</span></div>
     <div class="card-list">
       <div class="card">
         <div class="card-icon"><i class="fa-solid fa-user-tie"></i></div>
         <div class="card-content">
           <h4>Expert Installation</h4>
-          <p>Trained staff ensures perfect fit and finish for every window and door. We guarantee neat, quick, and professional service at your doorstep.</p>
+          <p>Trained staff ensure perfect fit and finish for every window and door. Neat, quick, and professional service at your doorstep.</p>
         </div>
       </div>
       <div class="card">
         <div class="card-icon"><i class="fa-solid fa-layer-group"></i></div>
         <div class="card-content">
           <h4>Wide Product Range</h4>
-          <p>Velcro, Openable, Pleated, Magnetic &amp; Sliding systems—customized for homes, offices, apartments, hotels, and kitchens.</p>
+          <p>Velcro, Openable, Pleated, Magnetic &amp; Sliding systems—customized for homes, offices, hotels and kitchens.</p>
         </div>
       </div>
       <div class="card">
         <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
         <div class="card-content">
           <h4>Modern Aesthetics</h4>
-          <p>Beautiful, sleek designs that blend with interiors. Multiple mesh colors, frame shades &amp; patterns to match your décor.</p>
+          <p>Sleek designs that blend with interiors. Multiple mesh colors, frame shades and patterns to match your décor.</p>
         </div>
       </div>
       <div class="card">
         <div class="card-icon"><i class="fa-solid fa-handshake-angle"></i></div>
         <div class="card-content">
           <h4>After Sales Support</h4>
-          <p>We offer maintenance, rework &amp; replacement for old or damaged nets. Quick repairs and annual check-ups available.</p>
+          <p>Maintenance, rework and replacement for old or damaged nets. Quick repairs and annual check-ups available.</p>
         </div>
       </div>
       <div class="card">
@@ -596,42 +526,58 @@
   </section>
   <!-- PRODUCTS -->
   <section class="section">
-    <h3>Our Mosquito Net Solutions</h3>
-    <div class="card-list product-list">
-      <div class="card product-card">
+    <div class="section-title">Our Mosquito Net Solutions</div>
+    <div class="product-list">
+      <div class="product-card">
         <div class="product-img">
           <img src="https://5.imimg.com/data5/SELLER/Default/2022/10/YO/RE/XK/1778140/velcro-mosquito-net-1000x1000.jpg" alt="Velcro Mosquito Net">
         </div>
-        <div class="card-content">
-          <h4><a href="velcro.html">Velcro System</a></h4>
-          <p>Budget-friendly, easy to remove &amp; wash. Ideal for all window types. Simple DIY maintenance.</p>
-        </div>
+        <h4><a href="velcro.html">Velcro System</a></h4>
+        <p>Budget-friendly, easy to remove &amp; wash. Ideal for all window types. Simple DIY maintenance.</p>
       </div>
-      <div class="card product-card">
+      <div class="product-card">
         <div class="product-img">
           <img src="https://www.mosquitonet.in/assets/images/products/openable_window_net.jpg" alt="Openable Mosquito Net">
         </div>
-        <div class="card-content">
-          <h4><a href="openable.html">Openable Nets</a></h4>
-          <p>Sturdy aluminium frames that swing open like a window or door. Elegant, long-lasting and rust-proof.</p>
-        </div>
+        <h4><a href="openable.html">Openable Nets</a></h4>
+        <p>Sturdy aluminum frames that swing open like a window or door. Elegant, durable and rust-proof.</p>
       </div>
-      <div class="card product-card">
+      <div class="product-card">
         <div class="product-img">
           <img src="https://www.phiferindia.com/wp-content/uploads/2022/10/pleated-mosquito-net.jpg" alt="Pleated Mosquito Net">
-              </div>
-      <div class="card">
-        <div class="card-icon"><i class="fa-solid fa-shield-heart"></i></div>
-        <div class="card-content">
-          <h4>Warranty &amp; Support</h4>
-          <p>Get warranty on mesh &amp; installation. Responsive support for any issues or upgrades.</p>
         </div>
+        <h4><a href="pleated.html">Pleated Nets</a></h4>
+        <p>Premium retractable system, smooth sliding, perfect for large windows, balconies or French doors.</p>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://mosquitonetservices.in/assets/products/magnetic-door-net.jpg" alt="Magnetic Mosquito Net">
+        </div>
+        <h4><a href="magnetic.html">Magnetic Nets</a></h4>
+        <p>Easy to open and auto-close with magnets. Great for families and frequent use doors.</p>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://mosquitonetservices.in/assets/products/sliding-mosquito-net.jpg" alt="Sliding Mosquito Net">
+        </div>
+        <h4><a href="sliding.html">Sliding Systems</a></h4>
+        <p>Sleek sliding frames for windows and doors, smooth operation and space saving design.</p>
       </div>
     </div>
   </section>
+  <!-- APPOINTMENT BANNER -->
+  <div class="appointment-banner" id="appointment">
+    <h4><i class="fa-solid fa-calendar-check"></i> Book an Appointment</h4>
+    <p>Schedule a free site visit for measurement and installation at your convenience.<br>Track your appointment and installation status online.</p>
+    <button class="appointment-btn" onclick="location.href='Customerappointment.html'"><i class="fa-solid fa-calendar-plus"></i> Schedule Now</button>
+  </div>
+  <!-- Sticky mobile CTA -->
+  <div class="sticky-cta" style="display:none;">
+    <button class="appointment-btn" onclick="location.href='Customerappointment.html'"><i class="fa-solid fa-calendar-plus"></i> Book Free Appointment</button>
+  </div>
   <div class="counter">
-    <span id="visitorCount"><i class="fa-solid fa-users"></i>  </span>
-    <span style="color:var(--secondary); font-size:0.95rem; font-weight:600; opacity:.8;">Customer Visits</span>
+    <span id="visitorCount"><i class="fa-solid fa-users"></i> </span>
+    <span style="color:var(--text); font-size:0.97rem; font-weight:600; opacity:.8;">Customer Visits</span>
   </div>
   <!-- Footer -->
   <footer>
@@ -642,54 +588,4 @@
       &nbsp;|&nbsp;
       <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
       &nbsp;|&nbsp;
-      <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">Email</a>
-    </div>
-    <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
-      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur &amp; more
-    </div>
-  </footer>
-  <!-- Visitor Counter JS -->
-  <script>
-    // Visitor Counter (localStorage for demo; for real site, use server/db)
-    const countKey = 'rajmarketing-visitor-count';
-    let count = Number(localStorage.getItem(countKey) || 0);
-    if (!sessionStorage.getItem('visited')) {
-      count++;
-      localStorage.setItem(countKey, count);
-      sessionStorage.setItem('visited', 'yes');
-    }
-    document.getElementById('visitorCount').innerHTML = `<i class="fa-solid fa-users"></i> ${count.toLocaleString()}`;
-  </script>
-  <!-- Hamburger Menu Script -->
-  <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
-    const overlay = document.querySelector('.nav-overlay');
-    function openMenu() {
-      nav.classList.add('open');
-      overlay.classList.add('show');
-      menuToggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMenu() {
-      nav.classList.remove('open');
-      overlay.classList.remove('show');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-    menuToggle.addEventListener('click', function(e) {
-      if (nav.classList.contains('open')) closeMenu();
-      else openMenu();
-    });
-    overlay.addEventListener('click', closeMenu);
-    // Close menu on Escape
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && nav.classList.contains('open')) closeMenu();
-    });
-    // Close menu on nav link click (mobile)
-    nav.addEventListener('click', function(e) {
-      if (e.target.tagName === 'A' && nav.classList.contains('open')) closeMenu();
-    });
-  </script>
-</body>
-</html>
+      <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">E

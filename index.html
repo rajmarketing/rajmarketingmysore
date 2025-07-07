@@ -591,4 +591,53 @@
           <p>We visit your home/office, suggest best options, and take accurate measurements.</p>
         </div>
       </div>
-      <d
+      <div class="card">
+        <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <div class="card-content">
+          <h4>Professional Installation</h4>
+          <p>Skilled team installs within a day. Zero mess and no civil work required.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fa-solid fa-shield-heart"></i></div>
+        <div class="card-content">
+          <h4>Warranty & Support</h4>
+          <p>Get warranty on mesh & installation. Responsive support for any issues or upgrades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="counter">
+    <span id="visitorCount"><i class="fa-solid fa-users"></i>  </span>
+    <span style="color:var(--secondary); font-size:0.93rem; font-weight:600; opacity:.8;">Customer Visits</span>
+  </div>
+
+  <footer>
+    &copy; 2025 Raj Marketing Mysore. All rights reserved.<br>
+    <div class="footer-contact">
+      <i class="fa-solid fa-location-dot"></i> No. 14, 1st Main, Jayanagar, Mysore<br>
+      <i class="fa-solid fa-phone"></i> <a href="tel:+919483037385">94830 37385</a>
+      &nbsp;|&nbsp;
+      <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
+      &nbsp;|&nbsp;
+      <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">Email</a>
+    </div>
+    <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
+      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur & more
+    </div>
+  </footer>
+  <!-- Simple Visitor Counter (localStorage based, for demo) -->
+  <script>
+    // Visitor Counter (localStorage for demo; for real site, use server/db)
+    const countKey = 'rajmarketing-visitor-count';
+    let count = Number(localStorage.getItem(countKey) || 0);
+    if (!sessionStorage.getItem('visited')) {
+      count++;
+      localStorage.setItem(countKey, count);
+      sessionStorage.setItem('visited', 'yes');
+    }
+    document.getElementById('visitorCount').innerHTML = `<i class="fa-solid fa-users"></i> ${count.toLocaleString()}`;
+  </script>
+</body>
+  </html>

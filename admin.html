@@ -557,4 +557,14 @@ function checkAdmin() {
   if (!loggedIn && localStorage.getItem('rajmarketing-admin') !== 'true') {
     showModal(true);
     document.querySelector('.admin-header').style.filter = "blur(3px)";
-    document.querySelector('.admin-c
+    document.querySelector('.admin-content').style.filter = "blur(7px)";
+  } else {
+    showModal(false);
+    document.querySelector('.admin-header').style.filter = "";
+    document.querySelector('.admin-content').style.filter = "";
+  }
+}
+setInterval(checkAdmin, 1000);
+</script>
+</body>
+</html>

@@ -4,11 +4,270 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raj Marketing Admin Panel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* ... (Styles same as previous, omitted for brevity) ... */
-    /* Use your full existing CSS from the previous admin.html */
+    :root {
+      --admin-primary: #1976d2;
+      --admin-bg: #f4f8fc;
+      --admin-dark: #163656;
+      --admin-accent: #ffb300;
+      --admin-danger: #f44336;
+      --admin-card: #fff;
+      --admin-border: #e3f0ff;
+      --admin-radius: 18px;
+      --admin-shadow: 0 4px 24px #1976d21c;
+      --admin-font-heading: 'Poppins', 'Inter', Arial, sans-serif;
+      --admin-font-body: 'Inter', Arial, sans-serif;
+    }
+    body {
+      margin: 0;
+      font-family: var(--admin-font-body);
+      background: var(--admin-bg);
+      color: var(--admin-dark);
+      letter-spacing: 0.01em;
+      min-height: 100dvh;
+    }
+    /* Modal */
+    .modal-bg {
+      position: fixed; inset: 0; background: #0008; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity .2s;
+    }
+    .modal-box {
+      background: #fff; border-radius: 11px; padding: 30px 32px 20px 32px;
+      box-shadow: 0 2px 30px #1976d233;
+      min-width: 290px;
+    }
+    .modal-title {
+      font-family: var(--admin-font-heading);
+      font-size: 1.38rem;
+      font-weight: 900;
+      color: var(--admin-primary);
+      margin-bottom: 19px;
+      text-align: center;
+      letter-spacing: 0.13em;
+    }
+    .modal-error {
+      color: var(--admin-danger);
+      margin-top: 8px;
+      text-align: center;
+      font-size: 1.01rem;
+      min-height: 22px;
+    }
+    #adminLoginForm input[type=password] {
+      width: 100%;
+      padding: 13px 12px;
+      margin-bottom: 12px;
+      border-radius: 7px;
+      border: 1.5px solid var(--admin-border);
+      font-size: 1.08rem;
+      outline: none;
+      transition: border .2s;
+    }
+    #adminLoginForm input:focus { border: 1.5px solid var(--admin-primary);}
+    #adminLoginForm button {
+      width: 100%;
+      padding: 13px 0;
+      border-radius: 7px;
+      border: none;
+      background: var(--admin-primary);
+      color: #fff;
+      font-family: var(--admin-font-heading);
+      font-size: 1.13rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: background .18s;
+    }
+    #adminLoginForm button:hover { background: #1253a7; }
+    /* Admin Layout */
+    .admin-header {
+      background: linear-gradient(100deg, var(--admin-primary) 65%, var(--admin-accent) 100%);
+      color: #fff;
+      padding: 23px 20px 19px 32px;
+      font-size: 1.42rem;
+      font-family: var(--admin-font-heading);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky; top: 0; z-index: 10;
+      box-shadow: 0 4px 19px #1976d20d;
+    }
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: #fff; font-size: 1.7rem;
+      margin-right: 10px; cursor: pointer;
+      display: none;
+    }
+    .admin-layout {
+      display: flex;
+      min-height: calc(100dvh - 54px);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .admin-menu {
+      background: #fff;
+      min-width: 220px;
+      max-width: 280px;
+      padding: 24px 0 40px 0;
+      box-shadow: 2px 0 24px #1976d218;
+      border-radius: 0 0 22px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 20;
+      position: relative;
+      transition: left .22s;
+    }
+    .admin-menu a {
+      color: var(--admin-primary);
+      font-family: var(--admin-font-heading);
+      font-weight: 800;
+      font-size: 1.07rem;
+      padding: 15px 34px 15px 32px;
+      text-decoration: none;
+      border-left: 4px solid #fff;
+      background: none;
+      display: flex; align-items: center; gap: 12px;
+      transition: background 0.15s, border 0.15s;
+      outline: none;
+      cursor: pointer;
+    }
+    .admin-menu a.active,
+    .admin-menu a:hover {
+      background: var(--admin-primary);
+      color: #fff;
+      border-left: 4px solid var(--admin-accent);
+    }
+    .admin-menu a[style*="danger"] { color: var(--admin-danger);}
+    .admin-content {
+      flex: 1;
+      padding: 32px 28px 38px 28px;
+      min-width: 0;
+      max-width: 100vw;
+    }
+    /* Overlay for mobile menu */
+    .menu-overlay {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: #0005;
+      z-index: 15;
+      transition: opacity 0.2s;
+    }
+    .menu-overlay.show { display: block;}
+    /* Responsive */
+    @media (max-width: 950px) {
+      .admin-layout { flex-direction: column;}
+      .admin-menu {
+        position: fixed; top: 0; left: -100vw; height: 100vh;
+        border-radius: 0 22px 22px 0;
+        z-index: 100;
+        transition: left .22s;
+      }
+      .admin-menu.mobile.open { left: 0;}
+      .menu-toggle { display: block;}
+      .admin-content { padding: 22px 4vw 28px 4vw;}
+    }
+    /* Cards, Tables, Gallery */
+    .admin-title {
+      font-family: var(--admin-font-heading);
+      font-size: 1.31rem;
+      font-weight: 900;
+      color: var(--admin-primary);
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+    }
+    .admin-card {
+      background: var(--admin-card);
+      padding: 28px 24px 18px 24px;
+      border-radius: var(--admin-radius);
+      box-shadow: var(--admin-shadow);
+      margin-bottom: 26px;
+      max-width: 100%;
+    }
+    .admin-table {
+      border-collapse: collapse; width: 100%;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+    .admin-table th, .admin-table td {
+      border: 1px solid var(--admin-border);
+      padding: 10px 8px;
+      text-align: left;
+    }
+    .admin-table th {
+      background: var(--admin-bg);
+      color: var(--admin-primary);
+      font-weight: 900;
+      font-size: 1.05rem;
+    }
+    .admin-table tbody tr:hover {
+      background: #e3f0ff88;
+    }
+    /* Gallery */
+    .gallery-upload {
+      border: 2px dashed var(--admin-accent);
+      border-radius: 12px;
+      padding: 44px 0;
+      text-align: center;
+      background: #f8f7ea;
+      cursor: pointer;
+      margin-bottom: 17px;
+      font-size: 1.12rem;
+      color: var(--admin-dark);
+      font-family: var(--admin-font-heading);
+      font-weight: 700;
+      transition: border .18s, background 0.15s;
+    }
+    .gallery-upload.dragover {
+      background: #fff3cf;
+      border-color: #f3b000;
+    }
+    .gallery-grid {
+      display: flex; flex-wrap: wrap; gap: 15px; justify-content: flex-start;
+    }
+    .gallery-thumb {
+      width: 120px; height: 92px;
+      background: #eee;
+      border-radius: 7px;
+      overflow: hidden;
+      box-shadow: 0 1px 8px #1976d211;
+      border: 2px solid #fff;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+    }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover;}
+    .gallery-thumb:hover { box-shadow: 0 4px 20px #1976d211;}
+    /* Utility */
+    .text-danger { color: var(--admin-danger);}
+    .text-center { text-align: center;}
+    .btn {
+      background: var(--admin-primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 22px;
+      font-family: var(--admin-font-heading);
+      font-size: 1.06rem;
+      font-weight: 800;
+      margin: 7px 0;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn:hover { background: #1253a7;}
+    .btn.danger {
+      background: var(--admin-danger);
+      color: #fff;
+    }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 7px;}
+    ::-webkit-scrollbar-thumb { background: #ddeafc; border-radius: 6px;}
+    ::-webkit-scrollbar-track { background: #f7faff;}
   </style>
 </head>
 <body>
@@ -47,7 +306,7 @@ let loggedIn = false;
 
 function showModal(show = true, error = '') {
   document.getElementById('adminModal').style.display = show ? 'flex' : 'none';
-  document.getElementById('modalError').textContent = error;
+  document.getElementById('modalError').textContent = error || '';
   if (show) document.getElementById('adminPassword').focus();
 }
 
@@ -85,7 +344,7 @@ window.onload = function() {
   }
 };
 
-// --- Menu & Layout (unchanged) ---
+// --- Menu & Layout ---
 const menuToggle = document.querySelector('.menu-toggle');
 const menu = document.getElementById('adminMenu');
 const overlay = document.querySelector('.menu-overlay');
@@ -108,13 +367,19 @@ function closeMenu() {
 // --- Admin Pages ---
 const pages = {
   dashboard: `
-    <div class="admin-title">Welcome to Admin Dashboard</div>
+    <div class="admin-title">Welcome to Raj Marketing Admin Dashboard</div>
     <div class="admin-card">
-      <ul style="line-height:1.7; color:#1976d2; font-size:1.09rem;">
-        <li>Live visitor tracking and analytics</li>
-        <li>Manage appointments, estimates, contacts</li>
-        <li>Upload and organize gallery images (instantly update home page)</li>
+      <ul style="line-height:1.7; color:#1976d2; font-size:1.09rem; padding-left:18px;">
+        <li>Live visitor tracking and analytics (auto-refresh every 8 seconds)</li>
+        <li>Manage appointments, estimates, contacts from customers</li>
+        <li>Upload and organize gallery images (updates home page instantly)</li>
       </ul>
+      <div style="margin-top:18px;">
+        <span style="font-weight:900; font-size:1.2rem; color:#222;">Quick Stats:</span>
+        <div id="adminStats" style="margin-top:7px; font-size:1.09rem;">
+          <i class="fa-solid fa-spinner fa-spin"></i> Loading stats...
+        </div>
+      </div>
     </div>
   `,
   visitors: `
@@ -127,6 +392,7 @@ const pages = {
         <tbody id="visitorsTable"></tbody>
       </table>
       <div id="noVisitors" style="color:#777; margin-top: 10px; display:none;">No visitors yet.</div>
+      <div style="text-align:right; font-size:0.97rem; color:#888;">Auto-refreshing every 8 sec</div>
     </div>
   `,
   appointments: `
@@ -198,13 +464,36 @@ document.getElementById('adminMenu').addEventListener('click', async function(e)
 });
 function loadPage(page) {
   document.getElementById('adminContent').innerHTML = pages[page] || '';
-  if (page === 'visitors') loadVisitors();
+  if (page === 'dashboard') loadStats();
+  if (page === 'visitors') { loadVisitors(); startVisitorRefresh(); }
+  else stopVisitorRefresh();
   if (page === 'appointments') loadAppointments();
   if (page === 'estimates') loadEstimates();
   if (page === 'contacts') loadContacts();
   if (page === 'gallery') setupGallery();
 }
 
+// --- Live Stats (dashboard) ---
+function loadStats() {
+  Promise.all([
+    fetch(API + '/api/visitors', { credentials: 'include' }).then(r=>r.json()).catch(_=>[]),
+    fetch(API + '/api/appointments', { credentials: 'include' }).then(r=>r.json()).catch(_=>[]),
+    fetch(API + '/api/estimates', { credentials: 'include' }).then(r=>r.json()).catch(_=>[]),
+    fetch(API + '/api/contacts', { credentials: 'include' }).then(r=>r.json()).catch(_=>[]),
+    fetch(API + '/api/gallery', { credentials: 'include' }).then(r=>r.json()).catch(_=>[])
+  ]).then(([visitors, appts, ests, contacts, gallery]) => {
+    document.getElementById('adminStats').innerHTML = `
+      <span><i class="fa-solid fa-users"></i> Visitors: <b>${visitors.length}</b></span> &nbsp;|&nbsp;
+      <span><i class="fa-solid fa-calendar-check"></i> Appointments: <b>${appts.length}</b></span> &nbsp;|&nbsp;
+      <span><i class="fa-solid fa-calculator"></i> Estimates: <b>${ests.length}</b></span> &nbsp;|&nbsp;
+      <span><i class="fa-solid fa-envelope"></i> Contacts: <b>${contacts.length}</b></span> &nbsp;|&nbsp;
+      <span><i class="fa-solid fa-image"></i> Gallery: <b>${gallery.length}</b></span>
+    `;
+  });
+}
+
+// --- Live Visitors Table (auto-refresh) ---
+let visitorTimer = null;
 function loadVisitors() {
   fetch(API + '/api/visitors', { credentials: 'include' })
     .then(r=>r.json()).then(visitors=>{
@@ -212,7 +501,7 @@ function loadVisitors() {
       tbody.innerHTML = '';
       if (!visitors.length) document.getElementById('noVisitors').style.display = 'block';
       else document.getElementById('noVisitors').style.display = 'none';
-      visitors.forEach(v => {
+      visitors.slice(-100).reverse().forEach(v => {
         tbody.innerHTML += `<tr><td>${v.date.replace('T',' ').slice(0,16)}</td><td>${v.ip||'-'}</td><td>${v.page}</td></tr>`;
       });
     }).catch(() => {
@@ -220,6 +509,16 @@ function loadVisitors() {
       document.getElementById('noVisitors').textContent = 'Could not load visitors (API error).';
     });
 }
+function startVisitorRefresh() {
+  loadVisitors();
+  stopVisitorRefresh();
+  visitorTimer = setInterval(loadVisitors, 8000);
+}
+function stopVisitorRefresh() {
+  if (visitorTimer) clearInterval(visitorTimer), visitorTimer = null;
+}
+
+// --- Appointments ---
 function loadAppointments() {
   fetch(API + '/api/appointments', { credentials: 'include' })
     .then(r=>r.json()).then(appts=>{
@@ -227,7 +526,7 @@ function loadAppointments() {
       tbody.innerHTML = '';
       if (!appts.length) document.getElementById('noAppt').style.display = 'block';
       else document.getElementById('noAppt').style.display = 'none';
-      appts.forEach(a => {
+      appts.slice(-100).reverse().forEach(a => {
         tbody.innerHTML += `<tr><td>${a.date}</td><td>${a.name}</td><td>${a.status}</td></tr>`;
       });
     }).catch(() => {
@@ -242,7 +541,7 @@ function loadEstimates() {
       tbody.innerHTML = '';
       if (!ests.length) document.getElementById('noEst').style.display = 'block';
       else document.getElementById('noEst').style.display = 'none';
-      ests.forEach(e => {
+      ests.slice(-100).reverse().forEach(e => {
         tbody.innerHTML += `<tr><td>${e.date}</td><td>${e.name}</td><td>${e.details}</td></tr>`;
       });
     }).catch(() => {
@@ -257,74 +556,5 @@ function loadContacts() {
       tbody.innerHTML = '';
       if (!contacts.length) document.getElementById('noContact').style.display = 'block';
       else document.getElementById('noContact').style.display = 'none';
-      contacts.forEach(c => {
-        tbody.innerHTML += `<tr><td>${c.date}</td><td>${c.name}</td><td>${c.email}</td><td>${c.message}</td></tr>`;
-      });
-    }).catch(() => {
-      document.getElementById('noContact').style.display = 'block';
-      document.getElementById('noContact').textContent = 'Could not load contacts (API error).';
-    });
-}
-function setupGallery() {
-  fetch(API + '/api/gallery', { credentials: 'include' })
-    .then(r=>r.json()).then(renderGallery);
-
-  function renderGallery(galleryImgs) {
-    const grid = document.getElementById('galleryGrid');
-    grid.innerHTML = '';
-    if (!galleryImgs.length) {
-      grid.innerHTML = '<div style="color:#888;text-align:center;padding:20px 0;">No images in gallery yet.</div>';
-    } else {
-      galleryImgs.forEach((img,i) => {
-        grid.innerHTML += `<div class="gallery-thumb" data-idx="${i}" tabindex="0">
-          <img src="${API}${img.url}" alt="Gallery ${i+1}">
-        </div>`;
-      });
-    }
-  }
-  const uploadForm = document.getElementById('galleryUploadForm');
-  const uploadInput = document.getElementById('galleryInput');
-  uploadForm.onclick = () => uploadInput.click();
-  uploadForm.ondragover = e => { e.preventDefault(); uploadForm.classList.add('dragover'); };
-  uploadForm.ondragleave = e => { uploadForm.classList.remove('dragover'); };
-  uploadForm.ondrop = function(e) {
-    e.preventDefault();
-    uploadForm.classList.remove('dragover');
-    handleFiles(e.dataTransfer.files);
-  };
-  uploadInput.onchange = () => handleFiles(uploadInput.files);
-  function handleFiles(files) {
-    const formData = new FormData();
-    Array.from(files).forEach(f=>formData.append('images', f));
-    fetch(API + '/api/gallery/upload', {
-      method: 'POST',
-      credentials: 'include',
-      body: formData
-    }).then(r=>r.json()).then(res => {
-      renderGallery(res.gallery);
-    });
-    uploadInput.value = "";
-  }
-}
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  if ((e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'c')) {
-    e.preventDefault();
-  }
-});
-function checkAdmin() {
-  if (!loggedIn && localStorage.getItem('rajmarketing-admin') !== 'true') {
-    showModal(true);
-    document.querySelector('.admin-header').style.filter = "blur(3px)";
-    document.querySelector('.admin-content').style.filter = "blur(7px)";
-  } else {
-    showModal(false);
-    document.querySelector('.admin-header').style.filter = "";
-    document.querySelector('.admin-content').style.filter = "";
-  }
-}
-setInterval(checkAdmin, 1000);
-</script>
-</body>
-</html>
+      contacts.slice(-100).reverse().forEach(c => {
+        

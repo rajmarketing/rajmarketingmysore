@@ -292,6 +292,66 @@
     .product-card:hover .product-img img {
       scale: 1.05;
     }
+    /* APPOINTMENT CARD ADDED */
+    .appointment-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: 0 2px 16px #1976d212;
+      padding: 18px 20px 17px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      transition: box-shadow 0.17s;
+      border-left: 6px solid var(--primary);
+      position: relative;
+      min-height: 100px;
+      margin-bottom: 30px;
+      margin-top: 0;
+    }
+    .appointment-icon {
+      height: 54px;
+      width: 54px;
+      background: var(--accent);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-dark);
+      font-size: 2.15rem;
+      flex-shrink: 0;
+      border: 2.5px solid var(--primary);
+      box-shadow: 0 2px 8px #1976d218;
+      overflow: hidden;
+    }
+    .appointment-content h4 {
+      font-size: 1.18rem;
+      font-family: var(--font-heading);
+      margin-bottom: 3px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      letter-spacing: 0.1px;
+    }
+    .appointment-content p {
+      font-size: 1.09rem;
+      color: #25304f;
+      margin-bottom: 7px;
+      font-weight: 500;
+    }
+    .appointment-content a {
+      display: inline-block;
+      margin-top: 6px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 9px 26px;
+      border-radius: 22px;
+      font-weight: 700;
+      font-size: 1.06rem;
+      transition: background 0.18s;
+    }
+    .appointment-content a:hover {
+      background: var(--primary-dark);
+    }
     /* CUSTOMER COUNTER */
     .counter {
       background: #fff;
@@ -352,6 +412,8 @@
       .section, .hero { padding: 28px 3vw 18px 3vw; }
       .counter { font-size: 1.01rem; }
       .footer-contact { font-size: 0.99rem; }
+      .appointment-card, .card, .product-card { flex-direction: column; align-items: stretch; }
+      .appointment-icon, .card-icon { margin-bottom: 10px; }
     }
     @media (max-width: 400px) {
       header h1 { font-size: 1.03rem; }
@@ -377,6 +439,21 @@
     <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
   </nav>
 
+  <!-- APPOINTMENT OPTION (NEW) -->
+  <section class="appointment-card">
+    <div class="appointment-icon">
+      <i class="fa-solid fa-calendar-check"></i>
+    </div>
+    <div class="appointment-content">
+      <h4>Book an Appointment</h4>
+      <p>
+        Schedule a free site visit for measurement and mosquito net installation at your convenience. Track your appointment and installation status online.
+      </p>
+      <a href="Customerappointment.html"><i class="fa-solid fa-calendar-plus"></i> Schedule Now</a>
+    </div>
+  </section>
+  <!-- END APPOINTMENT OPTION -->
+
   <section class="hero">
     <div class="badge">Now Get Free On-site Estimate!</div>
     <div class="hero-img">
@@ -384,7 +461,7 @@
     </div>
     <h2>Modern Mosquito Nets for Every Home & Office</h2>
     <p>
-      <b>Raj Marketing Mysore</b> brings you stylish, premium mosquito net solutions for windows, doors, balconies & kitchens. Enjoy healthy living, cool breeze, and 100% mosquito protection—Install today!
+      <b>Raj Marketing Mysore</b> brings you stylish, premium mosquito net solutions for windows, doors, balconies & kitchens. Enjoy healthy living, cool breeze, and 100% mosquito protection—Install[...]
     </p>
     <div class="btns">
       <button class="btn" onclick="location.href='estimate.html'"><i class="fa-solid fa-calculator"></i> Get Free Estimate</button>
@@ -514,53 +591,4 @@
           <p>We visit your home/office, suggest best options, and take accurate measurements.</p>
         </div>
       </div>
-      <div class="card">
-        <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-        <div class="card-content">
-          <h4>Professional Installation</h4>
-          <p>Skilled team installs within a day. Zero mess and no civil work required.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-icon"><i class="fa-solid fa-shield-heart"></i></div>
-        <div class="card-content">
-          <h4>Warranty & Support</h4>
-          <p>Get warranty on mesh & installation. Responsive support for any issues or upgrades.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="counter">
-    <span id="visitorCount"><i class="fa-solid fa-users"></i>  </span>
-    <span style="color:var(--secondary); font-size:0.93rem; font-weight:600; opacity:.8;">Customer Visits</span>
-  </div>
-
-  <footer>
-    &copy; 2025 Raj Marketing Mysore. All rights reserved.<br>
-    <div class="footer-contact">
-      <i class="fa-solid fa-location-dot"></i> No. 14, 1st Main, Jayanagar, Mysore<br>
-      <i class="fa-solid fa-phone"></i> <a href="tel:+919483037385">94830 37385</a>
-      &nbsp;|&nbsp;
-      <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
-      &nbsp;|&nbsp;
-      <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">Email</a>
-    </div>
-    <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
-      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur & more
-    </div>
-  </footer>
-  <!-- Simple Visitor Counter (localStorage based, for demo) -->
-  <script>
-    // Visitor Counter (localStorage for demo; for real site, use server/db)
-    const countKey = 'rajmarketing-visitor-count';
-    let count = Number(localStorage.getItem(countKey) || 0);
-    if (!sessionStorage.getItem('visited')) {
-      count++;
-      localStorage.setItem(countKey, count);
-      sessionStorage.setItem('visited', 'yes');
-    }
-    document.getElementById('visitorCount').innerHTML = `<i class="fa-solid fa-users"></i> ${count.toLocaleString()}`;
-  </script>
-</body>
-  </html>
+      <d

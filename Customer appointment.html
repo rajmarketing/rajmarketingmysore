@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customer Appointment & Installation Tracker | Raj Marketing Mysore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #1976d2;
+      --primary-dark: #0d47a1;
+      --secondary: #22223b;
+      --accent: #ffb300;
+      --bg-light: #f7faff;
+      --bg-section: #e3f0ff;
+      --card-bg: #fff;
+      --danger: #ff5252;
+      --font-heading: 'Poppins', 'Inter', Arial, sans-serif;
+      --font-body: 'Inter', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-light);
+      color: var(--secondary);
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100dvh;
+      letter-spacing: 0.01em;
+    }
+    header {
+      background: linear-gradient(100deg, var(--primary) 65%, var(--accent) 100%);
+      color: #fff;
+      padding: 30px 6vw 22px 6vw;
+      text-align: center;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 6px 26px rgba(25, 118, 210, 0.10);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-family: var(--font-heading);
+      font-size: 2.3rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      margin-bottom: 7px;
+      text-shadow: 0 2px 12px #1976d220;
+    }
+    header p {
+      font-size: 1.18rem;
+      letter-spacing: 0.3px;
+      font-weight: 600;
+      opacity: 0.98;
+    }
+    .top-contact {
+      margin-top: 10px;
+      font-size: 1.08rem;
+      opacity: 0.87;
+      letter-spacing: 0.1px;
+    }
+    .top-contact a {
+      color: #fff;
+      text-decoration: underline;
+      margin-left: 3px;
+      font-weight: 700;
+    }
+    .main-section {
+      background: var(--bg-section);
+      max-width: 980px;
+      margin: 30px auto 0 auto;
+      padding: 38px 6vw 28px 6vw;
+      border-radius: 22px;
+      box-shadow: 0 2px 18px #1976d20d;
+      min-height: 80vh;
+    }
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 1.7rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+      margin-bottom: 17px;
+      letter-spacing: 0.9px;
+      text-align: center;
+    }
+    form#appointmentForm {
+      background: var(--card-bg);
+      border-radius: 19px;
+      box-shadow: 0 2px 16px #1976d212;
+      max-width: 480px;
+      margin: 0 auto 32px auto;
+      padding: 26px 22px 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border-left: 7px solid var(--accent);
+      position: relative;
+    }
+    .form-group {
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    label {
+      font-family: var(--font-heading);
+      font-size: 1.07em;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 2px;
+    }
+    input, select, textarea {
+      padding: 9px 12px;
+      border: 1.7px solid #bfc6d1;
+      border-radius: 5px;
+      font-size: 1em;
+      font-family: var(--font-body);
+      background: #fafdff;
+      transition: border-color 0.17s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    textarea { resize: vertical; min-height: 39px; }
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      width: 100%;
+      border-radius: 22px;
+      font-size: 1.15em;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      box-shadow: 0 2px 12px #1976d220;
+      cursor: pointer;
+      transition: background 0.18s, scale 0.15s;
+      outline: none;
+      margin-top: 7px;
+      letter-spacing: 0.1px;
+    }
+    .btn:hover { background: var(--primary-dark); }
+    .result {
+      background: #e6ffe6;
+      border: 1px solid #6fdc6f;
+      color: #225e25;
+      margin-top: 18px;
+      border-radius: 9px;
+      padding: 14px 12px;
+      font-size: 1.07em;
+      box-shadow: 0 2px 12px #22cc2220;
+      max-width: 480px;
+      margin-left: auto; margin-right: auto;
+    }
+    .tracker {
+      background: var(--card-bg);
+      border-radius: 19px;
+      box-shadow: 0 2px 16px #1976d212;
+      max-width: 940px;
+      margin: 0 auto 0 auto;
+      padding: 28px 18px 24px 18px;
+      margin-top: 16px;
+      border-left: 6px solid var(--accent);
+      overflow-x: auto;
+    }
+    .tracker h3 {
+      color: var(--primary);
+      font-family: var(--font-heading);
+      font-size: 1.22rem;
+      margin-top: 0;
+      text-align: center;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      margin-bottom: 13px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 9px;
+      font-size: 1.01em;
+    }
+    th, td {
+      border: 1px solid #bfc6d1;
+      padding: 11px 6px;
+      text-align: left;
+      font-size: 0.97em;
+      background: #fff;
+    }
+    th {
+      background: #eaf0fb;
+      color: #23344e;
+      font-family: var(--font-heading);
+      font-size: 1.08em;
+    }
+    td.status-cell {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+    td.status-cell.awaiting { color: var(--danger);}
+    td.status-cell.scheduled { color: var(--primary-dark);}
+    td.status-cell.today { color: var(--accent);}
+    td.status-cell.passed { color: #888;}
+    @media (max-width: 900px) {
+      .main-section, .tracker { max-width: 98vw; padding: 12px 4px; }
+      table, th, td { font-size: 0.95em; }
+      form#appointmentForm, .result { max-width: 98vw;}
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.35rem; }
+      .main-section h2 { font-size: 1.14rem;}
+      .tracker h3 { font-size: 1rem;}
+      th, td { padding: 6px 3px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fa-solid fa-shield-virus"></i> Raj Marketing Mysore</h1>
+    <p>Mosquito Net Experts | <span class="top-contact"><i class="fa-solid fa-phone"></i><a href="tel:+919483037385">(+91) 94830 37385</a></span></p>
+    <div class="top-contact">Serving Mysore, Mandya, Nanjangud, Srirangapatna & Surroundings</div>
+  </header>
+  <section class="main-section">
+    <h2><i class="fa-solid fa-calendar-check"></i> Customer Appointment & Installation Form</h2>
+    <form id="appointmentForm" autocomplete="off">
+      <div class="form-group">
+        <label for="customerName"><i class="fa-solid fa-user"></i> Customer Name</label>
+        <input type="text" id="customerName" name="customerName" required placeholder="Enter full name">
+      </div>
+      <div class="form-group">
+        <label for="contact"><i class="fa-solid fa-phone"></i> Contact No./Email</label>
+        <input type="text" id="contact" name="contact" required placeholder="Phone or Email">
+      </div>
+      <div class="form-group">
+        <label for="address"><i class="fa-solid fa-location-dot"></i> Customer Address</label>
+        <textarea id="address" name="address" rows="2" required placeholder="Full address"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="appointmentDate"><i class="fa-solid fa-calendar-days"></i> Appointment Date (for Measurement)</label>
+        <input type="date" id="appointmentDate" name="appointmentDate" required>
+      </div>
+      <div class="form-group">
+        <label for="windowsQty"><i class="fa-solid fa-window-maximize"></i> No. of Windows</label>
+        <input type="number" id="windowsQty" name="windowsQty" min="1" required placeholder="Eg: 4">
+      </div>
+      <div class="form-group">
+        <label for="advanceReceived"><i class="fa-solid fa-money-bill-wave"></i> Advance Payment Received?</label>
+        <select id="advanceReceived" name="advanceReceived" required>
+          <option value="">--Select--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <button type="submit" class="btn"><i class="fa-solid fa-calendar-plus"></i> Schedule Installation</button>
+    </form>
+    <div id="result" class="result" style="display:none"></div>
+  </section>
+  <div class="tracker">
+    <h3><i class="fa-solid fa-list-check"></i> Customer Orders Tracker</h3>
+    <table id="ordersTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Measurement</th>
+          <th>Qty</th>
+          <th>Advance</th>
+          <th>Install Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Orders will appear here -->
+      </tbody>
+    </table>
+  </div>
+  <script>
+    // Date helpers
+    function addDays(date, days) {
+      const result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+    function formatDate(date) {
+      const d = new Date(date);
+      if (isNaN(d)) return "-";
+      let month = '' + (d.getMonth() + 1);
+      let day = '' + d.getDate();
+      const year = d.getFullYear();
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+      return [year, month, day].join('-');
+    }
+    // Tracker persistence helpers
+    function loadOrders() {
+      return JSON.parse(localStorage.getItem("customer_orders") || "[]");
+    }
+    function saveOrders(orders) {
+      localStorage.setItem("customer_orders", JSON.stringify(orders));
+    }
+    // Installation logic
+    function getInstallationDelay(qty) {
+      if (qty <= 10) return 2;
+      if (qty > 10 && qty <= 20) return 3;
+      if (qty > 20 && qty <= 30) return 4;
+      return 5;
+    }
+    function getInstallationMsg(qty) {
+      if (qty <= 10) return "2 days after confirmation";
+      if (qty > 10 && qty <= 20) return "3 days after confirmation";
+      if (qty > 20 && qty <= 30) return "4 days after confirmation";
+      return "5 days after confirmation";
+    }
+    function getStatus(advance, installationDate) {
+      if (advance !== "yes") return {text: "Awaiting Advance", cls: "awaiting"};
+      const today = new Date();
+      const install = new Date(installationDate);
+      if (today < install) return {text:"Scheduled", cls:"scheduled"};
+      else if (today.toDateString() === install.toDateString()) return {text:"Installation Today", cls:"today"};
+      else return {text:"Installation Passed", cls:"passed"};
+    }
+    function updateOrdersTable() {
+      const orders = loadOrders();
+      const tbody = document.querySelector("#ordersTable tbody");
+      tbody.innerHTML = "";
+      orders.forEach((order, idx) => {
+        const statusObj = getStatus(order.advanceReceived, order.installationDate);
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td>${order.customerName}</td>
+          <td>${order.contact}</td>
+          <td>${order.address}</td>
+          <td>${order.measureDate ? formatDate(order.measureDate) : "-"}</td>
+          <td>${order.windowsQty}</td>
+          <td>${order.advanceReceived === "yes" ? '<i class="fa-solid fa-circle-check" style="color:green"></i> Yes' : '<i class="fa-solid fa-circle-xmark" style="color:#ff5252"></i> No'}</td>
+          <td>${order.installationDate ? formatDate(order.installationDate) : "-"}</td>
+          <td class="status-cell ${statusObj.cls}">${statusObj.text}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+    document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const customerName = document.getElementById('customerName').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const appointmentDate = document.getElementById('appointmentDate').value;
+      const windowsQty = parseInt(document.getElementById('windowsQty').value, 10);
+      const advanceReceived = document.getElementById('advanceReceived').value;
+      if (!customerName || !contact || !address || !appointmentDate || !windowsQty || !advanceReceived) {
+        alert('Please fill all required fields.');
+        return;
+      }
+      let installationDate = null;
+      let installationMsg = "";
+      if (advanceReceived === "yes") {
+        const delay = getInstallationDelay(windowsQty);
+        installationDate = addDays(appointmentDate, delay);
+        installationMsg = `Installation scheduled <b>${getInstallationMsg(windowsQty)}</b>.`;
+      } else {
+        installationMsg = `<b>Awaiting advance payment and confirmation.</b> Installation date will be scheduled afterwards.`;
+      }
+      // Save to tracker (localStorage)
+      const orders = loadOrders();
+      orders.push({
+        customerName,
+        contact,
+        address,
+        measureDate: appointmentDate,
+        windowsQty,
+        advanceReceived,
+        installationDate: installationDate ? installationDate.toISOString() : null
+      });
+      saveOrders(orders);
+      updateOrdersTable();
+      // Display result
+      document.getElementById('result').style.display = "block";
+      document.getElementById('result').innerHTML = `
+        <b>Appointment Confirmed for Measurement:</b> ${formatDate(appointmentDate)}
+        <br><b>Customer:</b> ${customerName} (${contact})
+        <br><b>Address:</b> ${address}
+        <br><b>Number of Windows:</b> ${windowsQty}
+        <br>${installationMsg}
+        ${installationDate ? `<br><b>Expected Installation Date:</b> ${formatDate(installationDate)}` : ""}
+      `;
+      document.getElementById('appointmentForm').reset();
+    });
+    // On page load, show tracker table
+    updateOrdersTable();
+  </script>
+</body>
+</html>

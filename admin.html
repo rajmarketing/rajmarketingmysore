@@ -1,560 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Raj Marketing Admin Panel</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts for unique admin look -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --admin-primary: #1976d2;
-      --admin-bg: #f4f8fc;
-      --admin-dark: #163656;
-      --admin-accent: #ffb300;
-      --admin-danger: #f44336;
-      --admin-card: #fff;
-      --admin-border: #e3f0ff;
-      --admin-radius: 18px;
-      --admin-shadow: 0 4px 24px #1976d21c;
-      --admin-font-heading: 'Poppins', 'Inter', Arial, sans-serif;
-      --admin-font-body: 'Inter', Arial, sans-serif;
+      --admin-bg: #22212c;
+      --admin-accent: #ff2e63;
+      --admin-card: #39375b;
+      --admin-menu: #2d2b45;
+      --admin-menu-text: #fff;
+      --admin-menu-hover: #ff2e63;
+      --admin-content-bg: #f8f3ff;
+      --admin-font: 'Orbitron', 'Roboto Mono', monospace, Arial, sans-serif;
+      --admin-font2: 'Roboto Mono', monospace, Arial, sans-serif;
+      --admin-success: #28c76f;
+      --admin-danger: #ff2e63;
+      --admin-warning: #fbbf24;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0;}
     body {
-      margin: 0;
-      font-family: var(--admin-font-body);
+      font-family: var(--admin-font2);
       background: var(--admin-bg);
-      color: var(--admin-dark);
-      letter-spacing: 0.01em;
-      min-height: 100dvh;
-    }
-    /* Modal */
-    .modal-bg {
-      position: fixed; inset: 0; background: #0008; z-index: 9999;
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity .2s;
-    }
-    .modal-box {
-      background: #fff; border-radius: 11px; padding: 30px 32px 20px 32px;
-      box-shadow: 0 2px 30px #1976d233;
-      min-width: 290px;
-    }
-    .modal-title {
-      font-family: var(--admin-font-heading);
-      font-size: 1.38rem;
-      font-weight: 900;
-      color: var(--admin-primary);
-      margin-bottom: 19px;
-      text-align: center;
-      letter-spacing: 0.13em;
-    }
-    .modal-error {
-      color: var(--admin-danger);
-      margin-top: 8px;
-      text-align: center;
-      font-size: 1.01rem;
-      min-height: 22px;
-    }
-    #adminLoginForm input[type=password] {
-      width: 100%;
-      padding: 13px 12px;
-      margin-bottom: 12px;
-      border-radius: 7px;
-      border: 1.5px solid var(--admin-border);
-      font-size: 1.08rem;
-      outline: none;
-      transition: border .2s;
-    }
-    #adminLoginForm input:focus { border: 1.5px solid var(--admin-primary);}
-    #adminLoginForm button {
-      width: 100%;
-      padding: 13px 0;
-      border-radius: 7px;
-      border: none;
-      background: var(--admin-primary);
       color: #fff;
-      font-family: var(--admin-font-heading);
-      font-size: 1.13rem;
-      font-weight: 900;
-      cursor: pointer;
-      transition: background .18s;
+      min-height: 100vh;
+      letter-spacing: 0.03em;
     }
-    #adminLoginForm button:hover { background: #1253a7; }
-    /* Admin Layout */
     .admin-header {
-      background: linear-gradient(100deg, var(--admin-primary) 65%, var(--admin-accent) 100%);
-      color: #fff;
-      padding: 23px 20px 19px 32px;
-      font-size: 1.42rem;
-      font-family: var(--admin-font-heading);
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      position: sticky; top: 0; z-index: 10;
-      box-shadow: 0 4px 19px #1976d20d;
+      background: linear-gradient(85deg, var(--admin-accent) 0%, #ff6a89 80%);
+      padding: 32px 0 19px 0;
+      text-align: center;
+      font-family: var(--admin-font);
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      box-shadow: 0 6px 30px #ff2e6330;
     }
-    .menu-toggle {
-      background: none;
-      border: none;
-      color: #fff; font-size: 1.7rem;
-      margin-right: 10px; cursor: pointer;
-      display: none;
-    }
-    .admin-layout {
+    .admin-container {
       display: flex;
-      min-height: calc(100dvh - 54px);
-      max-width: 1400px;
-      margin: 0 auto;
+      min-height: 84vh;
     }
     .admin-menu {
-      background: #fff;
-      min-width: 220px;
-      max-width: 280px;
-      padding: 24px 0 40px 0;
-      box-shadow: 2px 0 24px #1976d218;
-      border-radius: 0 0 22px 0;
+      background: var(--admin-menu);
+      width: 240px;
+      padding: 34px 0 0 0;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      z-index: 20;
-      position: relative;
-      transition: left .22s;
+      gap: 7px;
+      box-shadow: 2px 0 16px #0001;
     }
     .admin-menu a {
-      color: var(--admin-primary);
-      font-family: var(--admin-font-heading);
-      font-weight: 800;
-      font-size: 1.07rem;
-      padding: 15px 34px 15px 32px;
+      color: var(--admin-menu-text);
       text-decoration: none;
-      border-left: 4px solid #fff;
-      background: none;
-      display: flex; align-items: center; gap: 12px;
-      transition: background 0.15s, border 0.15s;
-      outline: none;
+      padding: 15px 42px 15px 28px;
+      font-size: 1.13rem;
+      font-family: var(--admin-font);
+      font-weight: 700;
+      border-left: 5px solid transparent;
+      transition: 
+        background 0.2s, 
+        color 0.2s, 
+        border-left 0.2s, 
+        letter-spacing 0.2s;
+      letter-spacing: 1.5px;
       cursor: pointer;
     }
-    .admin-menu a.active,
-    .admin-menu a:hover {
-      background: var(--admin-primary);
+    .admin-menu a.active, .admin-menu a:hover {
+      background: var(--admin-menu-hover);
       color: #fff;
-      border-left: 4px solid var(--admin-accent);
+      border-left: 5px solid #fff;
+      letter-spacing: 2.2px;
     }
-    .admin-menu a[style*="danger"] { color: var(--admin-danger);}
     .admin-content {
       flex: 1;
-      padding: 32px 28px 38px 28px;
-      min-width: 0;
-      max-width: 100vw;
-    }
-    /* Overlay for mobile menu */
-    .menu-overlay {
-      display: none;
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: #0005;
-      z-index: 15;
-      transition: opacity 0.2s;
-    }
-    .menu-overlay.show { display: block;}
-    /* Responsive */
-    @media (max-width: 950px) {
-      .admin-layout { flex-direction: column;}
-      .admin-menu {
-        position: fixed; top: 0; left: -100vw; height: 100vh;
-        border-radius: 0 22px 22px 0;
-        z-index: 100;
-        transition: left .22s;
-      }
-      .admin-menu.mobile.open { left: 0;}
-      .menu-toggle { display: block;}
-      .admin-content { padding: 22px 4vw 28px 4vw;}
-    }
-    /* Cards, Tables, Gallery */
-    .admin-title {
-      font-family: var(--admin-font-heading);
-      font-size: 1.31rem;
-      font-weight: 900;
-      color: var(--admin-primary);
-      margin-bottom: 20px;
-      letter-spacing: 0.03em;
+      background: var(--admin-content-bg);
+      color: #23213a;
+      padding: 40px 60px 30px 60px;
+      font-family: var(--admin-font2);
+      min-height: 500px;
+      border-radius: 0 0 0 32px;
+      box-shadow: 0 2px 24px #ff2e6314;
+      overflow: auto;
     }
     .admin-card {
       background: var(--admin-card);
-      padding: 28px 24px 18px 24px;
-      border-radius: var(--admin-radius);
-      box-shadow: var(--admin-shadow);
-      margin-bottom: 26px;
-      max-width: 100%;
+      color: #fff;
+      border-radius: 18px;
+      padding: 28px 32px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 18px #0002;
+      font-family: var(--admin-font2);
+      font-size: 1.16rem;
     }
-    .admin-table {
-      border-collapse: collapse; width: 100%;
-      margin-bottom: 12px;
-      font-size: 1rem;
+    .admin-title {
+      font-size: 1.5rem;
+      font-family: var(--admin-font);
+      margin-bottom: 10px;
+      color: var(--admin-accent);
+      letter-spacing: 1.5px;
+      font-weight: 800;
     }
-    .admin-table th, .admin-table td {
-      border: 1px solid var(--admin-border);
-      padding: 10px 8px;
-      text-align: left;
+    /* Password Modal */
+    .modal-bg {
+      background: #000a;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .admin-table th {
-      background: var(--admin-bg);
-      color: var(--admin-primary);
-      font-weight: 900;
-      font-size: 1.05rem;
-    }
-    .admin-table tbody tr:hover {
-      background: #e3f0ff88;
-    }
-    /* Gallery */
-    .gallery-upload {
-      border: 2px dashed var(--admin-accent);
-      border-radius: 12px;
-      padding: 44px 0;
+    .modal-box {
+      background: #fff;
+      border-radius: 14px;
+      padding: 40px 34px 30px 34px;
+      box-shadow: 0 6px 42px #ff2e6333;
       text-align: center;
-      background: #f8f7ea;
-      cursor: pointer;
-      margin-bottom: 17px;
-      font-size: 1.12rem;
-      color: var(--admin-dark);
-      font-family: var(--admin-font-heading);
+      max-width: 345px;
+      width: 90vw;
+      font-family: var(--admin-font2);
+      color: #222;
+      animation: fadeIn 0.6s;
+    }
+    @keyframes fadeIn {
+      from { transform: scale(0.93) translateY(38px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1;}
+    }
+    .modal-title {
+      font-family: var(--admin-font);
+      color: var(--admin-accent);
+      font-size: 1.22rem;
       font-weight: 700;
-      transition: border .18s, background 0.15s;
+      margin-bottom: 14px;
+      letter-spacing: 2px;
     }
-    .gallery-upload.dragover {
-      background: #fff3cf;
-      border-color: #f3b000;
+    .modal-box input[type="password"] {
+      width: 96%;
+      padding: 13px 12px;
+      border: 2px solid #e5e7eb;
+      border-radius: 9px;
+      font-size: 1.13rem;
+      margin-bottom: 18px;
+      margin-top: 6px;
+      background: #f8f8fc;
+      font-family: var(--admin-font2);
+      outline: none;
+      transition: border 0.2s;
     }
-    .gallery-grid {
-      display: flex; flex-wrap: wrap; gap: 15px; justify-content: flex-start;
+    .modal-box input[type="password"]:focus {
+      border-color: var(--admin-accent);
     }
-    .gallery-thumb {
-      width: 120px; height: 92px;
-      background: #eee;
-      border-radius: 7px;
-      overflow: hidden;
-      box-shadow: 0 1px 8px #1976d211;
-      border: 2px solid #fff;
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-      cursor: pointer;
-      transition: box-shadow 0.15s;
-    }
-    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover;}
-    .gallery-thumb:hover { box-shadow: 0 4px 20px #1976d211;}
-    /* Utility */
-    .text-danger { color: var(--admin-danger);}
-    .text-center { text-align: center;}
-    .btn {
-      background: var(--admin-primary);
+    .modal-box button {
+      background: var(--admin-accent);
       color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 10px 22px;
-      font-family: var(--admin-font-heading);
+      padding: 11px 32px;
       font-size: 1.06rem;
-      font-weight: 800;
-      margin: 7px 0;
+      font-family: var(--admin-font2);
+      font-weight: 700;
       cursor: pointer;
-      transition: background .15s;
+      box-shadow: 0 2px 10px #ff2e6322;
+      margin-bottom: 8px;
+      margin-top: 4px;
+      transition: background 0.18s;
     }
-    .btn:hover { background: #1253a7;}
-    .btn.danger {
-      background: var(--admin-danger);
-      color: #fff;
+    .modal-box button:hover {
+      background: #ff5d85;
     }
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 7px;}
-    ::-webkit-scrollbar-thumb { background: #ddeafc; border-radius: 6px;}
-    ::-webkit-scrollbar-track { background: #f7faff;}
+    .modal-error {
+      color: var(--admin-danger);
+      font-size: 1rem;
+      margin-top: 7px;
+      font-weight: 700;
+      min-height: 22px;
+      letter-spacing: 0.2px;
+    }
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .admin-container { flex-direction: column; }
+      .admin-menu { flex-direction: row; width: 100vw; padding: 0;}
+      .admin-menu a { border-left: none; border-bottom: 3px solid transparent; padding: 12px 16px;}
+      .admin-menu a.active, .admin-menu a:hover { border-left: none; border-bottom: 3px solid #fff;}
+      .admin-content { padding: 22px 6vw;}
+    }
+    @media (max-width: 500px) {
+      .admin-header { font-size: 1.3rem; padding: 20px 0 14px 0;}
+      .admin-title { font-size: 1.13rem; }
+      .admin-card { padding: 14px 7vw;}
+      .admin-content { padding: 11px 2vw;}
+    }
   </style>
 </head>
 <body>
-<!-- Modal for password -->
-<div class="modal-bg" id="adminModal">
-  <div class="modal-box">
-    <div class="modal-title">Admin Login</div>
-    <form id="adminLoginForm" autocomplete="off">
-      <input type="password" id="adminPassword" placeholder="Enter Admin Password" required autofocus>
-      <br>
-      <button type="submit">Access Admin</button>
-      <div class="modal-error" id="modalError"></div>
-    </form>
-  </div>
-</div>
-<div class="admin-header">
-  <button class="menu-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
-  <span><i class="fa-solid fa-shield-halved"></i> Raj Marketing Admin</span>
-</div>
-<div class="menu-overlay"></div>
-<div class="admin-layout">
-  <nav class="admin-menu" id="adminMenu">
-    <a data-page="dashboard" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a>
-    <a data-page="visitors"><i class="fa-solid fa-users"></i> Visitors</a>
-    <a data-page="appointments"><i class="fa-solid fa-calendar-check"></i> Appointments</a>
-    <a data-page="estimates"><i class="fa-solid fa-calculator"></i> Estimates</a>
-    <a data-page="contacts"><i class="fa-solid fa-envelope"></i> Contacts</a>
-    <a data-page="gallery"><i class="fa-solid fa-images"></i> Gallery</a>
-    <a data-page="logout" style="color:var(--admin-danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-  </nav>
-  <main class="admin-content" id="adminContent"></main>
-</div>
-<script>
-const API = 'http://localhost:4000'; // Adjust as needed
-let loggedIn = false;
-
-function showModal(show = true, error = '') {
-  document.getElementById('adminModal').style.display = show ? 'flex' : 'none';
-  document.getElementById('modalError').textContent = error || '';
-  if (show) document.getElementById('adminPassword').focus();
-}
-
-document.getElementById('adminLoginForm').onsubmit = async function(e) {
-  e.preventDefault();
-  const pw = document.getElementById('adminPassword').value.trim();
-  try {
-    const res = await fetch(API + '/api/admin-login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ password: pw })
-    });
-    if (res.ok) {
-      loggedIn = true;
-      localStorage.setItem('rajmarketing-admin', 'true');
-      showModal(false);
-      loadPage('dashboard');
-    } else {
-      document.getElementById('modalError').textContent = 'Incorrect password!';
-      document.getElementById('adminPassword').value = '';
-      document.getElementById('adminPassword').focus();
-    }
-  } catch (err) {
-    document.getElementById('modalError').textContent = 'Server error. Try again later.';
-  }
-};
-
-window.onload = function() {
-  if (localStorage.getItem('rajmarketing-admin') === 'true') {
-    showModal(false);
-    loadPage('dashboard');
-  } else {
-    showModal(true);
-  }
-};
-
-// --- Menu & Layout ---
-const menuToggle = document.querySelector('.menu-toggle');
-const menu = document.getElementById('adminMenu');
-const overlay = document.querySelector('.menu-overlay');
-menuToggle.addEventListener('click', function(e){
-  if (menu.classList.contains('open')) closeMenu();
-  else openMenu();
-});
-overlay.addEventListener('click', closeMenu);
-function openMenu() {
-  menu.classList.add('open', 'mobile');
-  overlay.classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-function closeMenu() {
-  menu.classList.remove('open', 'mobile');
-  overlay.classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-// --- Admin Pages ---
-const pages = {
-  dashboard: `
-    <div class="admin-title">Welcome to Raj Marketing Admin Dashboard</div>
-    <div class="admin-card">
-      <ul style="line-height:1.7; color:#1976d2; font-size:1.09rem; padding-left:18px;">
-        <li>Live visitor tracking and analytics (auto-refresh every 8 seconds)</li>
-        <li>Manage appointments, estimates, contacts from customers</li>
-        <li>Upload and organize gallery images (updates home page instantly)</li>
-      </ul>
-      <div style="margin-top:18px;">
-        <span style="font-weight:900; font-size:1.2rem; color:#222;">Quick Stats:</span>
-        <div id="adminStats" style="margin-top:7px; font-size:1.09rem;">
-          <i class="fa-solid fa-spinner fa-spin"></i> Loading stats...
-        </div>
-      </div>
-    </div>
-  `,
-  visitors: `
-    <div class="admin-title">Live Visitor Tracker</div>
-    <div class="admin-card">
-      <table style="width:100%;" class="admin-table">
-        <thead>
-          <tr><th>Date & Time</th><th>IP / Location</th><th>Page Visited</th></tr>
-        </thead>
-        <tbody id="visitorsTable"></tbody>
-      </table>
-      <div id="noVisitors" style="color:#777; margin-top: 10px; display:none;">No visitors yet.</div>
-      <div style="text-align:right; font-size:0.97rem; color:#888;">Auto-refreshing every 8 sec</div>
-    </div>
-  `,
-  appointments: `
-    <div class="admin-title">Appointments</div>
-    <div class="admin-card">
-      <table style="width:100%;" class="admin-table">
-        <thead>
-          <tr><th>Date</th><th>Name</th><th>Status</th></tr>
-        </thead>
-        <tbody id="apptTable"></tbody>
-      </table>
-      <div id="noAppt" style="color:#777; margin-top: 10px; display:none;">No appointments yet.</div>
-    </div>
-  `,
-  estimates: `
-    <div class="admin-title">Customer Estimates</div>
-    <div class="admin-card">
-      <table style="width:100%;" class="admin-table">
-        <thead>
-          <tr><th>Date</th><th>Name</th><th>Details</th></tr>
-        </thead>
-        <tbody id="estTable"></tbody>
-      </table>
-      <div id="noEst" style="color:#777; margin-top: 10px; display:none;">No estimates yet.</div>
-    </div>
-  `,
-  contacts: `
-    <div class="admin-title">Contact Form Reports</div>
-    <div class="admin-card">
-      <table style="width:100%;" class="admin-table">
-        <thead>
-          <tr><th>Date</th><th>Name</th><th>Email</th><th>Message</th></tr>
-        </thead>
-        <tbody id="contactTable"></tbody>
-      </table>
-      <div id="noContact" style="color:#777; margin-top: 10px; display:none;">No contact messages yet.</div>
-    </div>
-  `,
-  gallery: `
-    <div class="admin-title">Gallery Manager</div>
-    <div class="admin-card">
-      <form id="galleryUploadForm" class="gallery-upload">
-        <input type="file" id="galleryInput" accept="image/*" multiple hidden>
-        <span id="galleryUploadText"><i class="fa-solid fa-cloud-arrow-up"></i> Drag & Drop or Click to Upload Images</span>
+  <div class="modal-bg" id="adminModal">
+    <div class="modal-box">
+      <div class="modal-title">Admin Login</div>
+      <form id="adminLoginForm" autocomplete="off">
+        <input type="password" id="adminPassword" placeholder="Enter Admin Password" required autofocus>
+        <br>
+        <button type="submit">Access Admin</button>
+        <div class="modal-error" id="modalError"></div>
       </form>
-      <div class="gallery-grid" id="galleryGrid"></div>
     </div>
-  `,
-  logout: `<div class="admin-card"><div class="admin-title" style="color:var(--admin-danger);">You have been logged out.</div><p>Return to the login screen to re-enter admin password.</p></div>`
-};
+  </div>
+  <div class="admin-header">
+    <span style="color:#fff; filter:drop-shadow(0 2px 8px #ff2e6330);"><i class="fa-solid fa-shield-halved"></i> Raj Marketing Admin</span>
+  </div>
+  <div class="admin-container">
+    <nav class="admin-menu" id="adminMenu">
+      <a data-page="dashboard" class="active">Dashboard</a>
+      <a data-page="orders">Orders</a>
+      <a data-page="appointments">Appointments</a>
+      <a data-page="customers">Customers</a>
+      <a data-page="products">Products</a>
+      <a data-page="gallery">Gallery</a>
+      <a data-page="services">Services</a>
+      <a data-page="messages">Messages</a>
+      <a data-page="team">Team</a>
+      <a data-page="settings">Settings</a>
+      <a data-page="logout" style="color:var(--admin-danger);">Logout</a>
+    </nav>
+    <main class="admin-content" id="adminContent">
+      <!-- Dynamic content loaded here -->
+      <div class="admin-card" id="dashboardPage">
+        <div class="admin-title">Welcome to Admin Dashboard</div>
+        <p>
+          Use the left menu to navigate between your confidential admin pages. This area is restricted to authorized admins only.
+        </p>
+        <ul style="margin-top:1.2em; color:#fff; line-height:1.7; list-style: disc inside; font-size:1.08rem;">
+          <li>Monitor orders and appointments</li>
+          <li>Manage customer and product details</li>
+          <li>Upload gallery images and update services</li>
+          <li>View messages and track your team</li>
+          <li>Change admin settings securely</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+  <!-- Icons CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+  <script>
+    // --- Simple Password Protection (for demo only) ---
+    // Use a strong password for production! Here it's hardcoded for demo: "admin@2025"
+    const ADMIN_PASS = "admin@2025"; // CHANGE THIS in real use
+    let loggedIn = false;
 
-document.getElementById('adminMenu').addEventListener('click', async function(e) {
-  if (e.target.closest('a')) {
-    const a = e.target.closest('a');
-    const page = a.getAttribute('data-page');
-    [...this.querySelectorAll('a')].forEach(a => a.classList.remove('active'));
-    a.classList.add('active');
-    if (page === 'logout') {
-      await fetch(API + '/api/admin-logout', { method: 'POST', credentials: 'include' });
-      localStorage.removeItem('rajmarketing-admin');
-      showModal(true, 'Logged out.');
-      document.getElementById('adminContent').innerHTML = pages.logout;
-      closeMenu();
-    } else if (pages[page]) {
-      loadPage(page);
-      closeMenu();
+    function showModal(show = true, error = '') {
+      document.getElementById('adminModal').style.display = show ? 'flex' : 'none';
+      document.getElementById('modalError').textContent = error;
+      if (show) document.getElementById('adminPassword').focus();
     }
-  }
-});
-function loadPage(page) {
-  document.getElementById('adminContent').innerHTML = pages[page] || '';
-  if (page === 'dashboard') loadStats();
-  if (page === 'visitors') { loadVisitors(); startVisitorRefresh(); }
-  else stopVisitorRefresh();
-  if (page === 'appointments') loadAppointments();
-  if (page === 'estimates') loadEstimates();
-  if (page === 'contacts') loadContacts();
-  if (page === 'gallery') setupGallery();
-}
 
-// --- Live Stats (dashboard) ---
-function loadStats() {
-  Promise.all([
-    fetch(API + '/api/visitors', { credentials: 'include' }).then(r=>r.json()).catch(_=>[]),
-    fetch(API + '/api/appointments', { credentials: 'include' }).then(r=>r.json()).catch(_=>[]),
-    fetch(API + '/api/estimates', { credentials: 'include' }).then(r=>r.json()).catch(_=>[]),
-    fetch(API + '/api/contacts', { credentials: 'include' }).then(r=>r.json()).catch(_=>[]),
-    fetch(API + '/api/gallery', { credentials: 'include' }).then(r=>r.json()).catch(_=>[])
-  ]).then(([visitors, appts, ests, contacts, gallery]) => {
-    document.getElementById('adminStats').innerHTML = `
-      <span><i class="fa-solid fa-users"></i> Visitors: <b>${visitors.length}</b></span> &nbsp;|&nbsp;
-      <span><i class="fa-solid fa-calendar-check"></i> Appointments: <b>${appts.length}</b></span> &nbsp;|&nbsp;
-      <span><i class="fa-solid fa-calculator"></i> Estimates: <b>${ests.length}</b></span> &nbsp;|&nbsp;
-      <span><i class="fa-solid fa-envelope"></i> Contacts: <b>${contacts.length}</b></span> &nbsp;|&nbsp;
-      <span><i class="fa-solid fa-image"></i> Gallery: <b>${gallery.length}</b></span>
-    `;
-  });
-}
+    document.getElementById('adminLoginForm').onsubmit = function(e) {
+      e.preventDefault();
+      const pw = document.getElementById('adminPassword').value.trim();
+      if (pw === ADMIN_PASS) {
+        loggedIn = true;
+        localStorage.setItem('rajmarketing-admin', 'true');
+        showModal(false);
+      } else {
+        document.getElementById('modalError').textContent = 'Incorrect password!';
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('adminPassword').focus();
+      }
+    };
 
-// --- Live Visitors Table (auto-refresh) ---
-let visitorTimer = null;
-function loadVisitors() {
-  fetch(API + '/api/visitors', { credentials: 'include' })
-    .then(r=>r.json()).then(visitors=>{
-      const tbody = document.getElementById('visitorsTable');
-      tbody.innerHTML = '';
-      if (!visitors.length) document.getElementById('noVisitors').style.display = 'block';
-      else document.getElementById('noVisitors').style.display = 'none';
-      visitors.slice(-100).reverse().forEach(v => {
-        tbody.innerHTML += `<tr><td>${v.date.replace('T',' ').slice(0,16)}</td><td>${v.ip||'-'}</td><td>${v.page}</td></tr>`;
-      });
-    }).catch(() => {
-      document.getElementById('noVisitors').style.display = 'block';
-      document.getElementById('noVisitors').textContent = 'Could not load visitors (API error).';
-    });
-}
-function startVisitorRefresh() {
-  loadVisitors();
-  stopVisitorRefresh();
-  visitorTimer = setInterval(loadVisitors, 8000);
-}
-function stopVisitorRefresh() {
-  if (visitorTimer) clearInterval(visitorTimer), visitorTimer = null;
-}
+    // Auto-login if admin
+    window.onload = function() {
+      if (localStorage.getItem('rajmarketing-admin') === 'true') {
+        showModal(false);
+      } else {
+        showModal(true);
+      }
+    };
 
-// --- Appointments ---
-function loadAppointments() {
-  fetch(API + '/api/appointments', { credentials: 'include' })
-    .then(r=>r.json()).then(appts=>{
-      const tbody = document.getElementById('apptTable');
-      tbody.innerHTML = '';
-      if (!appts.length) document.getElementById('noAppt').style.display = 'block';
-      else document.getElementById('noAppt').style.display = 'none';
-      appts.slice(-100).reverse().forEach(a => {
-        tbody.innerHTML += `<tr><td>${a.date}</td><td>${a.name}</td><td>${a.status}</td></tr>`;
-      });
-    }).catch(() => {
-      document.getElementById('noAppt').style.display = 'block';
-      document.getElementById('noAppt').textContent = 'Could not load appointments (API error).';
+    // --- Submenu Navigation with 10+ pages ---
+    const pages = {
+      dashboard: `
+        <div class="admin-card" id="dashboardPage">
+          <div class="admin-title">Welcome to Admin Dashboard</div>
+          <p>
+            Use the left menu to navigate between your confidential admin pages. This area is restricted to authorized admins only.
+          </p>
+          <ul style="margin-top:1.2em; color:#fff; line-height:1.7; list-style: disc inside; font-size:1.08rem;">
+            <li>Monitor orders and appointments</li>
+            <li>Manage customer and product details</li>
+            <li>Upload gallery images and update services</li>
+            <li>View messages and track your team</li>
+            <li>Change admin settings securely</li>
+          </ul>
+        </div>
+      `,
+      orders: `
+        <div class="admin-card">
+          <div class="admin-title">Orders Management</div>
+          <p>View and manage recent customer orders. Filter, update status, and download order summaries.</p>
+          <table style="width:100%; margin-top: 18px; background:#fff1; color:#fff; border-radius:8px; font-size:1rem;">
+            <tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Status</th></tr>
+            <tr><td>#1203</td><td>Ravi Kumar</td><td>Pleated Net</td><td style="color:var(--admin-success);">Completed</td></tr>
+            <tr><td>#1204</td><td>Anu S</td><td>Velcro Net</td><td style="color:var(--admin-warning);">Pending</td></tr>
+          </table>
+        </div>
+      `,
+      appointments: `
+        <div class="admin-card">
+          <div class="admin-title">Appointments</div>
+          <p>Track customer appointments for site visits and installations. Assign staff and reschedule as needed.</p>
+        </div>
+      `,
+      customers: `
+        <div class="admin-card">
+          <div class="admin-title">Customer Database</div>
+          <p>Maintain records of all customers. Search, edit, and export customer details securely.</p>
+        </div>
+      `,
+      products: `
+        <div class="admin-card">
+          <div class="admin-title">Products Catalog</div>
+          <p>Add, update, or remove mosquito net products. Edit pricing and availability.</p>
+        </div>
+      `,
+      gallery: `
+        <div class="admin-card" style="background:#222;">
+          <div class="admin-title" style="color:#ffcb05;">Gallery Manager</div>
+          <p>Upload, remove, or reorder gallery images for the website.</p>
+        </div>
+      `,
+      services: `
+        <div class="admin-card" style="background:#212;">
+          <div class="admin-title" style="color:#28c76f;">Service Records</div>
+          <p>Update services, offers, and after-sales support records.</p>
+        </div>
+      `,
+      messages: `
+        <div class="admin-card" style="background:#233;">
+          <div class="admin-title" style="color:#24befe;">Customer Messages</div>
+          <p>Read, reply, and archive customer messages and inquiries.</p>
+        </div>
+      `,
+      team: `
+        <div class="admin-card" style="background:#272;">
+          <div class="admin-title" style="color:#ffb300;">Team Management</div>
+          <p>Manage admin and staff logins, add new users, set roles and permissions.</p>
+        </div>
+      `,
+      settings: `
+        <div class="admin-card" style="background:#2b2;">
+          <div class="admin-title" style="color:#ff2e63;">Admin Settings</div>
+          <p>Change password, configure notification preferences, and backup data.</p>
+        </div>
+      `,
+      logout: `
+        <div class="admin-card">
+          <div class="admin-title" style="color:var(--admin-danger);">You have been logged out.</div>
+          <p>Return to the login screen to re-enter admin password.</p>
+        </div>
+      `
+    };
+
+    // Handle menu navigation
+    document.getElementById('adminMenu').addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        const page = e.target.getAttribute('data-page');
+        if (page === 'logout') {
+          localStorage.removeItem('rajmarketing-admin');
+          showModal(true, 'Logged out.');
+          document.getElementById('adminContent').innerHTML = pages.logout;
+        } else if (pages[page]) {
+          // Remove active from all
+          [...this.querySelectorAll('a')].forEach(a => a.classList.remove('active'));
+          e.target.classList.add('active');
+          document.getElementById('adminContent').innerHTML = pages[page];
+        }
+      }
     });
-}
-function loadEstimates() {
-  fetch(API + '/api/estimates', { credentials: 'include' })
-    .then(r=>r.json()).then(ests=>{
-      const tbody = document.getElementById('estTable');
-      tbody.innerHTML = '';
-      if (!ests.length) document.getElementById('noEst').style.display = 'block';
-      else document.getElementById('noEst').style.display = 'none';
-      ests.slice(-100).reverse().forEach(e => {
-        tbody.innerHTML += `<tr><td>${e.date}</td><td>${e.name}</td><td>${e.details}</td></tr>`;
-      });
-    }).catch(() => {
-      document.getElementById('noEst').style.display = 'block';
-      document.getElementById('noEst').textContent = 'Could not load estimates (API error).';
+
+    // Block right-click, copy, and view source for extra confidentiality (not secure, for demo only)
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'c')) {
+        e.preventDefault();
+      }
     });
-}
-function loadContacts() {
-  fetch(API + '/api/contacts', { credentials: 'include' })
-    .then(r=>r.json()).then(contacts=>{
-      const tbody = document.getElementById('contactTable');
-      tbody.innerHTML = '';
-      if (!contacts.length) document.getElementById('noContact').style.display = 'block';
-      else document.getElementById('noContact').style.display = 'none';
-      contacts.slice(-100).reverse().forEach(c => {
-        
+
+    // Extra: Hide admin elements if not logged in (JS fallback)
+    function checkAdmin() {
+      if (!loggedIn && localStorage.getItem('rajmarketing-admin') !== 'true') {
+        showModal(true);
+        document.querySelector('.admin-header').style.filter = "blur(4px)";
+        document.querySelector('.admin-container').style.filter = "blur(10px)";
+      } else {
+        showModal(false);
+        document.querySelector('.admin-header').style.filter = "";
+        document.querySelector('.admin-container').style.filter = "";
+      }
+    }
+    setInterval(checkAdmin, 1000);
+  </script>
+</body>
+</html>

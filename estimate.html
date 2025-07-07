@@ -24,25 +24,34 @@
       --font-body: 'Inter', Arial, sans-serif;
       --shadow: 0 4px 24px 0 rgba(25,118,210,0.09);
       --radius: 22px;
+      --font-black: #111;
+      --font-contrast: #191919;
+      --font-white: #fff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-body);
       background: var(--bg-light);
-      color: var(--secondary);
+      color: var(--font-black);
       font-size: 17px;
       min-height: 100dvh;
       letter-spacing: 0.01em;
     }
     header {
       background: linear-gradient(100deg, var(--primary) 65%, var(--accent) 100%);
-      color: #fff;
+      color: var(--font-white) !important;
       padding: 28px 6vw 20px 6vw;
       text-align: center;
       border-radius: 0 0 32px 32px;
       box-shadow: 0 6px 26px rgba(25, 118, 210, 0.10);
       margin-bottom: 0;
+    }
+    header h1,
+    header p,
+    .top-contact {
+      color: var(--font-white) !important;
+      text-shadow: 0 2px 8px #0002;
     }
     header h1 {
       font-family: var(--font-heading);
@@ -86,7 +95,7 @@
       margin-bottom: 12px;
     }
     nav a {
-      color: var(--primary);
+      color: var(--primary-dark);
       background: none;
       text-decoration: none;
       padding: 9px 20px;
@@ -101,7 +110,7 @@
     }
     nav a:hover, nav a.active {
       background: var(--primary);
-      color: #fff !important;
+      color: var(--font-white) !important;
     }
     .estimate-container {
       max-width: 1080px;
@@ -123,11 +132,13 @@
       flex: 1 1 350px;
       border-top: 6px solid var(--accent);
       margin-bottom: 18px;
+      color: var(--font-black);
     }
     .card-section.preview {
       background: var(--bg-section);
       border-top: 6px solid var(--primary);
       box-shadow: 0 2px 12px #1976d210;
+      color: var(--font-black);
     }
     h2, h3 {
       font-family: var(--font-heading);
@@ -137,6 +148,7 @@
       margin-bottom: 18px;
       text-align: center;
       font-size: 1.5rem;
+      text-shadow: 0 2px 8px #fff2;
     }
     .form-group {
       margin-bottom: 18px;
@@ -147,7 +159,7 @@
       font-family: var(--font-heading);
       margin-bottom: 5px;
       font-size: 16px;
-      color: var(--secondary);
+      color: var(--font-black) !important;
       letter-spacing: 0.06em;
     }
     input, select, textarea {
@@ -158,6 +170,7 @@
       font-size: 16px;
       font-family: inherit;
       background: #f9fbff;
+      color: var(--font-black) !important;
       transition: border 0.19s, background 0.19s;
       margin-top: 2px;
     }
@@ -184,11 +197,12 @@
       text-align: center;
       font-size: 15px;
       border-bottom: 1.2px solid #e3f0ff;
+      color: var(--font-black) !important;
     }
     .estimate-table th,
     .preview-table th {
       background: var(--bg-section);
-      color: var(--primary-dark);
+      color: var(--primary-dark) !important;
       font-weight: 700;
     }
     .estimate-table tr:last-child td,
@@ -268,7 +282,7 @@
       margin-top: 36px;
       text-align: right;
       font-size: 15px;
-      color: #666;
+      color: #444;
       font-family: inherit;
     }
     .authorised-sign .brand,
@@ -439,11 +453,13 @@
       { label: 'Pleated Nets', price: 350 },
       { label: 'Mesh Door', price: 380 }
     ];
+
     window.onload = function() {
-      addRow();
-      attachInputListeners();
+      addRow(); // Sample row at startup
       updatePreview();
+      attachInputListeners();
     };
+
     function addRow() {
       const tableBody = document.getElementById('estimateBody');
       const rowCount = tableBody.rows.length;
@@ -473,8 +489,8 @@
       cell8.innerHTML = `<button type="button" class="remove-row-btn" onclick="removeRow(this)"><i class="fa-solid fa-trash"></i></button>`;
       updateTotals();
       updatePreview();
-      attachInputListeners();
     }
+
     function removeRow(btn) {
       const row = btn.closest("tr");
       row.parentNode.removeChild(row);
@@ -485,12 +501,14 @@
       updateTotals();
       updatePreview();
     }
+
     function updatePrice(select) {
       const row = select.closest("tr");
       const price = parseFloat(select.value);
       row.cells[5].querySelector('input').value = price;
       calculateRow(select);
     }
+
     function calculateRow(inputElem) {
       const row = inputElem.closest("tr");
       let width = parseFloat(row.cells[2].querySelector('input').value) || 0;
@@ -507,6 +525,7 @@
       updateTotals();
       updatePreview();
     }
+
     function updateTotals() {
       const tableBody = document.getElementById('estimateBody');
       let totalSqft = 0, totalPrice = 0;
@@ -521,17 +540,20 @@
       document.getElementById('preTotalSqft').innerText = totalSqft.toFixed(2);
       document.getElementById('preTotalPrice').innerText = totalPrice.toFixed(2);
     }
+
     function attachInputListeners() {
+      // Attach a single event listener to the table for all input/select changes
       document.getElementById('estimateTable').addEventListener('input', function(e) {
         if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") {
           calculateRow(e.target);
           updatePreview();
         }
-      }, { once: true });
+      });
       document.getElementById('customerName').addEventListener('input', updatePreview);
       document.getElementById('customerNumber').addEventListener('input', updatePreview);
       document.getElementById('customerAddress').addEventListener('input', updatePreview);
     }
+
     function updatePreview() {
       document.getElementById('preName').innerText = document.getElementById('customerName').value;
       document.getElementById('preNumber').innerText = document.getElementById('customerNumber').value;
@@ -555,16 +577,7 @@
         preBody.appendChild(tr);
       }
     }
+
     function generatePDF() {
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({ unit: "pt", format: "a4" });
-      const pageWidth = doc.internal.pageSize.getWidth();
-      doc.setFontSize(20);
-      doc.setTextColor(25, 118, 210);
-      doc.text("Raj Marketing Mysore", pageWidth / 2, 40, { align: "center" });
-      doc.setFontSize(13);
-      doc.setTextColor(0,0,0);
-      doc.text("Estimate", pageWidth / 2, 65, { align: "center" });
-      doc.setFontSize(12);
-      doc.text(`Customer Name: ${document.getElementById('customerName').value || ''}`, 40, 95);
-      doc.text(`Contact Number:
+    

@@ -619,4 +619,77 @@
       <div class="card product-card">
         <div class="product-img">
           <img src="https://www.phiferindia.com/wp-content/uploads/2022/10/pleated-mosquito-net.jpg" alt="Pleated Mosquito Net">
-        
+              </div>
+      <div class="card">
+        <div class="card-icon"><i class="fa-solid fa-shield-heart"></i></div>
+        <div class="card-content">
+          <h4>Warranty &amp; Support</h4>
+          <p>Get warranty on mesh &amp; installation. Responsive support for any issues or upgrades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="counter">
+    <span id="visitorCount"><i class="fa-solid fa-users"></i>  </span>
+    <span style="color:var(--secondary); font-size:0.95rem; font-weight:600; opacity:.8;">Customer Visits</span>
+  </div>
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Raj Marketing Mysore. All rights reserved.<br>
+    <div class="footer-contact">
+      <i class="fa-solid fa-location-dot"></i> No. 14, 1st Main, Jayanagar, Mysore<br>
+      <i class="fa-solid fa-phone"></i> <a href="tel:+919483037385">94830 37385</a>
+      &nbsp;|&nbsp;
+      <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
+      &nbsp;|&nbsp;
+      <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">Email</a>
+    </div>
+    <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
+      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur &amp; more
+    </div>
+  </footer>
+  <!-- Visitor Counter JS -->
+  <script>
+    // Visitor Counter (localStorage for demo; for real site, use server/db)
+    const countKey = 'rajmarketing-visitor-count';
+    let count = Number(localStorage.getItem(countKey) || 0);
+    if (!sessionStorage.getItem('visited')) {
+      count++;
+      localStorage.setItem(countKey, count);
+      sessionStorage.setItem('visited', 'yes');
+    }
+    document.getElementById('visitorCount').innerHTML = `<i class="fa-solid fa-users"></i> ${count.toLocaleString()}`;
+  </script>
+  <!-- Hamburger Menu Script -->
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    const overlay = document.querySelector('.nav-overlay');
+    function openMenu() {
+      nav.classList.add('open');
+      overlay.classList.add('show');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      nav.classList.remove('open');
+      overlay.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    menuToggle.addEventListener('click', function(e) {
+      if (nav.classList.contains('open')) closeMenu();
+      else openMenu();
+    });
+    overlay.addEventListener('click', closeMenu);
+    // Close menu on Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) closeMenu();
+    });
+    // Close menu on nav link click (mobile)
+    nav.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A' && nav.classList.contains('open')) closeMenu();
+    });
+  </script>
+</body>
+</html>

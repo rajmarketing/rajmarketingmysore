@@ -563,4 +563,151 @@
       <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">Email</a>
     </div>
     <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
-      
+      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur &amp; more
+    </div>
+  </footer>
+
+  <!-- CHAT WIDGET -->
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-bubble" id="chatBubble" style="display:none;">
+      <button class="chat-close" aria-label="Close Chat" onclick="document.getElementById('chatBubble').style.display='none';">&times;</button>
+      <div><b>Raj Marketing Mysore</b><br>
+        👋 Hi! Welcome to Raj Marketing Mysore.<br>
+        Looking for mosquito net solutions or a free estimate?<br>
+        <span style="opacity:0.7;">(Chat available: 9am - 8pm)</span>
+      </div>
+    </div>
+    <button class="chat-btn" id="chatOpenBtn" aria-label="Open Chat"><i class="fa-solid fa-comments"></i></button>
+  </div>
+
+  <!-- JS: Visitor Counter, Menu, Sliders, Chat -->
+  <script>
+    // Visitor Counter
+    const countKey = 'rajmarketing-visitor-count';
+    let count = Number(localStorage.getItem(countKey) || 0);
+    if (!sessionStorage.getItem('visited')) {
+      count++;
+      localStorage.setItem(countKey, count);
+      sessionStorage.setItem('visited', 'yes');
+    }
+    document.getElementById('visitorCount').innerHTML = `<i class="fa-solid fa-users"></i> ${count.toLocaleString()}`;
+
+    // Hamburger Menu
+    const menuBtn = document.querySelector('.menu-btn');
+    const nav = document.querySelector('nav');
+    const overlay = document.querySelector('.nav-overlay');
+    menuBtn.addEventListener('click', function() {
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+    overlay.addEventListener('click', function() {
+      nav.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+    nav.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A' && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        overlay.classList.remove('active');
+      }
+    });
+
+    // Sticky CTA for mobile
+    function showStickyCTA() {
+      if (window.innerWidth <= 700) {
+        document.querySelector('.sticky-cta').style.display = 'flex';
+      } else {
+        document.querySelector('.sticky-cta').style.display = 'none';
+      }
+    }
+    window.addEventListener('resize', showStickyCTA);
+    window.addEventListener('DOMContentLoaded', showStickyCTA);
+
+    // PROMO SLIDER
+    const slider = document.getElementById('promoSlider');
+    const dots = document.getElementById('promoSliderDots');
+    const slides = slider.children;
+    let current = 0;
+    function showSlide(idx) {
+      if(idx < 0) idx = slides.length-1;
+      if(idx >= slides.length) idx = 0;
+      slider.style.transform = `translateX(-${idx*100}%)`;
+      for(let i=0;i<slides.length;i++) {
+        dots.children[i].classList.toggle('active', i===idx);
+      }
+      current = idx;
+    }
+    for(let i=0;i<slides.length;i++) {
+      let dot = document.createElement('span');
+      dot.className = 'promo-dot' + (i===0?' active':'');
+      dot.onclick = ()=>showSlide(i);
+      dots.appendChild(dot);
+    }
+    setInterval(()=>showSlide(current+1), 5000);
+    // Swipe for mobile
+    let startX = null;
+    slider.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; }, false);
+    slider.addEventListener('touchend', (e)=>{
+      if(startX!==null) {
+        let dx = e.changedTouches[0].clientX - startX;
+        if(dx > 40) showSlide(current-1);
+        else if(dx < -40) showSlide(current+1);
+      }
+      startX = null;
+    }, false);
+
+    // SECTION SLIDER (Why Choose Us)
+    function setupSectionSlider(sliderId, dotsId) {
+      const s = document.getElementById(sliderId);
+      const d = document.getElementById(dotsId);
+      const sSlides = s.children;
+      let idx = 0;
+      function show(idxNew) {
+        if(idxNew < 0) idxNew = sSlides.length-1;
+        if(idxNew >= sSlides.length) idxNew = 0;
+        s.scrollTo({left: idxNew * sSlides[0].offsetWidth, behavior:'smooth'});
+        for(let i=0;i<sSlides.length;i++) {
+          d.children[i].classList.toggle('active', i===idxNew);
+        }
+        idx = idxNew;
+      }
+      for(let i=0;i<sSlides.length;i++) {
+        let dot = document.createElement('span');
+        dot.className = 'section-slider-dot' + (i===0?' active':'');
+        dot.onclick = ()=>show(i);
+        d.appendChild(dot);
+      }
+      // Optional: auto-advance
+      setInterval(()=>show(idx+1), 6000);
+      // Swipe for mobile
+      let sx = null;
+      s.addEventListener('touchstart', (e)=>{ sx = e.touches[0].clientX; }, false);
+      s.addEventListener('touchend', (e)=>{
+        if(sx!==null) {
+          let dx = e.changedTouches[0].clientX - sx;
+          if(dx > 40) show(idx-1);
+          else if(dx < -40) show(idx+1);
+        }
+        sx = null;
+      }, false);
+    }
+    setupSectionSlider('whySlider','whySliderDots');
+    setupSectionSlider('solutionSlider','solutionSliderDots');
+
+    // Chat Widget
+    const chatBubble = document.getElementById('chatBubble');
+    const chatBtn = document.getElementById('chatOpenBtn');
+    // Open chat on page load, then hide after 10s if not closed
+    function openChat() {
+      chatBubble.style.display = 'block';
+    }
+    function closeChat() {
+      chatBubble.style.display = 'none';
+    }
+    chatBtn.addEventListener('click', openChat);
+    window.addEventListener('DOMContentLoaded', ()=>{
+      setTimeout(openChat, 1200);
+      setTimeout(()=>{ if(chatBubble.style.display==='block') closeChat(); }, 12000);
+    });
+  </script>
+</body>
+</html>

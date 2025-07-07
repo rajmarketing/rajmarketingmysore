@@ -705,5 +705,55 @@
       &nbsp;|&nbsp;
       <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
       &nbsp;|&nbsp;
-      
+      <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">Email</a>
+    </div>
+    <div style="margin-top:8px; color:#fffbe1; font-size:0.96rem;">
+      Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur &amp; more
+    </div>
+  </footer>
+  <!-- Visitor Counter JS -->
+  <script>
+    // Visitor Counter (localStorage for demo; for real site, use server/db)
+    const countKey = 'rajmarketing-visitor-count';
+    let count = Number(localStorage.getItem(countKey) || 0);
+    if (!sessionStorage.getItem('visited')) {
+      count++;
+      localStorage.setItem(countKey, count);
+      sessionStorage.setItem('visited', 'yes');
+    }
+    document.getElementById('visitorCount').innerHTML = `<i class="fa-solid fa-users"></i> ${count.toLocaleString()}`;
+  </script>
+  <!-- Hamburger Menu Script -->
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    const overlay = document.querySelector('.nav-overlay');
+    function openMenu() {
+      nav.classList.add('open');
+      overlay.classList.add('show');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      nav.classList.remove('open');
+      overlay.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    menuToggle.addEventListener('click', function(e) {
+      if (nav.classList.contains('open')) closeMenu();
+      else openMenu();
+    });
+    overlay.addEventListener('click', closeMenu);
+    // Close menu on Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) closeMenu();
+    });
+    // Close menu on nav link click (mobile)
+    nav.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A' && nav.classList.contains('open')) closeMenu();
+    });
+  </script>
+</body>
+</html>
 

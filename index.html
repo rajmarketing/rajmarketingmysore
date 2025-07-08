@@ -807,4 +807,34 @@
       function show(idxNew) {
         if(idxNew < 0) idxNew = sSlides.length-1;
         if(idxNew >= sSlides.length) idxNew = 0;
-    
+    s.scrollTo({left: idxNew * sSlides[0].offsetWidth, behavior:'smooth'});
+        for(let i=0;i<sSlides.length;i++) {
+          d.children[i].classList.toggle('active', i===idxNew);
+        }
+        idx = idxNew;
+      }
+      for(let i=0;i<sSlides.length;i++) {
+        let dot = document.createElement('span');
+        dot.className = 'section-slider-dot' + (i===0?' active':'');
+        dot.onclick = ()=>show(i);
+        d.appendChild(dot);
+      }
+      // Optional: auto-advance
+      setInterval(()=>show(idx+1), 6000);
+      // Swipe for mobile
+      let sx = null;
+      s.addEventListener('touchstart', (e)=>{ sx = e.touches[0].clientX; }, false);
+      s.addEventListener('touchend', (e)=>{
+        if(sx!==null) {
+          let dx = e.changedTouches[0].clientX - sx;
+          if(dx > 40) show(idx-1);
+          else if(dx < -40) show(idx+1);
+        }
+        sx = null;
+      }, false);
+    }
+    setupSectionSlider('whySlider','whySliderDots');
+    setupSectionSlider('solutionSlider','solutionSliderDots');
+  </script>
+</body>
+</html>

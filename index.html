@@ -713,3 +713,98 @@
         <a href="estimate.html">Estimate</a>
         <a href="contact.html">Contact</a>
       </div>
+<div class="footer-contact">
+        <div><i class="fa-solid fa-location-dot"></i> No. 14, 1st Main, Jayanagar, Mysore</div>
+        <div>
+          <i class="fa-solid fa-phone"></i> <a href="tel:+919483037385">94830 37385</a>
+          &nbsp;|&nbsp;
+          <i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/919483037385">WhatsApp Us</a>
+          &nbsp;|&nbsp;
+          <i class="fa-solid fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">Email</a>
+        </div>
+      </div>
+      <div class="footer-service-area">
+        Serving Mysore, Mandya, Nanjangud, Srirangapatna, Hunsur &amp; more
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Raj Marketing Mysore. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Visitor Counter JS and Menu/Slider -->
+  <script>
+    // Visitor Counter
+    const countKey = 'rajmarketing-visitor-count';
+    let count = Number(localStorage.getItem(countKey) || 0);
+    if (!sessionStorage.getItem('visited')) {
+      count++;
+      localStorage.setItem(countKey, count);
+      sessionStorage.setItem('visited', 'yes');
+    }
+    document.getElementById('visitorCount').innerHTML = `<i class="fa-solid fa-users"></i> ${count.toLocaleString()}`;
+
+    // Hamburger Menu
+    const menuBtn = document.querySelector('.menu-btn');
+    const nav = document.querySelector('nav');
+    const overlay = document.querySelector('.nav-overlay');
+    menuBtn.addEventListener('click', function() {
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+    overlay.addEventListener('click', function() {
+      nav.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+    nav.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A' && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        overlay.classList.remove('active');
+      }
+    });
+
+    // PROMO SLIDER
+    const slider = document.getElementById('promoSlider');
+    const dots = document.getElementById('promoSliderDots');
+    const slides = slider.children;
+    let current = 0;
+    function showSlide(idx) {
+      if(idx < 0) idx = slides.length-1;
+      if(idx >= slides.length) idx = 0;
+      slider.style.transform = `translateX(-${idx*100}%)`;
+      for(let i=0;i<slides.length;i++) {
+        dots.children[i].classList.toggle('active', i===idx);
+      }
+      current = idx;
+    }
+    if (dots && slider) {
+      for(let i=0;i<slides.length;i++) {
+        let dot = document.createElement('span');
+        dot.className = 'promo-dot' + (i===0?' active':'');
+        dot.onclick = ()=>showSlide(i);
+        dots.appendChild(dot);
+      }
+      setInterval(()=>showSlide(current+1), 5000);
+      // Swipe for mobile
+      let startX = null;
+      slider.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; }, false);
+      slider.addEventListener('touchend', (e)=>{
+        if(startX!==null) {
+          let dx = e.changedTouches[0].clientX - startX;
+          if(dx > 40) showSlide(current-1);
+          else if(dx < -40) showSlide(current+1);
+        }
+        startX = null;
+      }, false);
+    }
+
+    // SECTION SLIDER (Why Choose Us, Solutions)
+    function setupSectionSlider(sliderId, dotsId) {
+      const s = document.getElementById(sliderId);
+      const d = document.getElementById(dotsId);
+      const sSlides = s.children;
+      let idx = 0;
+      function show(idxNew) {
+        if(idxNew < 0) idxNew = sSlides.length-1;
+        if(idxNew >= sSlides.length) idxNew = 0;
+    
